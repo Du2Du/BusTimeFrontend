@@ -36,7 +36,7 @@ const Home: NextPage = () => {
               <button
                 onClick={redirectRegister}
                 className={
-                  styles.buttonRegister + " py-1 rounded  my-3 text-light"
+                  styles.buttonRegister + " py-1 rounded my-3 text-light"
                 }
               >
                 Cadastrar
@@ -46,7 +46,7 @@ const Home: NextPage = () => {
           </main>
           <a
             target="_blank"
-            className="mt-5"
+            className="mt-4"
             href="https://storyset.com/ethnicity"
           >
             Ethnicity illustrations by Storyset
