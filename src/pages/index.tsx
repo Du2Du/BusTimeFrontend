@@ -29,26 +29,24 @@ const Home: NextPage = () => {
                   Póssivel
                 </b>
               </h1>
-              <p className={styles.paragraph + " mt-3"}>
+              <p className={styles.paragraph + " mt-4"}>
                 O melhor site para encontrar os melhores horários de ônibus em
                 Luziânia!
               </p>
               <button
                 onClick={redirectRegister}
                 className={
-                  styles.buttonRegister +
-                  " border py-1 rounded border-light my-3 text-light"
+                  styles.buttonRegister + " py-1 rounded  my-3 text-light"
                 }
               >
                 Cadastrar
               </button>
             </div>
-
             <BusSvg />
           </main>
           <a
             target="_blank"
-            className="mb-3"
+            className="mt-5"
             href="https://storyset.com/ethnicity"
           >
             Ethnicity illustrations by Storyset

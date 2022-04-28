@@ -8,13 +8,15 @@
   width: 100%;
 
   main {
-    padding: 0 10%;
+    padding: 0 9%;
     width: 100%;
-  }
 
-  a {
-    position: absolute;
-    bottom: 0;
+    .title {
+    }
+    .paragraph {
+      font-size: 20px;
+      max-width: 550px;
+    }
   }
 }
 
@@ -22,9 +24,6 @@
   .section {
     padding-top: 5%;
   }
-}
-.paragraph {
-  font-size: 20px;
 }
 
 .paragraph:hover,
