@@ -1,6 +1,10 @@
 html,
 body {
-  font-family: "Roboto", sans-serif;
+  height: 100%;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  background-color: rgb(21, 21, 21);
+  color: #fff;
 }
 
 a {
