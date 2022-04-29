@@ -1,12 +1,17 @@
 import React from "react";
 import { FixedHead } from "../../components";
-import styles from "../../styles/Register.module.scss";
+import { Credentials } from "../../page-components";
 
+/**
+ * Esse componente renderiza a tela de registro.
+ *
+ * @author Du2Du
+ */
 const Register: React.FC = () => {
   return (
     <>
       <FixedHead title="Registrar" />
-      <div className={styles.form}>hello</div>
+      <Credentials />
     </>
   );
 };

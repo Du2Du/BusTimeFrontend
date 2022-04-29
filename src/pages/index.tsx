@@ -10,6 +10,9 @@ import styles from "../styles/Home.module.scss";
  * @author Du2Du
  */
 const Home: NextPage = () => {
+  /**
+   * Função que redireciona o usuário para a url de registro
+   */
   const redirectRegister = () => {
     Router.push("/register");
   };
