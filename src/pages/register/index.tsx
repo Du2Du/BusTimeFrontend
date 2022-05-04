@@ -8,10 +8,13 @@ import { Credentials } from "../../page-components";
  * @author Du2Du
  */
 const Register: React.FC = () => {
+  /*Essa função realiza o cadastro */
+  const register = (data: any) => {};
+
   return (
     <>
       <FixedHead title="Registrar" />
-      <Credentials />
+      <Credentials onSubmit={register} />
     </>
   );
 };
