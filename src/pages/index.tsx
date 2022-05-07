@@ -23,7 +23,7 @@ const Home: NextPage = () => {
       <div className={styles.home}>
         <section className={`${styles.section} flex flex-col items-center`}>
           <main
-            className={`${styles.main} flex flex-col lg:flex-row items-center`}
+            className={`${styles.main} flex flex-col lg:flex-row justify-center items-center`}
           >
             <div className="text-center lg:text-left">
               <h1 className={styles.title}>
