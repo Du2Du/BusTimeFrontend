@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Router from "next/router";
 import BusSvg from "../../public/bus.svg";
-import { Button, FixedHead } from "../components";
+import { FixedHead } from "../components";
 import styles from "../styles/Home.module.scss";
 
 /**
@@ -21,26 +21,24 @@ const Home: NextPage = () => {
     <>
       <FixedHead title="Bus Time" />
       <div className={styles.home}>
-        <section
-          className={`${styles.section} d-flex flex-column align-items-center`}
-        >
-          <main className="d-flex flex-column flex-lg-row align-items-center">
-            <div className="text-center text-lg-start">
+        <section className={`${styles.section} flex flex-col items-center`}>
+          <main
+            className={`${styles.main} flex flex-col lg:flex-row items-center`}
+          >
+            <div className="text-center lg:text-left">
               <h1 className={styles.title}>
                 <b>
                   Venha Agora e Confira os Horários de Ônibus o mais Rápido
                   Póssivel
                 </b>
               </h1>
-              <p className={styles.paragraph + " mt-4"}>
+              <p className={`${styles.paragraph} mt-4`}>
                 O melhor site para encontrar os melhores horários de ônibus em
                 Luziânia!
               </p>
               <button
                 onClick={redirectRegister}
-                className={
-                  styles.buttonRegister + " py-1 rounded my-3 text-light"
-                }
+                className={`${styles.buttonRegister} py-1 rounded my-3 text-white`}
               >
                 Cadastrar
               </button>

@@ -1,9 +1,33 @@
-import React, { InputHTMLAttributes } from "react";
+import React from "react";
 import styles from "./Input.module.scss";
+import { InputParam } from "./interface";
 
-export const Input: React.FC<InputHTMLAttributes<HTMLInputElement>> = ({
+/**
+ * Esse componente é responsável por renderizar
+ * o campo de input
+ *
+ * @author Du2Du
+ */
+export const Input: React.FC<InputParam> = ({
+  type = "text",
   className,
+  placeHolder,
+  label,
+  id,
   ...rest
 }) => {
-  return <input className={styles.input + ` ${className}`} {...rest} />;
+  return (
+    <div className={styles.inputContainer}>
+      <input
+        type={type}
+        id={id}
+        className={`${styles.textInput} ${className}`}
+        placeholder={placeHolder}
+        {...rest}
+      />
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
+    </div>
+  );
 };
