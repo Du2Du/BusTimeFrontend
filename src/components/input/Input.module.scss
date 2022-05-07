@@ -47,4 +47,9 @@
   .textInput:focus::placeholder {
     opacity: 1;
   }
+  .textInput:not(.textInput:placeholder-shown) + .label {
+    top: -10px;
+    color: #7e4ccb;
+    font-size: 14px;
+  }
 }

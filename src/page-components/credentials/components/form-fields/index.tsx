@@ -39,6 +39,7 @@ export const FormFields: React.FC<FormFieldsParams> = ({
       {!isLogin && (
         <Input
           label="Nome"
+          placeHolder="Nome"
           {...register("userName", {
             required: true,
             pattern: /^[A-Za-z]+$/i,
@@ -49,12 +50,14 @@ export const FormFields: React.FC<FormFieldsParams> = ({
       )}
       <Input
         label="Email"
+        placeHolder="Email"
         {...register("userEmail", { required: true })}
         id="email"
         className={styles.credentialsInput}
       />
       <Input
         label="Senha"
+        placeHolder="Senha"
         id="password"
         {...register("userPassword", { required: true, min: 6 })}
         className={styles.credentialsInput}
