@@ -48,6 +48,7 @@ const Home: NextPage = () => {
           <a
             target="_blank"
             className="mt-4"
+            rel="noreferrer"
             href="https://storyset.com/ethnicity"
           >
             Ethnicity illustrations by Storyset
