@@ -17,6 +17,14 @@ interface CredentialsParams {
   isLogin?: boolean;
 }
 
+export interface Fields {
+  userName: string;
+  userEmail: string;
+  userPassword: string;
+  userCpf: string;
+  userBirth: Date;
+}
+
 /**
  * Esse componente genérico pode renderizar
  *
@@ -36,7 +44,7 @@ export const Credentials: React.FC<CredentialsParams> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<Fields>();
 
   return (
     <div className={styles.credentials}>
@@ -44,7 +52,12 @@ export const Credentials: React.FC<CredentialsParams> = ({
         onSubmit={handleSubmit(onSubmit)}
         className={`${styles.formCredentials} rounded`}
       >
-        <FormFields isLogin={isLogin} label={label} register={register} />
+        <FormFields
+          isLogin={isLogin}
+          label={label}
+          errors={errors}
+          register={register}
+        />
       </form>
       <div className={styles.redirect}>
         <Link replace href={!isLogin ? routesName.LOGIN : routesName.REGISTER}>
