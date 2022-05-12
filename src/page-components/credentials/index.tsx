@@ -18,11 +18,11 @@ interface CredentialsParams {
 }
 
 export interface Fields {
-  userName: string;
-  userEmail: string;
-  userPassword: string;
-  userCpf: string;
-  userBirth: Date;
+  name: string;
+  email: string;
+  password: string;
+  cpf: string;
+  birth_date: Date;
 }
 
 /**
@@ -45,11 +45,11 @@ export const Credentials: React.FC<CredentialsParams> = ({
     handleSubmit,
     formState: { errors },
   } = useForm<Fields>();
-
   return (
     <div className={styles.credentials}>
       <form
         onSubmit={handleSubmit(onSubmit)}
+        autoComplete="off"
         className={`${styles.formCredentials} rounded`}
       >
         <FormFields
