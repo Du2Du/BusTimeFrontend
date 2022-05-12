@@ -14,6 +14,7 @@ export const Input: React.FC<InputParam> = ({
   placeHolder,
   label,
   id,
+  register,
   ...rest
 }) => {
   return (
@@ -23,6 +24,7 @@ export const Input: React.FC<InputParam> = ({
         id={id}
         className={`${styles.textInput} ${className}`}
         placeholder={placeHolder}
+        {...register}
         {...rest}
       />
       <label htmlFor={id} className={styles.label}>
