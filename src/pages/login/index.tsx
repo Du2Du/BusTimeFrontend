@@ -1,9 +1,11 @@
+import Router from "next/router";
 import React from "react";
 import { ApiRoutes } from "../../api-routes";
 import { FixedHead } from "../../components";
 import { Credentials } from "../../page-components";
 import { Fields } from "../../page-components/credentials";
 import { Backend } from "../../services/backend";
+import { showError } from "../../utils";
 
 /**
  * Esse componente renderiza a tela de login.
@@ -13,7 +15,9 @@ import { Backend } from "../../services/backend";
 const Login: React.FC = () => {
   /*Essa função realiza o login do usuário */
   const login = (data: { email: string; password: string }) => {
-    Backend.post(ApiRoutes.LOGIN_USER, data);
+    Backend.post(ApiRoutes.LOGIN_USER, data)
+      .then(() => Router.push("/home"))
+      .catch(showError);
   };
 
   return (
