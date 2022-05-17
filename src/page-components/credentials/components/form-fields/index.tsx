@@ -12,11 +12,11 @@ import styles from "../../Credentials.module.scss";
 import { Button } from "../button";
 
 interface Errors {
-  userName?: FieldError | undefined;
-  userEmail?: FieldError | undefined;
-  userPassword?: FieldError | undefined;
-  userCpf?: FieldError | undefined;
-  userBirth?: FieldError | undefined;
+  name?: FieldError | undefined;
+  email?: FieldError | undefined;
+  password?: FieldError | undefined;
+  cpf?: FieldError | undefined;
+  birth_date?: FieldError | undefined;
 }
 interface FormFieldsParams {
   /**
@@ -52,7 +52,7 @@ export const FormFields: React.FC<FormFieldsParams> = ({
 }) => {
   /* Esse regex é para a data de nascimento */
   const regexForDate =
-    /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/g;
+    /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
   const buttonLabel = isLogin ? "ENTRAR" : "CADASTRAR";
 
   return (
@@ -63,38 +63,37 @@ export const FormFields: React.FC<FormFieldsParams> = ({
           <Input
             label="Nome"
             placeHolder="Nome"
-            register={register("userName", {
+            register={register("name", {
               required: true,
               pattern: /^[A-Za-z]+$/i,
             })}
             id="name"
             className={`${styles.credentialsInput} ${
-              errors.userName ? styles.inputError : ""
+              errors.name ? styles.inputError : ""
             }`}
           />
           <Input
             label="CPF"
             placeHolder="CPF"
-            register={register("userCpf", {
+            register={register("cpf", {
               required: true,
               pattern: /\d{3}\.\d{3}\.\d{3}\-\d{2}/g,
             })}
             id="name"
             className={`${styles.credentialsInput} ${
-              errors.userCpf ? styles.inputError : ""
+              errors.cpf ? styles.inputError : ""
             }`}
           />
           <Input
             label="Data de Nascimento"
             placeHolder="Data de Nascimento"
-            register={register("userBirth", {
+            register={register("birthDate", {
               required: true,
               pattern: regexForDate,
             })}
-            type="date"
             id="name"
             className={`${styles.credentialsInput} ${
-              errors.userBirth ? styles.inputError : ""
+              errors.birth_date ? styles.inputError : ""
             }`}
           />
         </>
@@ -102,20 +101,20 @@ export const FormFields: React.FC<FormFieldsParams> = ({
       <Input
         label="Email"
         placeHolder="Email"
-        register={register("userEmail", { required: true })}
+        register={register("email", { required: true })}
         id="email"
         type="email"
         className={`${styles.credentialsInput} ${
-          errors.userEmail ? styles.inputError : ""
+          errors.email ? styles.inputError : ""
         }`}
       />
       <Input
         label="Senha"
         placeHolder="Senha"
         id="password"
-        register={register("userPassword", { required: true, min: 6 })}
+        register={register("password", { required: true, min: 6 })}
         className={`${styles.credentialsInput} ${
-          errors.userPassword ? styles.inputError : ""
+          errors.password ? styles.inputError : ""
         }`}
         type="password"
       />

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { routesName } from "../../routes-name";
 import styles from "./Credentials.module.scss";
 import { FormFields } from "./components";
+import toast from "react-hot-toast";
 
 interface CredentialsParams {
   /**
@@ -18,11 +19,11 @@ interface CredentialsParams {
 }
 
 export interface Fields {
-  userName: string;
-  userEmail: string;
-  userPassword: string;
-  userCpf: string;
-  userBirth: Date;
+  name: string;
+  email: string;
+  password: string;
+  cpf: string;
+  birthDate: string;
 }
 
 /**
@@ -46,10 +47,21 @@ export const Credentials: React.FC<CredentialsParams> = ({
     formState: { errors },
   } = useForm<Fields>();
 
+  //Função que irá validar quais informações devem ir para o backend
+  const handleData = (data: Fields) => {
+    if (!isLogin) return onSubmit(data);
+
+    const { email, password } = data;
+    const dataLogin = { email, password };
+
+    return onSubmit(dataLogin);
+  };
+
   return (
     <div className={styles.credentials}>
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(handleData)}
+        autoComplete="off"
         className={`${styles.formCredentials} rounded`}
       >
         <FormFields
