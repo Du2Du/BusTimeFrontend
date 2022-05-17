@@ -1,3 +1,4 @@
+import Router from "next/router";
 import React from "react";
 import { ApiRoutes } from "../../api-routes";
 import { FixedHead } from "../../components";
@@ -13,7 +14,12 @@ import { Backend } from "../../services/backend";
 const Register: React.FC = () => {
   /*Essa função realiza o cadastro */
   const register = (data: Fields) => {
-    Backend.post(ApiRoutes.CREATE_USER, data);
+    Backend.post(ApiRoutes.CREATE_USER, data).then(() => {
+      /*Essa função realiza o login apos o cadastro */
+      Backend.post(ApiRoutes.LOGIN_USER, data).then(() => {
+        Router.push("/home");
+      });
+    });
   };
 
   return (

@@ -1,3 +1,4 @@
 export const ApiRoutes = {
-  CREATE_USER: "/api/users",
+  CREATE_USER: "/users",
+  LOGIN_USER: "/auth/login",
 };
