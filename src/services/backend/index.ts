@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const Backend = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: "https://bus-time-web.herokuapp.com/api",
 });
