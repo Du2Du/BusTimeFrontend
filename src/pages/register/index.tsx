@@ -14,9 +14,11 @@ import { Backend } from "../../services/backend";
 const Register: React.FC = () => {
   /*Essa função realiza o cadastro */
   const register = (data: Fields) => {
+    const { email, password } = data;
+    const dataLogin = { email, password };
     Backend.post(ApiRoutes.CREATE_USER, data).then(() => {
       /*Essa função realiza o login apos o cadastro */
-      Backend.post(ApiRoutes.LOGIN_USER, data).then(() => {
+      Backend.post(ApiRoutes.LOGIN_USER, dataLogin).then(() => {
         Router.push("/home");
       });
     });
