@@ -2,6 +2,7 @@ import Router from "next/router";
 import React from "react";
 import { ApiRoutes } from "../../api-routes";
 import { FixedHead } from "../../components";
+import { WithAuth } from "../../global-hoc";
 import { Credentials } from "../../page-components";
 import { Fields } from "../../page-components/credentials";
 import { Backend } from "../../services/backend";
@@ -12,7 +13,7 @@ import { showError } from "../../utils";
  *
  * @author Du2Du
  */
-const Register: React.FC = () => {
+const Register: React.FC = WithAuth(() => {
   /*Essa função realiza o cadastro */
   const register = (data: Fields) => {
     const { email, password } = data;
@@ -35,6 +36,6 @@ const Register: React.FC = () => {
       <Credentials onSubmit={register} />
     </>
   );
-};
+});
 
 export default Register;
