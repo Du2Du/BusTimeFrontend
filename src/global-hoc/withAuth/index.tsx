@@ -7,10 +7,11 @@ export function WithAuth<T>(Component: React.ComponentType<T>) {
     const { userData, getUser } = useUserContext();
     const { pathname } = useRouter();
 
+    const isCredential = pathname === "/login" || pathname === "/register";
     useEffect(() => {
       if (!userData) getUser();
     }, [userData]);
-    if (pathname === "/login" || pathname === "/register")
+    if (isCredential)
       return !userData ? (
         <Component {...props} />
       ) : (

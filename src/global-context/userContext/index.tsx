@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import React, {
   createContext,
   PropsWithChildren,
@@ -29,6 +29,8 @@ const UserContext = createContext<UserInterface>({} as UserInterface);
 
 export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [userData, setUserData] = useState<UserDataProps>();
+  const { pathname } = useRouter();
+  const isCredential = pathname === "/login" || pathname === "/register";
 
   const getUser = useCallback(async () => {
     Backend.get(ApiRoutes.USER_ME)
@@ -36,8 +38,7 @@ export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
         setUserData(res.data);
       })
       .catch((errors) => {
-        showError(errors);
-        Router.push("/login");
+        if (!isCredential) Router.push("/login");
       });
   }, []);
 
