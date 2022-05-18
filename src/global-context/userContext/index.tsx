@@ -33,13 +33,9 @@ export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const isCredential = pathname === "/login" || pathname === "/register";
 
   const getUser = useCallback(async () => {
-    Backend.get(ApiRoutes.USER_ME)
-      .then((res) => {
-        setUserData(res.data);
-      })
-      .catch((errors) => {
-        if (!isCredential) Router.push("/login");
-      });
+    Backend.get(ApiRoutes.USER_ME).then((res) => {
+      setUserData(res.data);
+    });
   }, []);
 
   return (
