@@ -1,19 +1,24 @@
+import Router from "next/router";
 import React from "react";
 import { ApiRoutes } from "../../api-routes";
 import { FixedHead } from "../../components";
+import { WithAuth } from "../../global-hoc";
 import { Credentials } from "../../page-components";
 import { Fields } from "../../page-components/credentials";
 import { Backend } from "../../services/backend";
+import { showError } from "../../utils";
 
 /**
  * Esse componente renderiza a tela de login.
  *
  * @author Du2Du
  */
-const Login: React.FC = () => {
+const Login: React.FC = WithAuth(() => {
   /*Essa função realiza o login do usuário */
   const login = (data: { email: string; password: string }) => {
-    Backend.post(ApiRoutes.LOGIN_USER, data);
+    Backend.post(ApiRoutes.LOGIN_USER, data)
+      .then(() => Router.push("/home"))
+      .catch(showError);
   };
 
   return (
@@ -22,6 +27,6 @@ const Login: React.FC = () => {
       <Credentials isLogin onSubmit={login} />
     </>
   );
-};
+});
 
 export default Login;
