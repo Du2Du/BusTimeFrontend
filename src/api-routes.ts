@@ -1,5 +1,5 @@
 export const ApiRoutes = {
-  CREATE_USER: "/users",
-  LOGIN_USER: "/auth/login",
-  USER_ME: "/users/me",
+  CREATE_USER: "/v1/users",
+  LOGIN_USER: "/v1/auth/login",
+  USER_ME: "/v1/users/me",
 };
