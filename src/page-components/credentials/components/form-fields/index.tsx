@@ -118,10 +118,7 @@ export const FormFields: React.FC<FormFieldsParams> = ({
         }`}
         type="password"
       />
-      <Button
-        label={buttonLabel}
-        href={isLogin ? routesName.LOGIN : routesName.REGISTER}
-      />
+      <Button label={buttonLabel} />
     </>
   );
 };
