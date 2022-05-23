@@ -17,6 +17,7 @@ export const Header: React.FC = () => {
           <BiSearch />
         </a>
       </div>
+      <h1>BusTime</h1>
     </header>
   );
 };

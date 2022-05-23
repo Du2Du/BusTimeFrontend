@@ -5,6 +5,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
+
+  h1 {
+    display: none;
+  }
 }
 
 .searchBox {
@@ -58,6 +62,16 @@
 }
 
 @media (min-width: 750px) {
+  .header h1 {
+    display: block;
+    color: #7e4ccb;
+    font-size: 35px;
+    padding: 5px 20px;
+    border-radius: 3px;
+    border: 3px solid #7e4ccb;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 500;
+  }
   .searchBox {
     width: 400px;
   }
