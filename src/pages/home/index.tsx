@@ -1,27 +1,18 @@
 import React from "react";
 import { FixedHead } from "../../components";
 import { WithAuth } from "../../global-hoc";
-import styles from "./Home.module.scss";
-import { BiSearch } from "react-icons/bi";
+import { Header, Main } from "../../page-components/home";
+import styles from "../../page-components/home/Home.module.scss";
 
-const Home: React.FC = WithAuth(() => {
+const Home: React.FC = () => {
   return (
-    <>
+    <div className={styles.home}>
       <FixedHead title="Home" />
-      <header className={styles.header}>
-        <div className={`${styles.searchBox}`}>
-          <input
-            type="text"
-            placeholder="Pesquise Aqui"
-            className={styles.searchInput}
-          />
-          <a href="#" className={styles.searchBtn}>
-            <BiSearch />
-          </a>
-        </div>
-      </header>
-    </>
+      <Header />
+      <Main />
+      <footer className="footer"></footer>
+    </div>
   );
-});
+};
 
 export default Home;

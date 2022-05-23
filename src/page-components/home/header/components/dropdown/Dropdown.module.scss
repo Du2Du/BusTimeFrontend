@@ -1,0 +1,86 @@
+.dropdown {
+  position: relative;
+}
+
+.dropdown ul {
+  list-style: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+}
+
+.items {
+  background: rgb(52, 52, 52);
+  opacity: 0;
+  visibility: hidden;
+  min-width: 100%;
+  height: 0;
+  position: absolute;
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 0.3s;
+}
+
+.items::before {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  transform: rotate(45deg);
+  top: -7px;
+  left: 20px;
+  z-index: -1;
+}
+
+.items a {
+  border-bottom: 1px solid black;
+  padding: 10px 20px;
+}
+
+.faBrands {
+  margin-right: 5px;
+}
+
+.label {
+  cursor: pointer;
+  background: rgb(40, 40, 40);
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  color: #7e4ccb;
+  padding: 12px;
+  border-radius: 50%;
+  transition: 0.4s ease;
+}
+.items a {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.items a:hover {
+  border-left: 5px solid;
+  background-color: #7e4ccb;
+}
+.dropdown:hover > .label {
+  border-radius: 5px 5px 0 0;
+}
+
+.dropdown:hover > .items {
+  opacity: 1;
+  visibility: visible;
+  height: unset;
+  transform: scaleY(1);
+}
+.dropdown:hover > .label {
+  background-color: #7e4ccb;
+  color: #fff;
+}
+
+@media (min-width: 750px) {
+  .items {
+    width: 200px;
+  }
+}
