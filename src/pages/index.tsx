@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Router from "next/router";
 import BusSvg from "../../public/bus.svg";
 import { FixedHead } from "../components";
-import styles from "../styles/Home.module.scss";
+import styles from "../styles/Dashboard.module.scss";
 
 /**
  * Esse componente renderiza a pagina Inicial da aplicação.

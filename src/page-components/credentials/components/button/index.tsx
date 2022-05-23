@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./Button.module.scss";
 
 interface ButtonParams {
-  href: string;
   label: string;
 }
 
@@ -15,7 +14,7 @@ interface ButtonParams {
  *
  * @author Du2DU
  */
-export const Button: React.FC<ButtonParams> = ({ href, label }) => {
+export const Button: React.FC<ButtonParams> = ({ label }) => {
   return (
     <button type="submit" className={styles.button}>
       <span></span>
