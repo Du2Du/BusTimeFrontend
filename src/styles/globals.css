@@ -22,6 +22,19 @@ a {
   margin: 0;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ddd;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #7e4ccb;
+  border-radius: 5px;
+}
+
 input {
   outline: none;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { FixedHead } from "../../components";
 import { WithAuth } from "../../global-hoc";
-import { Header, Main } from "../../page-components/home";
+import { Footer, Header, Main } from "../../page-components/home";
 import styles from "../../page-components/home/Home.module.scss";
 
 const Home: React.FC = () => {
@@ -10,7 +10,7 @@ const Home: React.FC = () => {
       <FixedHead title="Home" />
       <Header />
       <Main />
-      <footer className="footer"></footer>
+      <Footer />
     </div>
   );
 };

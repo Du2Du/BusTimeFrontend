@@ -3,8 +3,10 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { BiDoorOpen, BiBusSchool } from "react-icons/bi";
 import styles from "./Dropdown.module.scss";
+import { useUserContext } from "../../../../../global-context";
 
 export const Dropdown: React.FC = () => {
+  const { userData } = useUserContext();
   return (
     <div className={styles.dropdown}>
       <a className={styles.label}>
@@ -17,12 +19,14 @@ export const Dropdown: React.FC = () => {
             Perfil
           </a>
         </li>
-        <li>
-          <a href="/bus">
-            <BiBusSchool size={27} className={styles.faBrands} />
-            Ônibus
-          </a>
-        </li>
+        {userData?.isAdmin && (
+          <li>
+            <a href="/bus">
+              <BiBusSchool size={27} className={styles.faBrands} />
+              Ônibus
+            </a>
+          </li>
+        )}
         <li>
           <a href="/logout">
             <BiDoorOpen size={27} className={styles.faBrands} />

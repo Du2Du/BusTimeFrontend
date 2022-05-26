@@ -3,6 +3,11 @@ import { BiSearch } from "react-icons/bi";
 import styles from "../Home.module.scss";
 import { Dropdown } from "./components";
 
+/**
+ * Esse componente renderiza o header da página Home.
+ *
+ * @author Du2Du
+ */
 export const Header: React.FC = () => {
   return (
     <header className={`${styles.header}`}>
