@@ -24,7 +24,7 @@ export const Main: React.FC = () => {
   const [bus, setBus] = useState<Array<BusProps>>([]);
 
   useEffect(() => {
-    Backend.get(ApiRoutes.LIST_BUS).then((res) => setBus(res.data.data));
+    Backend.get(ApiRoutes.LIST_BUS).then((res) => setBus(res.data));
     //.catch(showError);
   }, []);
 
