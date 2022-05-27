@@ -11,6 +11,13 @@ body {
   color: #fff;
 }
 
+#__next {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 a {
   color: inherit;
   text-decoration: none;

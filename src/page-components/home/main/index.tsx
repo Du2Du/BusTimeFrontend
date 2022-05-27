@@ -1,12 +1,10 @@
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
-import { string } from "yup";
 import { ApiRoutes } from "../../../api-routes";
 import { Button } from "../../../components/button";
 import { useUserContext } from "../../../global-context";
 import { BusProps } from "../../../interfaces";
 import { Backend } from "../../../services/backend";
-import { showError } from "../../../utils";
 import styles from "../Home.module.scss";
 import { BusItem } from "./components";
 
