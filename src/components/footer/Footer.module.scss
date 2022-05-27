@@ -1,0 +1,32 @@
+.footer {
+  background-color: #151414;
+  color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70px;
+  padding-top: 4px;
+  opacity: 0.9;
+  text-align: center;
+}
+.social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hide {
+  display: none;
+}
+
+@media (min-width: 700px) {
+  .social {
+    flex-direction: row;
+  }
+  .hide {
+    display: block;
+  }
+}

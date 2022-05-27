@@ -7,3 +7,14 @@ export type BootstrapColors =
   | "info"
   | "light"
   | "dark";
+
+export interface BusProps {
+  id: number;
+  line: string;
+  hour: string;
+  ticketPrice: number;
+  inicialRoute: string;
+  finalRoute: string;
+  busNumber: number;
+  idUserAdmin: number;
+}
