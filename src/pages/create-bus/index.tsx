@@ -1,14 +1,28 @@
 import React from "react";
-import { Section } from "../../page-components/create-bus";
+import toast from "react-hot-toast";
+import { ApiRoutes } from "../../api-routes";
+import { WithAuth } from "../../global-hoc";
+import { BusProps } from "../../interfaces";
+import { Section } from "../../page-components/bus-page";
 import { Header } from "../../page-components/home";
+import { Backend } from "../../services/backend";
+import { showError } from "../../utils";
 
-const CreateBus: React.FC = () => {
+const CreateBus: React.FC = WithAuth(() => {
+  const createBus = (data: BusProps) => {
+    Backend.post(ApiRoutes.CREATE_BUS, data)
+      .then(() => {
+        toast.success(`Ônibus criado com sucesso!`);
+      })
+      .catch(showError);
+  };
+
   return (
     <div>
       <Header />
-      <Section />
+      <Section isCreate sendingData={createBus} />
     </div>
   );
-};
+});
 
 export default CreateBus;

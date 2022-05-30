@@ -1,3 +1,5 @@
+import { number } from "yup";
+
 export type BootstrapColors =
   | "primary"
   | "secondary"
