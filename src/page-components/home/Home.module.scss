@@ -57,21 +57,12 @@
   margin: 0px 8px;
 }
 
-@media (min-width: 1250px) {
-  .header {
-    justify-content: start;
-  }
-  .searchBox {
-    margin: auto;
-  }
-}
-
 @media (min-width: 750px) {
   .header h1 {
     display: block;
     color: #7e4ccb;
     font-size: 35px;
-    padding: 5px 20px;
+    padding: 0 15px;
     border-radius: 3px;
     border: 3px solid #7e4ccb;
     font-family: "Work Sans", sans-serif;
@@ -96,9 +87,14 @@
 }
 
 .busDescription {
+  margin-top: 2%;
   p {
     font-size: 20px;
   }
+}
+
+.busList {
+  margin-top: 2%;
 }
 
 .busList p {

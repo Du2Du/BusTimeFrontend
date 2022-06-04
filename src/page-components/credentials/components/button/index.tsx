@@ -16,7 +16,7 @@ interface ButtonParams {
  */
 export const Button: React.FC<ButtonParams> = ({ label }) => {
   return (
-    <button type="submit" className={styles.button}>
+    <button type="submit" className={styles.buttonBorder}>
       <span></span>
       <span></span>
       <span></span>

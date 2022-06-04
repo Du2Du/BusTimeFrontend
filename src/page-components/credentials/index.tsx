@@ -2,9 +2,8 @@ import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { routesName } from "../../routes-name";
-import styles from "./Credentials.module.scss";
 import { FormFields } from "./components";
-import toast from "react-hot-toast";
+import styles from "./Credentials.module.scss";
 
 interface CredentialsParams {
   /**
