@@ -1,6 +1,7 @@
 import React from "react";
 import toast from "react-hot-toast";
 import { ApiRoutes } from "../../api-routes";
+import { FixedHead } from "../../components";
 import { WithAuth } from "../../global-hoc";
 import { BusProps } from "../../interfaces";
 import { Section } from "../../page-components/bus-page";
@@ -19,6 +20,7 @@ const CreateBus: React.FC = WithAuth(() => {
 
   return (
     <div>
+      <FixedHead title="Create Bus" />
       <Header />
       <Section isCreate sendingData={createBus} />
     </div>

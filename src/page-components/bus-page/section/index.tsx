@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "../../../components";
 import { Button } from "../../../components/button";
@@ -14,8 +14,20 @@ interface SectionParams {
   /**
    * Um boolean para saber se está criando um ônibus ou não
    */
-  isCreate: boolean;
+  isCreate?: boolean;
+  /**
+   * Método para setar os novos estados
+   */
+  fieldValues?: any;
 }
+
+type BusType =
+  | "line"
+  | "hour"
+  | "ticketPrice"
+  | "inicialRoute"
+  | "finalRoute"
+  | "busNumber";
 
 /**
  * Esse componente renderiza a pagina de cadastro/atualização
@@ -26,16 +38,33 @@ interface SectionParams {
 export const Section: React.FC<SectionParams> = ({
   sendingData,
   isCreate = false,
+  fieldValues,
 }) => {
-  const { register, handleSubmit } = useForm<BusProps>();
+  const { register, handleSubmit, setValue, getValues } = useForm<BusProps>();
 
   const { userData } = useUserContext();
+
+  useEffect(() => {
+    if (fieldValues) {
+      const busFields: Array<BusType> = [
+        "line",
+        "hour",
+        "ticketPrice",
+        "inicialRoute",
+        "finalRoute",
+        "busNumber",
+      ];
+
+      busFields?.forEach((field: BusType) =>
+        setValue(field, fieldValues[field])
+      );
+    }
+  }, [fieldValues]);
 
   //Método que adiciona o id do usuario que está criando
   const addIdUserAdmin = (data: BusProps) => {
     if (userData?.id) {
       const newData = { ...data, idUserAdmin: userData.id };
-
       sendingData(newData);
     }
   };

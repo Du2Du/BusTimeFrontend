@@ -20,3 +20,30 @@ export interface BusProps {
   busNumber: number;
   idUserAdmin: number;
 }
+
+interface SortProps {
+  empty: boolean;
+  sorted: boolean;
+  unsorted: boolean;
+}
+interface PageableProps {
+  sort: SortProps;
+  offset: number;
+  pageNumber: number;
+  pageSize: number;
+  unpaged: boolean;
+  paged: boolean;
+}
+export interface PaginationInterface<T> {
+  content: Array<T>;
+  pageable: PageableProps;
+  last: boolean;
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+  sort: SortProps;
+  first: boolean;
+  numberOfElements: number;
+  empty: boolean;
+}
