@@ -49,14 +49,16 @@ export const Main: React.FC = () => {
         {bus?.content.length === 0 ? (
           <p>Nenhum ônibus a ser exibido</p>
         ) : (
-          <div className={styles.list}>
-            {bus?.content.map((bus) => (
-              <BusItem key={bus.id} bus={bus} />
-            ))}
-          </div>
-        )}
-        {bus && (
-          <Pagination showTotal reloadItens={reloadBus} pagination={bus} />
+          <>
+            <div className={styles.list}>
+              {bus?.content.map((bus) => (
+                <BusItem key={bus.id} bus={bus} />
+              ))}
+            </div>
+            {bus && (
+              <Pagination showTotal reloadItens={reloadBus} pagination={bus} />
+            )}
+          </>
         )}
       </div>
     </main>
