@@ -29,7 +29,7 @@ export const Button: React.FC<ButtonParams> = ({
       disabled={disabled === undefined ? false : disabled}
       type={type || "button"}
       onClick={onClick}
-      className={`${styles.button} ${extraCss ? extraCss : ""}`}
+      className={`${styles.newButton} ${extraCss ? extraCss : ""}`}
       {...rest}
     >
       {children}
