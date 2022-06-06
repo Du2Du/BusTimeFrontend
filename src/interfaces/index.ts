@@ -21,6 +21,15 @@ export interface BusProps {
   idUserAdmin: number;
 }
 
+export interface UserDataProps {
+  id: number;
+  name: string;
+  email: string;
+  birthDate: string;
+  cpf: string;
+  isAdmin: boolean;
+}
+
 interface SortProps {
   empty: boolean;
   sorted: boolean;

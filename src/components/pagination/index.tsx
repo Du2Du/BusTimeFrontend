@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { PaginationInterface } from "../../interfaces";
-import { Button } from "../button";
+import { ButtonWithBorder } from "../button-with-border";
 
 interface PaginationParams<T> {
   pagination: PaginationInterface<T>;
@@ -111,11 +111,11 @@ export const Pagination: React.FC<PaginationParams<any>> = ({
         {arrayPages.map((_pag) => {
           const pos: any = _pag;
           return (
-            <Button
+            <ButtonWithBorder
               btnLabel={pos}
               onClick={() => goToPage(pos)}
               key={pos}
-              extraCss=" mx-1"
+              className="mx-1"
             />
           );
         })}
@@ -124,7 +124,12 @@ export const Pagination: React.FC<PaginationParams<any>> = ({
         <span className="mb-3 mt-2">
           Mostrando:
           {pagination.totalPages
-            ? ` ${pagination.numberOfElements}/${pagination.totalElements}`
+            ? ` ${
+                pagination.number !== 0
+                  ? pagination.numberOfElements +
+                    pagination.size * pagination.number
+                  : pagination.numberOfElements
+              }/${pagination.totalElements}`
             : " 0/0"}
         </span>
       )}

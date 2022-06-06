@@ -13,20 +13,16 @@
 }
 
 .busItem {
-  align-items: center;
-  justify-content: space-between;
   border: #7e4ccb 2px solid;
-  display: flex;
   border-radius: 4px;
   margin: 10px 0;
   width: 90%;
   overflow: auto;
-  padding: 10px 20px;
-  cursor: pointer;
+  padding: 15px 20px 10px;
 }
 
 .busItem:hover {
-  transform: scale(1.1);
+  transform: scale(1.01);
   transition: 100ms;
 }
 
@@ -34,12 +30,35 @@
   margin: 0 20px;
 }
 
+.fields {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .title {
   font-size: 30px;
   margin-bottom: 20px;
+  color: #7e4ccb;
+  border-bottom: #7e4ccb 2px solid;
 }
 
 .notBus {
   font-size: 18px;
   color: #7e4ccb;
+}
+
+.update {
+  width: 200px;
+  border-radius: 5px;
+  height: 30px;
+  background-color: #7e4ccb;
+  -webkit-transition: 0.5s ease-in;
+  -moz-transition: 0.5s ease-in;
+  -o-transition: 0.5s ease-in;
+  transition: 0.3s ease-in;
+}
+
+.update:hover {
+  background-color: #6d2fca;
 }

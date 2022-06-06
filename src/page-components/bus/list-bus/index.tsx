@@ -25,39 +25,44 @@ export const ListAllBus: React.FC = () => {
 
   return (
     <main className={styles.mainBus}>
-      <h2 className={styles.title}>Ônibus Criados por Você</h2>
+      <h2 className={styles.title}>Rotas Criadas por Você</h2>
       {bus.length === 0 ? (
-        <h2 className={styles.notBus}>Nenhum Ônibus Criado</h2>
+        <h2 className={styles.notBus}>Nenhuma Rota Criada</h2>
       ) : (
         bus.map((element) => (
-          <div
-            onClick={redirectBus(element.id)}
-            className={styles.busItem}
-            key={element.id}
-          >
-            <div className={styles.fieldItem}>
-              <b>Linha: </b>
-              {element.line}
+          <div className={styles.busItem} key={element.id}>
+            <div className={styles.fields}>
+              <div className={styles.fieldItem}>
+                <b>Linha: </b>
+                {element.line}
+              </div>
+              <div className={styles.fieldItem}>
+                <b>Hora: </b>
+                {element.hour}
+              </div>
+              <div className={styles.fieldItem}>
+                <b>Passagem: </b>R${element.ticketPrice}
+              </div>
+              <div className={styles.fieldItem}>
+                <b>Rota Incial: </b>
+                {element.inicialRoute}
+              </div>
+              <div className={styles.fieldItem}>
+                <b>Rota Final: </b>
+                {element.finalRoute}
+              </div>
+              <div className={styles.fieldItem}>
+                <b>Número: </b>
+                {element.busNumber}
+              </div>
             </div>
-            <div className={styles.fieldItem}>
-              <b>Hora: </b>
-              {element.hour}
-            </div>
-            <div className={styles.fieldItem}>
-              <b>Passagem: </b>R${element.ticketPrice}
-            </div>
-            <div className={styles.fieldItem}>
-              <b>Rota Incial: </b>
-              {element.inicialRoute}
-            </div>
-            <div className={styles.fieldItem}>
-              <b>Rota Final: </b>
-              {element.finalRoute}
-            </div>
-            <div className={styles.fieldItem}>
-              <b>Número: </b>
-              {element.busNumber}
-            </div>
+            <button
+              type="button"
+              onClick={redirectBus(element.id)}
+              className={`${styles.update} mb-4 ml-2  mt-3`}
+            >
+              Alterar
+            </button>
           </div>
         ))
       )}

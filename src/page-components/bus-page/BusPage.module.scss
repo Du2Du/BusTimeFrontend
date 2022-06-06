@@ -5,6 +5,12 @@
   text-align: center;
 }
 
+.section > h1 {
+  border-bottom: #7e4ccb 2px solid;
+  padding-bottom: 5px;
+  color: #7e4ccb;
+}
+
 .field {
   margin: 20px 0;
   display: flex;

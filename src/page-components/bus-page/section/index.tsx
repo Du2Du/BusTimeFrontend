@@ -1,8 +1,7 @@
 import Router from "next/router";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Input } from "../../../components";
-import { Button } from "../../../components/button";
+import { Button, ButtonWithBorder, Input } from "../../../components";
 import { useUserContext } from "../../../global-context";
 import { BusProps } from "../../../interfaces";
 import { routesName } from "../../../routes-name";
@@ -57,9 +56,7 @@ export const Section: React.FC<SectionParams> = ({
         "busNumber",
       ];
 
-      busFields?.forEach((field: BusType) =>
-        setValue(field, fieldValues[field])
-      );
+      busFields?.forEach((field) => setValue(field, fieldValues[field]));
     }
   }, [fieldValues]);
 
@@ -79,7 +76,7 @@ export const Section: React.FC<SectionParams> = ({
   return (
     <section className={styles.section}>
       <h1 className="text-3xl mb-3">
-        {isCreate ? "Registre" : "Atualize"} agora um ônibus
+        {isCreate ? "Registre" : "Atualize"} agora uma Rota
       </h1>
       <form onSubmit={handleSubmit(addIdUserAdmin)} className="fields">
         <Input
@@ -131,15 +128,16 @@ export const Section: React.FC<SectionParams> = ({
         <Button
           type="submit"
           btnLabel={isCreate ? "Cadastrar" : "Salvar"}
-          extraCss="mb-4   mt-3"
+          className="mb-4 mt-3"
         />
-        <button
-          type="button"
-          onClick={redirectBus}
-          className={`${styles.back} mb-4 ml-2  mt-3`}
-        >
-          Voltar
-        </button>
+        {!isCreate && (
+          <ButtonWithBorder
+            type="button"
+            onClick={redirectBus}
+            btnLabel="Voltar"
+            className="mb-4 ml-2 mt-3"
+          />
+        )}
       </form>
     </section>
   );

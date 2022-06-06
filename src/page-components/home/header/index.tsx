@@ -15,7 +15,7 @@ export const Header: React.FC = () => {
       <div className={`${styles.searchBox}`}>
         <input
           type="text"
-          placeholder="Procure Ônibus"
+          placeholder="Procure pela Linha do Ônibus"
           className={styles.searchInput}
         />
         <a href="#" className={styles.searchBtn}>
