@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <UserProvider>
         <Component {...pageProps} />
+
         <Footer />
         <Toaster
           toastOptions={{

@@ -2,20 +2,15 @@ import { AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { ApiRoutes } from "../../api-routes";
-import { FixedHead } from "../../components";
-import { useUserContext } from "../../global-context";
-import { WithAuth } from "../../global-hoc";
-import { BusProps } from "../../interfaces";
-import { Section } from "../../page-components/bus-page";
-import { Header } from "../../page-components/home";
-import { Backend } from "../../services/backend";
-import { showError } from "../../utils";
-
-interface FieldValueProps {
-  name: string;
-  value: any;
-}
+import { ApiRoutes } from "../../../api-routes";
+import { FixedHead } from "../../../components";
+import { useUserContext } from "../../../global-context";
+import { WithAuth } from "../../../global-hoc";
+import { BusProps } from "../../../interfaces";
+import { Section } from "../../../page-components/bus-page";
+import { Header } from "../../../page-components/home";
+import { Backend } from "../../../services/backend";
+import { showError } from "../../../utils";
 
 const CreateBus: React.FC = WithAuth(() => {
   const { userData } = useUserContext();
@@ -46,7 +41,7 @@ const CreateBus: React.FC = WithAuth(() => {
 
   return (
     <div>
-      <FixedHead title="Update Bus" />
+      <FixedHead title="Atualizar Ônibus" />
       <Header />
       <Section fieldValues={fieldValues} sendingData={createBus} />
     </div>

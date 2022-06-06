@@ -5,6 +5,7 @@ import { FixedHead } from "../../components";
 import { WithAuth } from "../../global-hoc";
 import { Credentials } from "../../page-components";
 import { Fields } from "../../page-components/credentials";
+import { routesName } from "../../routes-name";
 import { Backend } from "../../services/backend";
 import { showError } from "../../utils";
 
@@ -17,7 +18,7 @@ const Login: React.FC = WithAuth(() => {
   /*Essa função realiza o login do usuário */
   const login = (data: { email: string; password: string }) => {
     Backend.post(ApiRoutes.LOGIN_USER, data)
-      .then(() => Router.push("/home"))
+      .then(() => Router.push(routesName.HOME))
       .catch(showError);
   };
 

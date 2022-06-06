@@ -3,6 +3,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { BiBusSchool, BiDoorOpen, BiHomeAlt } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { useUserContext } from "../../../../../global-context";
+import { routesName } from "../../../../../routes-name";
 import styles from "./Dropdown.module.scss";
 
 export const Dropdown: React.FC = () => {
@@ -14,27 +15,27 @@ export const Dropdown: React.FC = () => {
       </a>
       <ul className={styles.items}>
         <li>
-          <a href="/profile">
+          <a href={routesName.PROFILE}>
             <CgProfile size={27} className={styles.faBrands} />
             Perfil
           </a>
         </li>
         <li>
-          <a href="/home">
+          <a href={routesName.HOME}>
             <BiHomeAlt size={27} className={styles.faBrands} />
             Menu
           </a>
         </li>
         {userData?.isAdmin && (
           <li>
-            <a href="/bus">
+            <a href={routesName.BUS}>
               <BiBusSchool size={27} className={styles.faBrands} />
               Ônibus
             </a>
           </li>
         )}
         <li>
-          <a href="/logout">
+          <a href={routesName.LOGOUT}>
             <BiDoorOpen size={27} className={styles.faBrands} />
             Sair
           </a>

@@ -115,7 +115,7 @@ export const Pagination: React.FC<PaginationParams<any>> = ({
               btnLabel={pos}
               onClick={() => goToPage(pos)}
               key={pos}
-              extraCss="p-0 mx-1"
+              extraCss=" mx-1"
             />
           );
         })}
