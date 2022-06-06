@@ -1,0 +1,19 @@
+.buttonBorder {
+  padding: 10px 20px;
+  border: #7e4ccb 1px solid;
+  color: #7e4ccb;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  letter-spacing: 4px;
+  width: auto;
+  border-radius: 5px;
+}
+
+.buttonBorder:hover {
+  background-color: #7e4ccb;
+  color: rgb(210, 210, 210);
+  border-radius: 5px;
+  box-shadow: 0 0 5px #7e4ccb, 0 0 25px #7e4ccb, 0 0 50px #7e4ccb, 0 0 10;
+}

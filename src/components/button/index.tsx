@@ -18,9 +18,9 @@ export const Button: React.FC<ButtonParams> = ({
   disabled,
   type,
   onClick,
-  extraCss,
   children,
   btnLabel,
+  className,
   ...rest
 }) => {
   return (
@@ -28,7 +28,7 @@ export const Button: React.FC<ButtonParams> = ({
       ref={buttonRef}
       disabled={disabled === undefined ? false : disabled}
       onClick={onClick}
-      className={`${styles.newButton} ${extraCss ? extraCss : ""}`}
+      className={`${styles.newButton} ${className ? className : ""}`}
       {...rest}
     >
       {children}

@@ -8,17 +8,9 @@ import React, {
   useState,
 } from "react";
 import { ApiRoutes } from "../../api-routes";
+import { UserDataProps } from "../../interfaces";
 import { Backend } from "../../services/backend";
 import { showError } from "../../utils";
-
-interface UserDataProps {
-  id: number;
-  name: string;
-  email: string;
-  birthDate: string;
-  cpf: string;
-  isAdmin: boolean;
-}
 
 interface UserInterface {
   userData?: UserDataProps;

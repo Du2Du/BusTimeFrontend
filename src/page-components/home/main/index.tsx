@@ -1,8 +1,7 @@
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
 import { ApiRoutes } from "../../../api-routes";
-import { Pagination } from "../../../components";
-import { Button } from "../../../components/button";
+import { Button, Pagination } from "../../../components";
 import { useUserContext } from "../../../global-context";
 import { BusProps, PaginationInterface } from "../../../interfaces";
 import { routesName } from "../../../routes-name";
@@ -38,10 +37,10 @@ export const Main: React.FC = () => {
     <main className={styles.homeMain}>
       {userData?.isAdmin && (
         <div className={styles.busDescription}>
-          <p>É responsável por alguma linha de ônibus? Registre ela agora!</p>
+          <p>É responsável por alguma rota de ônibus? Registre ela agora!</p>
           <Button
             onClick={redirectCreateBus}
-            extraCss="my-4"
+            className="my-4"
             btnLabel="Cadastrar"
           />
         </div>

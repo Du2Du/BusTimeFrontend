@@ -1,0 +1,32 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fieldsUser > .fields {
+  margin: 20px 0;
+}
+
+.title {
+  font-size: 30px;
+  text-align: center;
+  color: #7e4ccb;
+  border-bottom: #7e4ccb 2px solid;
+}
+
+.input {
+  width: 300px !important;
+  margin-top: 10px !important;
+}
+
+.buttonSave {
+  align-self: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

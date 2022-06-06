@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Router from "next/router";
 import BusSvg from "../../public/bus.svg";
 import { FixedHead } from "../components";
+import { WithAuth } from "../global-hoc";
 import { routesName } from "../routes-name";
 import styles from "../styles/Dashboard.module.scss";
 
@@ -10,7 +11,7 @@ import styles from "../styles/Dashboard.module.scss";
  *
  * @author Du2Du
  */
-const Home: NextPage = () => {
+const Home: NextPage = WithAuth(() => {
   /**
    * Função que redireciona o usuário para a url de registro
    */
@@ -58,7 +59,7 @@ const Home: NextPage = () => {
       </div>
     </>
   );
-};
+});
 
 export default Home;
 
