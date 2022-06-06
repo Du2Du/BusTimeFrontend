@@ -4,3 +4,41 @@
   align-items: center;
   justify-content: center;
 }
+
+.not {
+  font-size: 30px;
+}
+.listAll > h1 {
+  font-size: 30px;
+  color: #7e4ccb;
+  border-bottom: #7e4ccb 2px solid;
+}
+
+.list {
+  margin: 4% 0 0;
+  border-radius: 5px;
+  width: 100%;
+
+  p {
+    text-align: center;
+    padding: 5px;
+  }
+}
+.item {
+  margin: 20px 0;
+  border-radius: 5px;
+  width: 100%;
+  overflow: auto;
+  border: 3px solid #7e4ccb;
+}
+
+.item:first-child {
+  margin-top: 0;
+}
+
+.listAll {
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  align-items: center;
+}
