@@ -8,7 +8,7 @@ import { WithAuth } from "../../global-hoc";
 const ListBus: React.FC = WithAuth(() => {
   return (
     <div className={styles.listBus}>
-      <FixedHead title="All Bus" />
+      <FixedHead title="Ônibus" />
       <Header />
       <ListAllBus />
     </div>

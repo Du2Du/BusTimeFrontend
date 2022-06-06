@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Router from "next/router";
 import BusSvg from "../../public/bus.svg";
 import { FixedHead } from "../components";
+import { routesName } from "../routes-name";
 import styles from "../styles/Dashboard.module.scss";
 
 /**
@@ -14,7 +15,7 @@ const Home: NextPage = () => {
    * Função que redireciona o usuário para a url de registro
    */
   const redirectRegister = () => {
-    Router.push("/register");
+    Router.push(routesName.REGISTER);
   };
 
   return (

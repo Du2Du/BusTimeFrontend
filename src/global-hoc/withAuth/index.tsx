@@ -2,6 +2,7 @@ import Router, { useRouter } from "next/router";
 import React, { FormEvent, FormEventHandler, useEffect } from "react";
 import { useUserContext } from "../../global-context";
 import { Button } from "../../page-components/credentials/components";
+import { routesName } from "../../routes-name";
 import styles from "./withAuth.module.scss";
 
 export function WithAuth<T>(Component: React.ComponentType<T>) {
@@ -10,7 +11,9 @@ export function WithAuth<T>(Component: React.ComponentType<T>) {
     const { pathname } = useRouter();
 
     const isCredential =
-      pathname === "/login" || pathname === "/register" || pathname === "/";
+      pathname === routesName.LOGIN ||
+      pathname === routesName.REGISTER ||
+      pathname === "/";
 
     useEffect(() => {
       if (!userData) getUser();
@@ -35,7 +38,7 @@ export const NotAuthentic: React.FC<{ isCredential: boolean }> = ({
 }) => {
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    Router.push(isCredential ? "/home" : "/login");
+    Router.push(isCredential ? routesName.HOME : routesName.LOGIN);
   };
 
   return (

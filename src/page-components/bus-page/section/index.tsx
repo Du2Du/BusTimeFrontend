@@ -1,9 +1,11 @@
+import Router from "next/router";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "../../../components";
 import { Button } from "../../../components/button";
 import { useUserContext } from "../../../global-context";
 import { BusProps } from "../../../interfaces";
+import { routesName } from "../../../routes-name";
 import styles from "../BusPage.module.scss";
 
 interface SectionParams {
@@ -69,6 +71,11 @@ export const Section: React.FC<SectionParams> = ({
     }
   };
 
+  //Método que redireciona o usuario para tela de onibus
+  const redirectBus = () => {
+    Router.push(routesName.BUS);
+  };
+
   return (
     <section className={styles.section}>
       <h1 className="text-3xl mb-3">
@@ -126,6 +133,13 @@ export const Section: React.FC<SectionParams> = ({
           btnLabel={isCreate ? "Cadastrar" : "Salvar"}
           extraCss="mb-4   mt-3"
         />
+        <button
+          type="button"
+          onClick={redirectBus}
+          className={`${styles.back} mb-4 ml-2  mt-3`}
+        >
+          Voltar
+        </button>
       </form>
     </section>
   );

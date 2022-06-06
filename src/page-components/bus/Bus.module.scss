@@ -5,4 +5,41 @@
 }
 
 .mainBus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.busItem {
+  align-items: center;
+  justify-content: space-between;
+  border: #7e4ccb 2px solid;
+  display: flex;
+  border-radius: 4px;
+  margin: 10px 0;
+  width: 90%;
+  overflow: auto;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.busItem:hover {
+  transform: scale(1.1);
+  transition: 100ms;
+}
+
+.fieldItem {
+  margin: 0 20px;
+}
+
+.title {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.notBus {
+  font-size: 18px;
+  color: #7e4ccb;
 }

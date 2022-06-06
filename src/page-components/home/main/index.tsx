@@ -5,6 +5,7 @@ import { Pagination } from "../../../components";
 import { Button } from "../../../components/button";
 import { useUserContext } from "../../../global-context";
 import { BusProps, PaginationInterface } from "../../../interfaces";
+import { routesName } from "../../../routes-name";
 import { Backend } from "../../../services/backend";
 import styles from "../Home.module.scss";
 import { BusItem } from "./components";
@@ -19,7 +20,7 @@ export const Main: React.FC = () => {
 
   //Método que redireciona o usuário para a tela de registrar ônibus
   const redirectCreateBus = () => {
-    Router.push("/create-bus");
+    Router.push(routesName.CREATE_BUS);
   };
   const [bus, setBus] = useState<PaginationInterface<BusProps>>();
 
