@@ -1,7 +1,8 @@
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
 import { ApiRoutes } from "../../../api-routes";
-import { Button, Pagination } from "../../../components";
+import { Pagination } from "../../../components";
+import { Button } from "../../../components/button";
 import { useUserContext } from "../../../global-context";
 import { BusProps, PaginationInterface } from "../../../interfaces";
 import { Backend } from "../../../services/backend";
