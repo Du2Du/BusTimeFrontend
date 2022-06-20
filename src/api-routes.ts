@@ -5,5 +5,6 @@ export const ApiRoutes = {
   USER_ME: "/v1/users/me",
   LIST_BUS: "/v1/bus",
   CREATE_BUS: "/v1/bus",
+  SEARCH_BUS: "/v1/bus",
   LIST_BUS_USER: "/v1/bus/user",
 };

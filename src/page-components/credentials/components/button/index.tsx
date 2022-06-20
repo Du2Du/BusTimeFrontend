@@ -3,6 +3,7 @@ import styles from "./Button.module.scss";
 
 interface ButtonParams {
   label: string;
+  onClick?: () => void;
 }
 
 /**
@@ -14,9 +15,9 @@ interface ButtonParams {
  *
  * @author Du2DU
  */
-export const Button: React.FC<ButtonParams> = ({ label }) => {
+export const Button: React.FC<ButtonParams> = ({ label, onClick }) => {
   return (
-    <button type="submit" className={styles.buttonBorder}>
+    <button type="submit" onClick={onClick} className={styles.buttonBorder}>
       <span></span>
       <span></span>
       <span></span>

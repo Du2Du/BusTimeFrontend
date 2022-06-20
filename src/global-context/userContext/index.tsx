@@ -5,6 +5,7 @@ import React, {
   PropsWithChildren,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import { ApiRoutes } from "../../api-routes";
@@ -27,6 +28,10 @@ export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
     Backend.get(ApiRoutes.USER_ME).then((res) => {
       setUserData(res.data);
     });
+  }, []);
+
+  useEffect(() => {
+    getUser();
   }, []);
 
   return (

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Fields } from "../..";
 import { Input } from "../../../../components";
 import styles from "../../Credentials.module.scss";
@@ -10,8 +11,11 @@ interface Errors {
   email?: FieldError | undefined;
   password?: FieldError | undefined;
   cpf?: FieldError | undefined;
-  birth_date?: FieldError | undefined;
+  birthDate?: FieldError | undefined;
 }
+
+type FieldsName = "name" | "cpf" | "email" | "birthDate" | "password";
+
 interface FormFieldsParams {
   /**
    * Esse param é a label que ficará no topo
@@ -49,6 +53,38 @@ export const FormFields: React.FC<FormFieldsParams> = ({
     /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
   const buttonLabel = isLogin ? "ENTRAR" : "CADASTRAR";
 
+  const fieldsErros: FieldsName[] = [
+    "name",
+    "cpf",
+    "birthDate",
+    "email",
+    "password",
+  ];
+
+  const fieldLabel = {
+    name: { required: "O nome é obrigatório", pattern: "", min: "" },
+    cpf: {
+      required: "O cpf é obrigatório",
+      pattern: "O cpf deve ficar no formato XXX.XXX.XXX-XX",
+      min: "",
+    },
+    birthDate: {
+      required: "A data de nascimento é obrigatória",
+      pattern: "A data de nascimento deve ficar no formato dd/mm/yyyy",
+      min: "",
+    },
+    email: { required: "O email é obrigatório", pattern: "", min: "" },
+    password: {
+      required: "A senha é obrigatória",
+      pattern: "",
+      min: "A senha deve ter no mínimo 6 dígitos",
+    },
+  };
+
+  const showToast = (message: string) => {
+    toast.error(message);
+  };
+
   return (
     <>
       <h1 className="text-2xl">{label}</h1>
@@ -59,13 +95,11 @@ export const FormFields: React.FC<FormFieldsParams> = ({
             placeHolder="Nome"
             register={register("name", {
               required: true,
-              pattern: /^[A-Za-z]+$/i,
             })}
             id="name"
-            className={`${styles.credentialsInput} ${
-              errors.name ? styles.inputError : ""
-            }`}
+            className={styles.credentialsInput}
           />
+
           <Input
             label="CPF"
             placeHolder="CPF"
@@ -73,11 +107,10 @@ export const FormFields: React.FC<FormFieldsParams> = ({
               required: true,
               pattern: /\d{3}\.\d{3}\.\d{3}\-\d{2}/g,
             })}
-            id="name"
-            className={`${styles.credentialsInput} ${
-              errors.cpf ? styles.inputError : ""
-            }`}
+            id="cpf"
+            className={styles.credentialsInput}
           />
+
           <Input
             label="Data de Nascimento"
             placeHolder="Data de Nascimento"
@@ -85,34 +118,42 @@ export const FormFields: React.FC<FormFieldsParams> = ({
               required: true,
               pattern: regexForDate,
             })}
-            id="name"
-            className={`${styles.credentialsInput} ${
-              errors.birth_date ? styles.inputError : ""
-            }`}
+            id="date"
+            className={styles.credentialsInput}
           />
         </>
       )}
+
       <Input
         label="Email"
         placeHolder="Email"
         register={register("email", { required: true })}
         id="email"
         type="email"
-        className={`${styles.credentialsInput} ${
-          errors.email ? styles.inputError : ""
-        }`}
+        className={styles.credentialsInput}
       />
+
       <Input
         label="Senha"
         placeHolder="Senha"
         id="password"
         register={register("password", { required: true, min: 6 })}
-        className={`${styles.credentialsInput} ${
-          errors.password ? styles.inputError : ""
-        }`}
+        className={styles.credentialsInput}
         type="password"
       />
-      <Button label={buttonLabel} />
+
+      <Button
+        onClick={() => {
+          fieldsErros.forEach((field) => {
+            if (errors[field]?.type === "required")
+              showToast(fieldLabel[field].required);
+            if (errors[field]?.type === "pattern")
+              showToast(fieldLabel[field].pattern);
+            if (errors[field]?.type === "min") showToast(fieldLabel[field].min);
+          });
+        }}
+        label={buttonLabel}
+      />
     </>
   );
 };

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { routesName } from "../../routes-name";
 import { FormFields } from "./components";
 import styles from "./Credentials.module.scss";

@@ -3,7 +3,12 @@ import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { ApiRoutes } from "../../../api-routes";
-import { Button, ButtonWithBorder, SimpleInput } from "../../../components";
+import {
+  Button,
+  ButtonWithBorder,
+  CheckboxInput,
+  SimpleInput,
+} from "../../../components";
 import { useUserContext } from "../../../global-context";
 import { UserDataProps } from "../../../interfaces";
 import { routesName } from "../../../routes-name";
@@ -116,6 +121,13 @@ export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
             disabled={isUpdate ? false : true}
             register={register("birthDate")}
           />
+        </div>
+        <div className={styles.fields + " flex items-center justify-center"}>
+          <CheckboxInput
+            disabled={isUpdate ? false : true}
+            register={register("isAdmin")}
+          />
+          <label className="ml-2">É administrador?</label>
         </div>
       </div>
       {isUpdate && (
