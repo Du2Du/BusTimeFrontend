@@ -10,7 +10,7 @@ export const BusItem: React.FC<{ bus: BusProps }> = ({ bus }) => {
         {bus.line}
       </div>
       <div className={styles.fieldItem}>
-        <b>Hora: </b>
+        <b>Horário: </b>
         {bus.hour}
       </div>
       <div className={styles.fieldItem}>

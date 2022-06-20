@@ -1,5 +1,7 @@
+import Router from "next/router";
 import React, { ChangeEventHandler, useState } from "react";
 import { BiSearch } from "react-icons/bi";
+import { routesName } from "../../../routes-name";
 import styles from "../Home.module.scss";
 import { Dropdown } from "./components";
 
@@ -24,9 +26,16 @@ export const Header: React.FC = () => {
           value={searchBus}
           onChange={changeValue}
           placeholder="Procure pela Linha do Ônibus"
+          onKeyDown={(ev) => {
+            if (ev.code == "Enter")
+              return Router.push(`${routesName.SEARCH_BUS}?line=${searchBus}`);
+          }}
           className={styles.searchInput}
         />
-        <a href="#" className={styles.searchBtn}>
+        <a
+          href={`${routesName.SEARCH_BUS}?line=${searchBus}`}
+          className={styles.searchBtn}
+        >
           <BiSearch />
         </a>
       </div>
