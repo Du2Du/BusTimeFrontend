@@ -6,13 +6,14 @@ import { toast } from "react-hot-toast";
  *
  * @author Du2Du
  */
-export const showError = (errors: any) => {
-  if (errors?.isCanceled || !errors) return;
+export const showError = (error: any) => {
+  if (error?.isCanceled || !error) return;
   const {
     response: {
-      data: { message },
+      data: { message, errors },
     },
-  } = errors;
+  } = error;
+  if (errors.length > 0) return toast.error(errors[0]);
   if (message) {
     return toast.error(message);
   }
