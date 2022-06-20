@@ -13,6 +13,6 @@ const ListBus: React.FC = WithAuth(() => {
       <ListAllBus />
     </div>
   );
-});
+}, true);
 
 export default ListBus;

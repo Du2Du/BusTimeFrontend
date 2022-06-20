@@ -25,6 +25,6 @@ const CreateBus: React.FC = WithAuth(() => {
       <Section isCreate sendingData={createBus} />
     </div>
   );
-});
+}, true);
 
 export default CreateBus;
