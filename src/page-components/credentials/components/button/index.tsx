@@ -3,7 +3,7 @@ import styles from "./Button.module.scss";
 
 interface ButtonParams {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 /**
