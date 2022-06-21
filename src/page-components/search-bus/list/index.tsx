@@ -9,7 +9,7 @@ import { BusItem } from "../../home/main/components";
 import styles from "../SearchBus.module.scss";
 
 export const List: React.FC = () => {
-  const [bus, setBus] = useState<Array<BusProps>>();
+  const [bus, setBus] = useState<PaginationInterface<BusProps>>();
   const { query } = useRouter();
   const line = query.line;
 
@@ -17,8 +17,8 @@ export const List: React.FC = () => {
     reloadItens();
   }, [line]);
 
-  const reloadItens = () => {
-    Backend.get(`${ApiRoutes.FILTER_BUS}?line=${line}`)
+  const reloadItens = (page = 0) => {
+    Backend.get(`${ApiRoutes.FILTER_BUS}?line=${line}&size=10&page=${page}`)
       .then((res) => setBus(res.data))
       .catch(showError);
   };
@@ -26,7 +26,7 @@ export const List: React.FC = () => {
   return (
     <div className={styles.listAll}>
       <h1>Rotas da linha: {line}</h1>
-      {bus?.length === 0 ? (
+      {bus?.content.length === 0 ? (
         <h2 className={`${styles.not} mt-3`}>
           Nenhuma Rota de Ônibus encontrado
         </h2>
@@ -34,12 +34,13 @@ export const List: React.FC = () => {
         bus && (
           <>
             <div className={styles.list}>
-              {bus.map((ele) => (
+              {bus.content.map((ele) => (
                 <div className={styles.item} key={ele.id}>
                   <BusItem bus={ele} />
                 </div>
               ))}
             </div>
+            <Pagination reloadItens={reloadItens} pagination={bus} showTotal />
           </>
         )
       )}
