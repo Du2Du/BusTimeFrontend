@@ -7,11 +7,15 @@ import { Backend } from "../../services/backend";
 
 const Logout: React.FC = WithAuth(() => {
   useEffect(() => {
-    Backend.get(ApiRoutes.LOGOUT).then(() => {
-      Router.push(routesName.LOGIN).then(() => {
-        Router.reload();
+    Backend.get(ApiRoutes.LOGOUT)
+      .then(() => {
+        Router.push(routesName.LOGIN).then(() => {
+          Router.reload();
+        });
+      })
+      .catch(() => {
+        Router.push(routesName.HOME);
       });
-    });
   }, []);
 
   return <div></div>;
