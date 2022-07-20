@@ -2,6 +2,7 @@ import React from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiBusSchool, BiDoorOpen, BiHomeAlt } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
+import { GiBusStop } from "react-icons/gi";
 import { useUserContext } from "../../../../../global-context";
 import { routesName } from "../../../../../routes-name";
 import styles from "./Dropdown.module.scss";
@@ -27,12 +28,20 @@ export const Dropdown: React.FC = () => {
           </a>
         </li>
         {userData?.isAdmin && (
-          <li>
-            <a href={routesName.BUS}>
-              <BiBusSchool size={27} className={styles.faBrands} />
-              Ônibus
-            </a>
-          </li>
+          <>
+            <li>
+              <a href={routesName.CREATE_BUS}>
+                <GiBusStop size={27} className={styles.faBrands} />
+                Cadastrar
+              </a>
+            </li>
+            <li>
+              <a href={routesName.BUS}>
+                <BiBusSchool size={27} className={styles.faBrands} />
+                Ônibus
+              </a>
+            </li>
+          </>
         )}
         <li>
           <a href={routesName.LOGOUT}>

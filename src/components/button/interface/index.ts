@@ -1,7 +1,6 @@
 export interface ButtonParams
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   btnLabel: string;
-  extraCss?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | (() => void);
   type?: "button" | "submit" | "reset" | undefined;
   disabled?: boolean;

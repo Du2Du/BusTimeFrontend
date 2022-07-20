@@ -16,7 +16,7 @@
   border: #7e4ccb 2px solid;
   border-radius: 4px;
   margin: 10px 0;
-  width: 90%;
+  width: 70%;
   overflow: auto;
   padding: 15px 20px 10px;
 }
@@ -27,13 +27,14 @@
 }
 
 .fieldItem {
-  margin: 0 20px;
+  margin: 7px 20px;
 }
 
 .fields {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .title {
@@ -46,6 +47,12 @@
 .notBus {
   font-size: 18px;
   color: #7e4ccb;
+}
+
+.hr {
+  background-color: #6d2fca;
+  border: none;
+  height: 1px;
 }
 
 .update {

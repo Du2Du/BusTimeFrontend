@@ -47,8 +47,8 @@ export const Main: React.FC = () => {
       )}
       <div className={styles.busList}>
         <p>Veja agora os horários de ônibus:</p>
-        {bus?.content.length === 0 ? (
-          <p>Nenhum ônibus a ser exibido</p>
+        {bus?.content.length === 0 || !bus?.content ? (
+          <p style={{ color: "#fff" }}>Nenhum ônibus a ser exibido</p>
         ) : (
           <>
             <div className={styles.list}>

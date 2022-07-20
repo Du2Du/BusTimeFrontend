@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Router from "next/router";
 import BusSvg from "../../public/bus.svg";
-import { FixedHead } from "../components";
+import { ButtonWithBorder, FixedHead } from "../components";
 import { WithAuth } from "../global-hoc";
 import { routesName } from "../routes-name";
 import styles from "../styles/Dashboard.module.scss";
@@ -15,8 +15,8 @@ const Home: NextPage = WithAuth(() => {
   /**
    * Função que redireciona o usuário para a url de registro
    */
-  const redirectRegister = () => {
-    Router.push(routesName.REGISTER);
+  const redirect = (url: string) => () => {
+    Router.push(url);
   };
 
   return (
@@ -38,12 +38,20 @@ const Home: NextPage = WithAuth(() => {
                 O melhor site para encontrar os melhores horários de ônibus em
                 Luziânia!
               </p>
-              <button
-                onClick={redirectRegister}
-                className={`${styles.buttonRegister} py-1 rounded my-3 text-white`}
-              >
-                Cadastrar
-              </button>
+              <div>
+                <button
+                  onClick={redirect(routesName.REGISTER)}
+                  className={`${styles.buttonRegister} py-1 rounded my-3 text-white`}
+                >
+                  Cadastrar
+                </button>
+                <ButtonWithBorder
+                  onClick={redirect(routesName.LOGIN)}
+                  btnLabel="Logar"
+                  className="mx-4"
+                  style={{ padding: "5px 10px" }}
+                />
+              </div>
             </div>
             <BusSvg />
           </main>

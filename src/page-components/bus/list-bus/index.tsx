@@ -56,6 +56,7 @@ export const ListAllBus: React.FC = () => {
                 {element.busNumber}
               </div>
             </div>
+            <hr className={styles.hr} />
             <button
               type="button"
               onClick={redirectBus(element.id)}
