@@ -60,7 +60,6 @@ export const FormFields: React.FC<FormFieldsParams> = ({
     "email",
     "password",
   ];
-
   const fieldLabel = {
     name: { required: "O nome é obrigatório", pattern: "", min: "" },
     cpf: {

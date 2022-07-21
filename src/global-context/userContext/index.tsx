@@ -9,6 +9,7 @@ import React, {
   useState,
 } from "react";
 import { ApiRoutes } from "../../api-routes";
+import { useLoadingSpinner } from "../../hooks";
 import { UserDataProps } from "../../interfaces";
 import { Backend } from "../../services/backend";
 import { showError } from "../../utils";
@@ -22,12 +23,14 @@ const UserContext = createContext<UserInterface>({} as UserInterface);
 
 export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [userData, setUserData] = useState<UserDataProps>();
-  const { pathname } = useRouter();
-
+  const { setTrue, setFalse } = useLoadingSpinner();
   const getUser = useCallback(async () => {
-    Backend.get(ApiRoutes.USER_ME).then((res) => {
-      setUserData(res.data);
-    });
+    setTrue();
+    Backend.get(ApiRoutes.USER_ME)
+      .then((res) => {
+        setUserData(res.data);
+      })
+      .finally(setFalse);
   }, []);
 
   useEffect(() => {

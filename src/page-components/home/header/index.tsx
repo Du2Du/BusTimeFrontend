@@ -1,6 +1,7 @@
 import Router from "next/router";
 import React, { ChangeEventHandler, useState } from "react";
 import { BiSearch } from "react-icons/bi";
+import { useLoadingSpinner } from "../../../hooks";
 import { routesName } from "../../../routes-name";
 import styles from "../Home.module.scss";
 import { Dropdown } from "./components";
@@ -12,7 +13,7 @@ import { Dropdown } from "./components";
  */
 export const Header: React.FC = () => {
   const [searchBus, setSearchBus] = useState("");
-
+  const { setTrue, setFalse } = useLoadingSpinner();
   const changeValue = (ev: any) => {
     setSearchBus(ev.target.value);
   };
@@ -27,8 +28,12 @@ export const Header: React.FC = () => {
           onChange={changeValue}
           placeholder="Procure pela Linha do Ônibus"
           onKeyDown={(ev) => {
-            if (ev.code == "Enter")
-              return Router.push(`${routesName.SEARCH_BUS}?line=${searchBus}`);
+            if (ev.code === "Enter") {
+              setTrue();
+              return Router.push(
+                `${routesName.SEARCH_BUS}?line=${searchBus}`
+              ).finally(setFalse);
+            }
           }}
           className={styles.searchInput}
         />

@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FixedHead } from "../../components";
 import { WithAuth } from "../../global-hoc";
-import { useLoadingSpinner } from "../../hooks";
 import { Header, Main } from "../../page-components/home";
 import styles from "../../page-components/home/Home.module.scss";
 
@@ -11,10 +10,6 @@ import styles from "../../page-components/home/Home.module.scss";
  * @author Du2Du
  */
 const Home: React.FC = WithAuth(() => {
-  const { setTrue } = useLoadingSpinner();
-  useEffect(() => {
-    setTrue();
-  }, []);
   return (
     <div className={styles.home}>
       <FixedHead title="Home" />

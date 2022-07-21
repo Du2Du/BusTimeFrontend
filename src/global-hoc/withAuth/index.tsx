@@ -2,6 +2,7 @@ import Router, { useRouter } from "next/router";
 import React, { FormEvent, FormEventHandler, useEffect } from "react";
 import { FixedHead } from "../../components";
 import { useUserContext } from "../../global-context";
+import { useLoadingSpinner } from "../../hooks";
 import { Button } from "../../page-components/credentials/components";
 import { routesName } from "../../routes-name";
 import styles from "./withAuth.module.scss";
@@ -21,7 +22,8 @@ export function WithAuth<T>(
 
     useEffect(() => {
       if (!userData) getUser();
-    }, [userData]);
+    }, []);
+
     if (isCredential)
       return !userData ? (
         <Component {...props} />
@@ -45,9 +47,14 @@ export function WithAuth<T>(
 export const NotAuthentic: React.FC<{ isCredential: boolean }> = ({
   isCredential,
 }) => {
+  const { setTrue, setFalse } = useLoadingSpinner();
+
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    Router.push(isCredential ? routesName.HOME : routesName.LOGIN);
+    setTrue();
+    Router.push(isCredential ? routesName.HOME : routesName.LOGIN).finally(
+      setFalse
+    );
   };
 
   return (

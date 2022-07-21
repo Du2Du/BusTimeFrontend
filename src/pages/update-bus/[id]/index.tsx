@@ -6,19 +6,22 @@ import { ApiRoutes } from "../../../api-routes";
 import { FixedHead } from "../../../components";
 import { useUserContext } from "../../../global-context";
 import { WithAuth } from "../../../global-hoc";
+import { useLoadingSpinner } from "../../../hooks";
 import { BusProps } from "../../../interfaces";
 import { Section } from "../../../page-components/bus-page";
 import { Header } from "../../../page-components/home";
 import { Backend } from "../../../services/backend";
 import { showError } from "../../../utils";
 
-const CreateBus: React.FC = WithAuth(() => {
+const UpdateBus: React.FC = WithAuth(() => {
   const { userData } = useUserContext();
   const [fieldValues, setFieldValues] = useState<BusProps>();
+  const { setTrue, setFalse } = useLoadingSpinner();
   const router = useRouter();
   const busId = router.query.id;
 
-  const createBus = (data: BusProps) => {
+  const updateBus = (data: BusProps) => {
+    setTrue();
     Backend.put(`${ApiRoutes.CREATE_BUS}/${busId}`, {
       ...data,
       id: busId,
@@ -26,7 +29,8 @@ const CreateBus: React.FC = WithAuth(() => {
       .then(() => {
         toast.success(`Ônibus atualizado com sucesso!`);
       })
-      .catch(showError);
+      .catch(showError)
+      .finally(setFalse);
   };
 
   useEffect(() => {
@@ -43,9 +47,9 @@ const CreateBus: React.FC = WithAuth(() => {
     <div>
       <FixedHead title="Atualizar Ônibus" />
       <Header />
-      <Section fieldValues={fieldValues} sendingData={createBus} />
+      <Section fieldValues={fieldValues} sendingData={updateBus} />
     </div>
   );
 }, true);
 
-export default CreateBus;
+export default UpdateBus;
