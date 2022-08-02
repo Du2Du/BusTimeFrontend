@@ -1,5 +1,7 @@
-import React from "react";
+import Router from "next/router";
+import React, { useEffect } from "react";
 import { FixedHead } from "../../components";
+import { useUserContext } from "../../global-context";
 import { WithAuth } from "../../global-hoc";
 import { Header, Main } from "../../page-components/home";
 import styles from "../../page-components/home/Home.module.scss";
@@ -10,6 +12,12 @@ import styles from "../../page-components/home/Home.module.scss";
  * @author Du2Du
  */
 const Home: React.FC = WithAuth(() => {
+  const { userData } = useUserContext();
+
+  useEffect(() => {
+    if (!userData) Router.reload();
+  }, [userData]);
+
   return (
     <div className={styles.home}>
       <FixedHead title="Home" />

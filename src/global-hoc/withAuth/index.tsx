@@ -1,5 +1,5 @@
 import Router, { useRouter } from "next/router";
-import React, { FormEvent, FormEventHandler, useEffect } from "react";
+import React, { FormEvent } from "react";
 import { FixedHead } from "../../components";
 import { useUserContext } from "../../global-context";
 import { useLoadingSpinner } from "../../hooks";
@@ -12,17 +12,13 @@ export function WithAuth<T>(
   validateAdmin = false
 ) {
   function WrapperFunction(props: T) {
-    const { userData, getUser } = useUserContext();
+    const { userData, isAdmin } = useUserContext();
     const { pathname } = useRouter();
 
     const isCredential =
       pathname === routesName.LOGIN ||
       pathname === routesName.REGISTER ||
       pathname === "/";
-
-    useEffect(() => {
-      if (!userData) getUser();
-    }, []);
 
     if (isCredential)
       return !userData ? (
@@ -32,7 +28,7 @@ export function WithAuth<T>(
       );
     else if (userData) {
       if (validateAdmin) {
-        return userData.isAdmin ? (
+        return isAdmin ? (
           <Component {...props} />
         ) : (
           <NotAuthentic isCredential={true} />

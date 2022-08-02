@@ -1,14 +1,15 @@
 import React from "react";
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineLock, AiOutlineMenu } from "react-icons/ai";
 import { BiBusSchool, BiDoorOpen, BiHomeAlt } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { GiBusStop } from "react-icons/gi";
 import { useUserContext } from "../../../../../global-context";
 import { routesName } from "../../../../../routes-name";
+import { PermissionsGroupName } from "../../../../../utils";
 import styles from "./Dropdown.module.scss";
 
 export const Dropdown: React.FC = () => {
-  const { userData } = useUserContext();
+  const { userData, isAdmin } = useUserContext();
   return (
     <div className={styles.dropdown}>
       <a className={styles.label}>
@@ -21,13 +22,28 @@ export const Dropdown: React.FC = () => {
             Perfil
           </a>
         </li>
+        {userData?.permissionsGroup.name ===
+          PermissionsGroupName.SUPER_ADMINISTRATOR && (
+          <li>
+            <a href={routesName.PERMISSIONS}>
+              <AiOutlineLock size={27} className={styles.faBrands} />
+              Permissões
+            </a>
+          </li>
+        )}
+        <li>
+          <a href={routesName.FAVORITE}>
+            <AiOutlineHeart size={27} className={styles.faBrands} />
+            Favoritos
+          </a>
+        </li>
         <li>
           <a href={routesName.HOME}>
             <BiHomeAlt size={27} className={styles.faBrands} />
             Menu
           </a>
         </li>
-        {userData?.isAdmin && (
+        {isAdmin && (
           <>
             <li>
               <a href={routesName.CREATE_BUS}>

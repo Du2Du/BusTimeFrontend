@@ -1,0 +1,30 @@
+.listBusStyle {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  padding: 30px;
+  justify-content: flex-start;
+
+  & > div {
+    margin: 10px auto;
+  }
+}
+
+.title {
+  color: #7e4ccb;
+  font-size: 28px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .listBusStyle {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    & > div {
+      margin: 10px;
+    }
+  }
+}

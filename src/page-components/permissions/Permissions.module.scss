@@ -1,0 +1,32 @@
+.usersList {
+  padding: 0 20px;
+}
+
+.userItem {
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 3px;
+  border: 1px solid #7e4ccb;
+  margin: 15px 0;
+  padding: 5px 10px;
+  & > div {
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 768px) {
+  .usersList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .userItem {
+    width: 50% !important;
+    div {
+      justify-content: flex-start;
+    }
+  }
+}

@@ -1,8 +1,48 @@
-import React from "react";
+import { AxiosResponse } from "axios";
+import React, { useMemo, useState } from "react";
+import toast from "react-hot-toast";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { ApiRoutes } from "../../../../../api-routes";
+import { useUserContext } from "../../../../../global-context";
+import { useLoadingSpinner } from "../../../../../hooks";
 import { BusProps } from "../../../../../interfaces";
+import { Backend } from "../../../../../services/backend";
+import { showError } from "../../../../../utils";
 import styles from "../../../Home.module.scss";
+interface BusItemProps {
+  bus: BusProps;
+  setFavoriteBus?: React.Dispatch<React.SetStateAction<BusProps[] | undefined>>;
+}
 
-export const BusItem: React.FC<{ bus: BusProps }> = ({ bus }) => {
+export const BusItem: React.FC<BusItemProps> = ({ bus, setFavoriteBus }) => {
+  const { setTrue, setFalse } = useLoadingSpinner();
+  const { userData } = useUserContext();
+  const [currentFavoriteBus, setCurrentFavoriteBus] = useState(
+    userData?.favoriteBus.find((favoriteBus) => bus.id === favoriteBus.id)
+  );
+
+  const favoriteBus =
+    (isFavorite = true) =>
+    () => {
+      setTrue();
+      Backend.get(
+        `${isFavorite ? ApiRoutes.FAVORITE_BUS : ApiRoutes.DISFAVOR_BUS}/${
+          userData?.id
+        }?bus=${bus.id}`
+      )
+        .then((res: AxiosResponse<Array<BusProps>>) => {
+          if (setFavoriteBus) setFavoriteBus(res.data);
+          setCurrentFavoriteBus(
+            res.data.find((favoriteBus) => bus.id === favoriteBus.id)
+          );
+          toast.success(
+            `Ônibus ${isFavorite ? "favoritado" : "desfavoritado"} com sucesso!`
+          );
+        })
+        .catch(showError)
+        .finally(setFalse);
+    };
+
   return (
     <div className={styles.listItem}>
       <div className={styles.fieldItem}>
@@ -27,6 +67,21 @@ export const BusItem: React.FC<{ bus: BusProps }> = ({ bus }) => {
       <div className={styles.fieldItem}>
         <b>Número: </b>
         {bus.busNumber}
+      </div>
+      <div className={styles.fieldItem}>
+        {!currentFavoriteBus ? (
+          <AiOutlineHeart
+            className="cursor-pointer"
+            size={30}
+            onClick={favoriteBus()}
+          />
+        ) : (
+          <AiFillHeart
+            size={30}
+            className="cursor-pointer"
+            onClick={favoriteBus(false)}
+          />
+        )}
       </div>
     </div>
   );

@@ -10,23 +10,26 @@ import {
   SimpleInput,
 } from "../../../components";
 import { useUserContext } from "../../../global-context";
+import { useLoadingSpinner } from "../../../hooks";
 import { UserDataProps } from "../../../interfaces";
 import { routesName } from "../../../routes-name";
 import { Backend } from "../../../services/backend";
 import { showError } from "../../../utils";
 import styles from "../Profile.module.scss";
 
-type UserData = "name" | "email" | "cpf" | "birthDate" | "id" | "isAdmin";
+type UserData = "name" | "email" | "cpf" | "birthDate" | "id";
 
 export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
   isUpdate = false,
 }) => {
   const { userData, getUser } = useUserContext();
   const { register, handleSubmit, setValue } = useForm<UserDataProps>();
+  const { setTrue, setFalse } = useLoadingSpinner();
 
   //Método para atualizar os dados
   const updateUser = (data: UserDataProps) => {
-    if (isUpdate && userData?.id)
+    if (isUpdate && userData?.id) {
+      setTrue();
       Backend.put(`${ApiRoutes.UPDATE_USER}/${userData.id}`, {
         ...data,
         id: userData.id,
@@ -36,7 +39,9 @@ export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
           Router.push(routesName.PROFILE);
           getUser();
         })
-        .catch(showError);
+        .catch(showError)
+        .finally(setFalse);
+    }
   };
 
   const updateValues = (user = userData) => {
@@ -47,7 +52,6 @@ export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
         "cpf",
         "birthDate",
         "id",
-        "isAdmin",
       ];
 
       //Constante para formatar a data de nascimento.
@@ -74,6 +78,7 @@ export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
   }, [userData]);
 
   const redirectUser = (isUpdate: boolean) => () => {
+    setTrue();
     Router.push(!isUpdate ? routesName.PROFILE : routesName.PROFILE_UPDATE);
   };
 
@@ -121,13 +126,6 @@ export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
             disabled={isUpdate ? false : true}
             register={register("birthDate")}
           />
-        </div>
-        <div className={styles.fields + " flex items-center justify-center"}>
-          <CheckboxInput
-            disabled={isUpdate ? false : true}
-            register={register("isAdmin")}
-          />
-          <label className="ml-2">É administrador?</label>
         </div>
       </div>
       {isUpdate && (

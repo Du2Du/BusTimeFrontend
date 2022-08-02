@@ -2,6 +2,7 @@ import Router from "next/router";
 import React from "react";
 import { ApiRoutes } from "../../api-routes";
 import { FixedHead } from "../../components";
+import { useUserContext } from "../../global-context";
 import { WithAuth } from "../../global-hoc";
 import { useLoadingSpinner } from "../../hooks";
 import { Credentials } from "../../page-components";
@@ -17,6 +18,7 @@ import { showError } from "../../utils";
  */
 const Register: React.FC = WithAuth(() => {
   const { setTrue, setFalse } = useLoadingSpinner();
+  const { getUser } = useUserContext();
 
   /*Essa função realiza o cadastro */
   const register = (data: Fields) => {
@@ -30,6 +32,7 @@ const Register: React.FC = WithAuth(() => {
         /*Essa função realiza o login apos o cadastro */
         Backend.post(ApiRoutes.LOGIN_USER, dataLogin)
           .then(() => {
+            getUser();
             Router.push(routesName.HOME);
           })
           .catch(showError)

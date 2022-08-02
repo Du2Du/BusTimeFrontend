@@ -34,13 +34,15 @@ const UpdateBus: React.FC = WithAuth(() => {
   };
 
   useEffect(() => {
-    if (busId)
-      Backend.get(`${ApiRoutes.LIST_BUS}/${busId}`)
-        .then((res: AxiosResponse<BusProps>) => {
-          const bus = res.data;
-          setFieldValues(bus);
-        })
-        .catch(showError);
+    if (!busId) return;
+    setTrue();
+    Backend.get(`${ApiRoutes.LIST_BUS}/${busId}`)
+      .then((res: AxiosResponse<BusProps>) => {
+        const bus = res.data;
+        setFieldValues(bus);
+      })
+      .catch(showError)
+      .finally(setFalse);
   }, [busId]);
 
   return (

@@ -99,59 +99,50 @@
   margin-top: 2%;
 }
 
-.busList p {
-  font-size: 30px;
-}
-
 .list {
-  margin: 4% 0;
-  border: 3px solid #7e4ccb;
-  border-radius: 5px;
-  max-height: 400px;
-  overflow: auto;
-
-  p {
-    text-align: center;
-    padding: 5px;
-  }
+  display: flex;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .listItem {
-  border-bottom: #7e4ccb 4px solid;
-  padding: 2% 1%;
-  display: flex;
-  width: 100rem;
-  min-height: 70px;
+  background: #7e4ccb;
+  border-radius: 5px;
+  padding: 15px 10px;
+  margin: 15px;
+  width: 25%;
 }
-
-.listItem:last-child {
-  border-bottom: 0;
-}
-
 .fieldItem {
-  border-left: #664b8e 1px solid;
-  max-width: 250px;
-  display: flex;
-  flex-direction: column;
-  padding: 0 4%;
-  margin: auto;
-
-  b {
-    font-size: 18px;
+  margin: 10px;
+}
+.listItem:hover {
+  animation: scale-up-center 0.1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+@keyframes scale-up-center {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
   }
 }
 
-.fieldItem:last-child {
-  border-right: #664b8e 1px solid;
-}
-
-@media (min-width: 1100px) {
-  .list {
-    margin: 10px 0;
-  }
+.fieldItem .busList p {
+  font-size: 30px;
 }
 
 .busList > p,
 .busDescription > p {
   color: #7e4ccb;
+}
+
+@media (max-width: 768px) {
+  .list {
+    justify-content: center;
+  }
+  .listItem {
+    width: 80%;
+    margin: 10px 5px;
+  }
 }

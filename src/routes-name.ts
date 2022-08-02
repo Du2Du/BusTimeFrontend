@@ -6,7 +6,9 @@ export const routesName = {
   PROFILE: "/profile",
   PROFILE_UPDATE: "/profile/update",
   BUS: "/bus",
+  FAVORITE: "/favorites",
   LOGOUT: "/logout",
+  PERMISSIONS: "/permissions",
   UPDATE_BUS: "/update-bus",
   SEARCH_BUS: "/search-bus",
 };

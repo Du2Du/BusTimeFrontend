@@ -37,12 +37,9 @@ export const Header: React.FC = () => {
           }}
           className={styles.searchInput}
         />
-        <a
-          href={`${routesName.SEARCH_BUS}?line=${searchBus}`}
-          className={styles.searchBtn}
-        >
+        <div className={styles.searchBtn}>
           <BiSearch />
-        </a>
+        </div>
       </div>
       <h1>BusTime</h1>
     </header>

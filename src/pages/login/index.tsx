@@ -2,6 +2,7 @@ import Router from "next/router";
 import React from "react";
 import { ApiRoutes } from "../../api-routes";
 import { FixedHead } from "../../components";
+import { useUserContext } from "../../global-context";
 import { WithAuth } from "../../global-hoc";
 import { useLoadingSpinner } from "../../hooks";
 import { Credentials } from "../../page-components";
@@ -17,12 +18,18 @@ import { showError } from "../../utils";
  */
 const Login: React.FC = WithAuth(() => {
   const { setTrue, setFalse } = useLoadingSpinner();
+  const { getUser } = useUserContext();
 
   /*Essa função realiza o login do usuário */
   const login = (data: { email: string; password: string }) => {
     setTrue();
     Backend.post(ApiRoutes.LOGIN_USER, data)
-      .then(() => Router.push(routesName.HOME))
+      .then(() => {
+        setTrue();
+        getUser()
+          .then(() => Router.push(routesName.HOME))
+          .finally(setFalse);
+      })
       .catch(showError)
       .finally(setFalse);
   };

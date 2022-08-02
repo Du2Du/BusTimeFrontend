@@ -1,0 +1,55 @@
+.dialogIndex {
+  z-index: 1050 !important;
+  background-color: #fff;
+}
+.modalHeaderSticky {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: #fff;
+}
+
+html body .modal {
+  &.show {
+    overflow-y: hidden;
+  }
+  // padding-left: 15px !important;
+}
+
+.modal-header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: #fff;
+}
+
+.transparent-modal {
+  .modal-content,
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    background: transparent !important;
+  }
+
+  .modal-content {
+    box-shadow: none !important;
+  }
+
+  .modal-header {
+    border: none !important;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  //& button adicionar esta tag ao final para esconder texto
+  .card,
+  .add-flow-y-modal {
+    & .card-footer {
+      & button span {
+      }
+      & i {
+        padding-right: 0;
+      }
+    }
+  }
+}

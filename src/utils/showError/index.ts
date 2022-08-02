@@ -13,6 +13,7 @@ export const showError = (error: any) => {
       data: { message, errors },
     },
   } = error;
+  if (!errors) return toast.error("Não foi possível fazer isso no momento");
   if (errors.length > 0) return toast.error(errors[0]);
   if (message) {
     return toast.error(message);

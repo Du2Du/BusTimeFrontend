@@ -6,25 +6,21 @@ export const useLoadingSpinner = () => {
     value: loadingSpinner,
     setValue: setLoadingSpinner,
     setTrue,
+    setFalse: setFalseSpinner,
     toggle,
   } = useBoolean(false);
 
   //Função do useEffect que irá dizer se o spinner era ser visível ou não
   useEffect(() => {
     const spinnerElement = document.querySelector(".loading");
-    if (spinnerElement) {
-      if (!loadingSpinner) spinnerElement.id = "hidenLdsEllipsis";
-      else spinnerElement.id = "lds-ellipsis";
-    }
-
-    //Não sei explicar essa lógica de validação muito bem kkk, so fui fazendo os teste até dar certo
-
-    console.log(spinnerElement, loadingSpinner);
+    if (!spinnerElement) return;
+    if (!loadingSpinner) spinnerElement.id = "hidenLdsEllipsis";
+    else spinnerElement.id = "lds-ellipsis";
   }, [loadingSpinner]);
 
   const setFalse = () => {
     setTimeout(() => {
-      setLoadingSpinner(false);
+      setFalseSpinner();
     }, 1000);
   };
 

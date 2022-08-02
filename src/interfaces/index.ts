@@ -21,13 +21,29 @@ export interface BusProps {
   idUserAdmin: number;
 }
 
+export type PermissionsType =
+  | "DEFAULT"
+  | "ADMINISTRATOR"
+  | "SUPER_ADMINISTRATOR";
+
+export interface Permission {
+  id: number;
+  permissionName: string;
+  permissionId: string;
+}
+export interface PermissionsGroup {
+  id: number;
+  name: PermissionsType;
+  permissionList: Array<Permission>;
+}
 export interface UserDataProps {
   id: number;
   name: string;
   email: string;
   birthDate: string;
+  favoriteBus: Array<BusProps>;
   cpf: string;
-  isAdmin: boolean;
+  permissionsGroup: PermissionsGroup;
 }
 
 interface SortProps {
