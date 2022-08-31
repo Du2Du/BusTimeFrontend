@@ -3,13 +3,12 @@ import React, { useEffect } from "react";
 import { FixedHead } from "../../components";
 import { useUserContext } from "../../global-context";
 import { WithAuth } from "../../global-hoc";
-import { useLoadingSpinner } from "../../hooks";
+import { PermissionsListMain } from "../../page-components";
 import { Header } from "../../page-components/home";
-import { PermissionsMain } from "../../page-components/permissions";
 import { routesName } from "../../routes-name";
 import { PermissionsGroupName } from "../../utils";
 
-const Permissions: React.FC = WithAuth(() => {
+const PermissionsList: React.FC = WithAuth(() => {
   const { userData } = useUserContext();
 
   useEffect(() => {
@@ -19,14 +18,13 @@ const Permissions: React.FC = WithAuth(() => {
     )
       Router.push(routesName.HOME);
   }, [userData]);
-
   return (
-    <div>
+    <>
       <FixedHead title="Permissões" />
       <Header />
-      <PermissionsMain />
-    </div>
+      <PermissionsListMain />
+    </>
   );
 }, true);
 
-export default Permissions;
+export default PermissionsList;

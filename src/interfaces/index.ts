@@ -43,7 +43,7 @@ export interface UserDataProps {
   birthDate: string;
   favoriteBus: Array<BusProps>;
   cpf: string;
-  permissionsGroup: PermissionsGroup;
+  permissionsGroup?: PermissionsGroup;
 }
 
 interface SortProps {
@@ -71,4 +71,16 @@ export interface PaginationInterface<T> {
   first: boolean;
   numberOfElements: number;
   empty: boolean;
+}
+
+export interface PermissionGroupInterface {
+  id: number;
+  name: string;
+  permissionList: Array<PermissionInterface>;
+}
+
+interface PermissionInterface {
+  id: number;
+  permissionName: string;
+  permissionId: string;
 }

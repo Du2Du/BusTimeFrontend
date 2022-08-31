@@ -1,10 +1,8 @@
 import { AxiosResponse } from "axios";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import React, {
   createContext,
-  Dispatch,
   PropsWithChildren,
-  SetStateAction,
   useCallback,
   useContext,
   useEffect,
@@ -15,7 +13,7 @@ import { ApiRoutes } from "../../api-routes";
 import { useLoadingSpinner } from "../../hooks";
 import { UserDataProps } from "../../interfaces";
 import { Backend } from "../../services/backend";
-import { PermissionsGroupName, showError } from "../../utils";
+import { PermissionsGroupName } from "../../utils";
 
 interface UserInterface {
   userData?: UserDataProps;
@@ -30,19 +28,16 @@ export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const { setFalse, setTrue } = useLoadingSpinner();
   const isAdmin = useMemo(
     () =>
-      userData?.permissionsGroup.name === PermissionsGroupName.ADMINISTRATOR ||
-      userData?.permissionsGroup.name ===
+      userData?.permissionsGroup?.name === PermissionsGroupName.ADMINISTRATOR ||
+      userData?.permissionsGroup?.name ===
         PermissionsGroupName.SUPER_ADMINISTRATOR,
     [userData]
   );
 
   const getUser = useCallback(async () => {
-    setTrue();
-    Backend.get(ApiRoutes.USER_ME)
-      .then((res) => {
-        setUserData(res.data);
-      })
-      .finally(setFalse);
+    Backend.get(ApiRoutes.USER_ME).then((res) => {
+      setUserData(res.data);
+    });
   }, []);
 
   useEffect(() => {

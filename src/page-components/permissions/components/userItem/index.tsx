@@ -12,8 +12,8 @@ export const UserItem: React.FC<{ user: UserDataProps }> = ({ user }) => {
   const { userData } = useUserContext();
   if (!userData) return <></>;
 
-  const [userIsAdmin, setUserIsAdmin] = useState<PermissionsType>(
-    user?.permissionsGroup.name
+  const [userIsAdmin, setUserIsAdmin] = useState<PermissionsType | undefined>(
+    user?.permissionsGroup?.name
   );
   const { setFalse, setTrue } = useLoadingSpinner();
 
@@ -21,8 +21,8 @@ export const UserItem: React.FC<{ user: UserDataProps }> = ({ user }) => {
     setTrue();
     Backend.get(`${ApiRoutes.CHANGE_ADMIN}/${id}?admin=${!value}`)
       .then((res: AxiosResponse<UserDataProps>) => {
-        setUserIsAdmin(res.data.permissionsGroup.name);
-        console.log(res.data.permissionsGroup.name);
+        setUserIsAdmin(res.data.permissionsGroup?.name);
+        console.log(res.data.permissionsGroup?.name);
       })
       .catch(showError)
       .finally(setFalse);

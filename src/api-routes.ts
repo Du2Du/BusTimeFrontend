@@ -13,4 +13,5 @@ export const ApiRoutes = {
   LIST_BUS_USER: "/v1/bus/user",
   FAVORITE_BUS: "/v1/users/favorite-bus",
   DISFAVOR_BUS: "/v1/users/desfavorite-bus",
+  LIST_GROUP_PERMISSIONS: "/v1/permissions",
 };

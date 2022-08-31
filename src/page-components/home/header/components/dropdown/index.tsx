@@ -22,7 +22,7 @@ export const Dropdown: React.FC = () => {
             Perfil
           </a>
         </li>
-        {userData?.permissionsGroup.name ===
+        {userData?.permissionsGroup?.name ===
           PermissionsGroupName.SUPER_ADMINISTRATOR && (
           <li>
             <a href={routesName.PERMISSIONS}>

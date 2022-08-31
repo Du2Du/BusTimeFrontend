@@ -1,0 +1,139 @@
+.main h1 {
+  padding-bottom: 5px;
+  color: #7e4ccb;
+  font-size: 26px;
+  text-align: center;
+  width: auto;
+}
+
+.mainInner {
+  width: 100%;
+  max-width: calc(680px + 20px);
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.mainWrap {
+  position: relative;
+}
+
+.accor {
+  list-style: none;
+  padding: 0;
+  margin: 1.4rem 0;
+  line-height: 1.8rem;
+  font-size: 14px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 2px 0 8px 0 rgba(0, 0, 0, 0.2), -2px 0 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.accor > *:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.accorTitle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  transition: 0.1s ease;
+}
+
+.accorTitle .icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  margin-left: 10px;
+  border: 1px solid #7e4ccb;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: inherit;
+}
+
+.accorTitle .icon::before,
+.accorTitle .icon::after {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 2px;
+  background-color: #7e4ccb;
+  transition: inherit;
+}
+
+.accorTitle .icon::after {
+  position: absolute;
+  transform: rotate(90deg);
+}
+
+.accorContent {
+  position: relative;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 16px;
+  color: #444;
+  transition: 0.1s ease;
+
+  p {
+    color: #fff;
+  }
+}
+
+.accorContent > *:first-child {
+  margin-top: 0;
+}
+
+.accorContent > *:first-child {
+  margin-bottom: 0;
+}
+
+.accorTitle::before,
+.accorContent::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  transition: inherit;
+}
+.offAccor {
+  display: none;
+}
+
+.offAccor:checked ~ .accorContent {
+  max-height: 100vh;
+  padding-bottom: 16px;
+}
+
+.offAccor:checked ~ .accorTitle .icon::after {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.offAccor:checked ~ .accorTitle .icon {
+  background-color: #7e4ccb;
+  border: 1px #fff solid;
+}
+
+.offAccor:checked ~ .accorTitle .icon::before {
+  background-color: #fff;
+}
+
+.offAccor:checked ~ .accorTitle,
+.offAccor:checked ~ .accorContent {
+  background-color: #7e4ccb;
+}
+
+.offAccor:checked ~ .accorTitle::before,
+.offAccor:checked ~ .accorContent::before {
+  background-color: #6b52ec;
+}
