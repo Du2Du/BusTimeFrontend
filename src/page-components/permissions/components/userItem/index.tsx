@@ -1,6 +1,10 @@
 import { AxiosResponse } from "axios";
+import { get } from "lodash";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { ApiRoutes } from "../../../../api-routes";
+import { Select } from "../../../../components";
+import { OptionsProps } from "../../../../components/select";
 import { useUserContext } from "../../../../global-context";
 import { useLoadingSpinner } from "../../../../hooks";
 import { PermissionsType, UserDataProps } from "../../../../interfaces";
@@ -12,17 +16,34 @@ export const UserItem: React.FC<{ user: UserDataProps }> = ({ user }) => {
   const { userData } = useUserContext();
   if (!userData) return <></>;
 
-  const [userIsAdmin, setUserIsAdmin] = useState<PermissionsType | undefined>(
-    user?.permissionsGroup?.name
-  );
+  const [userPermissionGroup, setUserPermissionGroup] = useState<
+    PermissionsType | undefined
+  >(user?.permissionsGroup?.name);
   const { setFalse, setTrue } = useLoadingSpinner();
 
-  const changeAdmin = (value: boolean, id: number) => {
+  const groupOptions: OptionsProps[] = [
+    {
+      label: "Passageiro",
+      value: PermissionsGroupName.DEFAULT,
+    },
+    {
+      label: "Administrador",
+      value: PermissionsGroupName.ADMINISTRATOR,
+    },
+    {
+      label: "Super Administrador",
+      value: PermissionsGroupName.SUPER_ADMINISTRATOR,
+    },
+  ];
+
+  const changeAdmin = (ev: any) => {
     setTrue();
-    Backend.get(`${ApiRoutes.CHANGE_ADMIN}/${id}?admin=${!value}`)
+    Backend.put(`${ApiRoutes.CHANGE_ADMIN}/${user.id}`, {
+      permissionGroup: ev.currentTarget.value,
+    })
       .then((res: AxiosResponse<UserDataProps>) => {
-        setUserIsAdmin(res.data.permissionsGroup?.name);
-        console.log(res.data.permissionsGroup?.name);
+        setUserPermissionGroup(res.data.permissionsGroup?.name);
+        toast.success("Permissão alterada com sucesso!");
       })
       .catch(showError)
       .finally(setFalse);
@@ -38,17 +59,12 @@ export const UserItem: React.FC<{ user: UserDataProps }> = ({ user }) => {
         <b className="mx-2">Email:</b>
         <p>{user.email}</p>
       </div>
-      <div className={`flex`}>
-        <b className="mx-2">Administrador:</b>
-
-        <input
-          type="checkbox"
-          onChange={(ev) => {
-            changeAdmin(!ev.target.checked, user.id);
-          }}
-          checked={
-            userIsAdmin === PermissionsGroupName.ADMINISTRATOR ? true : false
-          }
+      <div>
+        <Select
+          initialValue={userPermissionGroup ?? PermissionsGroupName.DEFAULT}
+          onChange={changeAdmin}
+          options={groupOptions}
+          extraCss="ml-2 my-1"
         />
       </div>
     </div>

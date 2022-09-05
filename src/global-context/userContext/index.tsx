@@ -19,6 +19,10 @@ interface UserInterface {
   userData?: UserDataProps;
   getUser: () => Promise<void | AxiosResponse<UserInterface, any>>;
   isAdmin: boolean;
+  verifyPermissionsGroup: (
+    permissionsGroup: string,
+    user?: UserDataProps
+  ) => boolean;
 }
 
 const UserContext = createContext<UserInterface>({} as UserInterface);
@@ -26,19 +30,24 @@ const UserContext = createContext<UserInterface>({} as UserInterface);
 export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [userData, setUserData] = useState<UserDataProps>();
   const { setFalse, setTrue } = useLoadingSpinner();
-  const isAdmin = useMemo(
-    () =>
-      userData?.permissionsGroup?.name === PermissionsGroupName.ADMINISTRATOR ||
-      userData?.permissionsGroup?.name ===
-        PermissionsGroupName.SUPER_ADMINISTRATOR,
-    [userData]
-  );
 
   const getUser = useCallback(async () => {
     Backend.get(ApiRoutes.USER_ME).then((res) => {
       setUserData(res.data);
     });
   }, []);
+
+  const verifyPermissionsGroup = useCallback(
+    (permissionsGroup: string, user?: UserDataProps) => {
+      if (user) return user?.permissionsGroup?.name === permissionsGroup;
+      return userData?.permissionsGroup?.name === permissionsGroup;
+    },
+    [userData]
+  );
+  const isAdmin = useMemo(
+    () => !verifyPermissionsGroup(PermissionsGroupName.DEFAULT),
+    [userData]
+  );
 
   useEffect(() => {
     if (!userData) {
@@ -51,7 +60,9 @@ export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ userData, getUser, isAdmin }}>
+    <UserContext.Provider
+      value={{ userData, getUser, isAdmin, verifyPermissionsGroup }}
+    >
       {children}
     </UserContext.Provider>
   );

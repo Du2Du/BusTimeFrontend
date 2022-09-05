@@ -9,13 +9,10 @@ import { routesName } from "../../routes-name";
 import { PermissionsGroupName } from "../../utils";
 
 const PermissionsList: React.FC = WithAuth(() => {
-  const { userData } = useUserContext();
+  const { userData, verifyPermissionsGroup } = useUserContext();
 
   useEffect(() => {
-    if (
-      userData?.permissionsGroup?.name !==
-      PermissionsGroupName.SUPER_ADMINISTRATOR
-    )
+    if (!verifyPermissionsGroup(PermissionsGroupName.SUPER_ADMINISTRATOR))
       Router.push(routesName.HOME);
   }, [userData]);
   return (

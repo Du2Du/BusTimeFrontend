@@ -9,7 +9,7 @@ import { PermissionsGroupName } from "../../../../../utils";
 import styles from "./Dropdown.module.scss";
 
 export const Dropdown: React.FC = () => {
-  const { userData, isAdmin } = useUserContext();
+  const { verifyPermissionsGroup, isAdmin } = useUserContext();
   return (
     <div className={styles.dropdown}>
       <a className={styles.label}>
@@ -22,8 +22,7 @@ export const Dropdown: React.FC = () => {
             Perfil
           </a>
         </li>
-        {userData?.permissionsGroup?.name ===
-          PermissionsGroupName.SUPER_ADMINISTRATOR && (
+        {verifyPermissionsGroup(PermissionsGroupName.SUPER_ADMINISTRATOR) && (
           <li>
             <a href={routesName.PERMISSIONS}>
               <AiOutlineLock size={27} className={styles.faBrands} />

@@ -6,7 +6,7 @@ import { useLoadingSpinner } from "../../hooks";
 import { UserDataProps } from "../../interfaces";
 import { routesName } from "../../routes-name";
 import { Backend } from "../../services/backend";
-import { PermissionsGroupName, showError } from "../../utils";
+import { showError } from "../../utils";
 import { UserItem } from "./components";
 import styles from "./Permissions.module.scss";
 
@@ -32,13 +32,9 @@ export const PermissionsMain: React.FC = () => {
         onClick={() => Router.push(routesName.PERMISSIONS_LIST)}
       />
       <div className={styles.usersList}>
-        {usersList?.map(
-          (user) =>
-            user.permissionsGroup?.name !==
-              PermissionsGroupName.SUPER_ADMINISTRATOR && (
-              <UserItem key={user.id} user={user} />
-            )
-        )}
+        {usersList?.map((user) => (
+          <UserItem key={user.id} user={user} />
+        ))}
       </div>
     </div>
   );
