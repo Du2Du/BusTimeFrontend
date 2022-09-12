@@ -1,6 +1,7 @@
 import axios from "axios";
+import { appUrl } from "../../utils";
 
 export const Backend = axios.create({
   withCredentials: true,
-  baseURL: "http://localhost:8090/api",
+  baseURL: appUrl,
 });

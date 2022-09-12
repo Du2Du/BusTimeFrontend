@@ -54,4 +54,9 @@ const UpdateBus: React.FC = WithAuth(() => {
   );
 }, true);
 
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}
 export default UpdateBus;

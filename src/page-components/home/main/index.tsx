@@ -14,24 +14,24 @@ import { BusItem } from "./components";
  *
  * @author Du2Du
  */
-export const Main: React.FC = () => {
-  const { userData, isAdmin } = useUserContext();
+export const Main: React.FC<{
+  busPagination: PaginationInterface<BusProps>;
+  setBusPagination: React.Dispatch<
+    React.SetStateAction<PaginationInterface<BusProps>>
+  >;
+}> = ({ busPagination, setBusPagination }) => {
+  const { isAdmin } = useUserContext();
 
   //Método que redireciona o usuário para a tela de registrar ônibus
   const redirectCreateBus = () => {
     Router.push(routesName.CREATE_BUS);
   };
-  const [bus, setBus] = useState<PaginationInterface<BusProps>>();
 
   const reloadBus = (page: number, perPage = 3) => {
     Backend.get(`${ApiRoutes.LIST_BUS}?size=${perPage}&page=${page}`).then(
-      (res) => setBus(res.data)
+      (res) => setBusPagination(res.data)
     );
   };
-
-  useEffect(() => {
-    reloadBus(0);
-  }, []);
 
   return (
     <main className={styles.homeMain}>
@@ -47,17 +47,21 @@ export const Main: React.FC = () => {
       )}
       <div className={styles.busList}>
         <p>Veja agora os horários de ônibus:</p>
-        {bus?.content.length === 0 || !bus?.content ? (
+        {busPagination?.content.length === 0 || !busPagination?.content ? (
           <p style={{ color: "#fff" }}>Nenhum ônibus a ser exibido</p>
         ) : (
           <>
             <div className={styles.list}>
-              {bus?.content.map((bus) => (
+              {busPagination?.content.map((bus) => (
                 <BusItem key={bus.id} bus={bus} />
               ))}
             </div>
-            {bus && (
-              <Pagination showTotal reloadItens={reloadBus} pagination={bus} />
+            {busPagination && (
+              <Pagination
+                showTotal
+                reloadItens={reloadBus}
+                pagination={busPagination}
+              />
             )}
           </>
         )}

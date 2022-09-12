@@ -35,9 +35,7 @@ export const List: React.FC = () => {
           <>
             <div className={styles.list}>
               {bus.content.map((ele) => (
-                <div className={styles.item} key={ele.id}>
-                  <BusItem bus={ele} />
-                </div>
+                <BusItem bus={ele} key={ele.id} />
               ))}
             </div>
             <Pagination reloadItens={reloadItens} pagination={bus} showTotal />
