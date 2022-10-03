@@ -42,7 +42,6 @@ export interface UserDataProps {
   email: string;
   birthDate: string;
   favoriteBus: Array<BusProps>;
-  cpf: string;
   permissionsGroup?: PermissionsGroup;
 }
 

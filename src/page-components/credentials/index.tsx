@@ -22,7 +22,6 @@ export interface Fields {
   name: string;
   email: string;
   password: string;
-  cpf: string;
   birthDate: string;
 }
 

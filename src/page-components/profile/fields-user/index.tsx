@@ -17,7 +17,7 @@ import { Backend } from "../../../services/backend";
 import { showError } from "../../../utils";
 import styles from "../Profile.module.scss";
 
-type UserData = "name" | "email" | "cpf" | "birthDate" | "id";
+type UserData = "name" | "email" | "birthDate" | "id";
 
 export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
   isUpdate = false,
@@ -34,7 +34,7 @@ export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
         ...data,
         id: userData.id,
       })
-        .then((res) => {
+        .then(() => {
           toast.success("Perfil atualizado com sucesso!");
           Router.push(routesName.PROFILE);
           getUser();
@@ -49,7 +49,6 @@ export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
       const userFields: Array<UserData> = [
         "name",
         "email",
-        "cpf",
         "birthDate",
         "id",
       ];
@@ -109,14 +108,6 @@ export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
             className={styles.input}
             disabled={isUpdate ? false : true}
             register={register("email")}
-          />
-        </div>
-        <div className={styles.fields}>
-          <label>CPF:</label>
-          <SimpleInput
-            className={styles.input}
-            disabled={isUpdate ? false : true}
-            register={register("cpf")}
           />
         </div>
         <div className={styles.fields}>
