@@ -15,9 +15,4 @@ const SearchBus: React.FC = WithAuth(() => {
   );
 });
 
-export async function getServerSideProps() {
-  return {
-    props: {},
-  };
-}
 export default SearchBus;

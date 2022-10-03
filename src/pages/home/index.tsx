@@ -7,6 +7,7 @@ import { WithAuth } from "../../global-hoc";
 import { BusProps, PaginationInterface } from "../../interfaces";
 import { Header, Main } from "../../page-components/home";
 import styles from "../../page-components/home/Home.module.scss";
+import { Backend } from "../../services/backend";
 import { appUrl } from "../../utils";
 
 /**
@@ -14,14 +15,17 @@ import { appUrl } from "../../utils";
  *
  * @author Du2Du
  */
-const Home: React.FC<{ bus: PaginationInterface<BusProps> }> = WithAuth(
-  ({ bus }) => {
+const Home: React.FC = WithAuth(
+  () => {
     const { userData } = useUserContext();
     const [busPagination, setBusPagination] =
-      useState<PaginationInterface<BusProps>>(bus);
+      useState<PaginationInterface<BusProps>>();
 
     useEffect(() => {
       if (!userData) Router.reload();
+      Backend.get(`${ApiRoutes.LIST_BUS}?size=4&page=0`).then(
+        (res) => setBusPagination(res.data)
+      );
     }, [userData]);
 
     return (
@@ -36,14 +40,5 @@ const Home: React.FC<{ bus: PaginationInterface<BusProps> }> = WithAuth(
     );
   }
 );
-
-export async function getServerSideProps() {
-  const data = await fetch(`${appUrl}${ApiRoutes.LIST_BUS}?size=3&page=0`);
-  const bus = await data.json();
-
-  return {
-    props: { bus },
-  };
-}
 
 export default Home;

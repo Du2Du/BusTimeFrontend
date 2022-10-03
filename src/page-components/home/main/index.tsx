@@ -15,9 +15,9 @@ import { BusItem } from "./components";
  * @author Du2Du
  */
 export const Main: React.FC<{
-  busPagination: PaginationInterface<BusProps>;
+  busPagination?: PaginationInterface<BusProps>;
   setBusPagination: React.Dispatch<
-    React.SetStateAction<PaginationInterface<BusProps>>
+    React.SetStateAction<PaginationInterface<BusProps> | undefined>
   >;
 }> = ({ busPagination, setBusPagination }) => {
   const { isAdmin } = useUserContext();
@@ -27,7 +27,7 @@ export const Main: React.FC<{
     Router.push(routesName.CREATE_BUS);
   };
 
-  const reloadBus = (page: number, perPage = 3) => {
+  const reloadBus = (page: number, perPage = 4) => {
     Backend.get(`${ApiRoutes.LIST_BUS}?size=${perPage}&page=${page}`).then(
       (res) => setBusPagination(res.data)
     );
