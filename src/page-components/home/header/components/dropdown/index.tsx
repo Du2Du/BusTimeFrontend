@@ -39,7 +39,7 @@ export const Dropdown: React.FC = () => {
         <li>
           <a href={routesName.HOME}>
             <BiHomeAlt size={27} className={styles.faBrands} />
-            Menu
+            Home
           </a>
         </li>
         {isAdmin && (
