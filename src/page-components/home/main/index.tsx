@@ -48,7 +48,7 @@ export const Main: React.FC<{
       <div className={styles.busList}>
         <p>Veja agora os horários de ônibus:</p>
         {busPagination?.content.length === 0 || !busPagination?.content ? (
-          <p style={{ color: "#fff" }}>Nenhum ônibus a ser exibido</p>
+          <p style={{ color: "#fff" }}></p>
         ) : (
           <>
             <div className={styles.list}>
