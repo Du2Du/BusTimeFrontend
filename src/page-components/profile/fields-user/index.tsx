@@ -54,7 +54,13 @@ export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
       ];
 
       //Constante para formatar a data de nascimento.
-      const birthDate = new Date(user.birthDate);
+      const dateSplited = user.birthDate.split('/');
+      const birthDate = new Date(
+        Number(dateSplited[2]),
+        Number(dateSplited[1]),
+        Number(dateSplited[0])
+      );
+      
       const birthDay = birthDate.getUTCDate();
       const birthMonth = String(birthDate.getMonth() + 1);
       const birthYear = birthDate.getFullYear();
