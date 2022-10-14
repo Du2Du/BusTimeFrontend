@@ -31,7 +31,6 @@ const Home: React.FC = WithAuth(
     return (
       <div className={styles.home}>
         <FixedHead title="Home" />
-        <Header />
         <Main
           busPagination={busPagination}
           setBusPagination={setBusPagination}

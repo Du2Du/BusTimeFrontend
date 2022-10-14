@@ -33,7 +33,7 @@
   z-index: -1;
 }
 
-.items a {
+.items .link {
   border-bottom: 1px solid black;
   padding: 10px 20px;
 }
@@ -52,7 +52,7 @@
   padding: 12px;
   transition: 0.4s ease;
 }
-.items a {
+.items .link {
   color: #fff;
   display: flex;
   align-items: center;
@@ -60,7 +60,7 @@
   transition: all 0.2s;
 }
 
-.items a:hover {
+.items .link:hover {
   border-left: 5px solid;
   background-color: #7e4ccb;
 }

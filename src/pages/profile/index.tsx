@@ -9,7 +9,6 @@ const Profile: React.FC = WithAuth(() => {
   return (
     <div className={styles.profile}>
       <FixedHead title="Perfil" />
-      <Header />
       <FieldsUser />
     </div>
   );

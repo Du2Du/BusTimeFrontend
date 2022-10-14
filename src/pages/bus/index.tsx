@@ -9,7 +9,6 @@ const ListBus: React.FC = WithAuth(() => {
   return (
     <div className={styles.listBus}>
       <FixedHead title="Ônibus" />
-      <Header />
       <ListAllBus />
     </div>
   );

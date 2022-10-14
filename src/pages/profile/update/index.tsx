@@ -9,7 +9,6 @@ const ProfileUpdate: React.FC = WithAuth(() => {
   return (
     <div className={styles.profile}>
       <FixedHead title="Perfil" />
-      <Header />
       <FieldsUser isUpdate />
     </div>
   );

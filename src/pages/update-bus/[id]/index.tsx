@@ -48,7 +48,6 @@ const UpdateBus: React.FC = WithAuth(() => {
   return (
     <div>
       <FixedHead title="Atualizar Ônibus" />
-      <Header />
       <Section fieldValues={fieldValues} sendingData={updateBus} />
     </div>
   );

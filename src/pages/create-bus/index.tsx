@@ -26,7 +26,6 @@ const CreateBus: React.FC = WithAuth(() => {
   return (
     <div>
       <FixedHead title="Criar Ônibus" />
-      <Header />
       <Section isCreate sendingData={createBus} />
     </div>
   );

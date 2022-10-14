@@ -9,10 +9,11 @@ import styles from "./withAuth.module.scss";
 
 export function WithAuth<T>(
   Component: React.ComponentType<T>,
-  validateAdmin = false
+  validateAdmin = false,
+  validateSuperAdmin = false
 ) {
   function WrapperFunction(props: T) {
-    const { userData, isAdmin } = useUserContext();
+    const { userData, isAdmin, isSuperAdmin } = useUserContext();
     const { pathname } = useRouter();
 
     const isCredential =
@@ -27,6 +28,13 @@ export function WithAuth<T>(
         <NotAuthentic isCredential={isCredential} />
       );
     else if (userData) {
+      if (validateSuperAdmin)
+        return isSuperAdmin ? (
+          <Component {...props} />
+        ) : (
+          <NotAuthentic isCredential={true} />
+        );
+
       if (validateAdmin) {
         return isAdmin ? (
           <Component {...props} />

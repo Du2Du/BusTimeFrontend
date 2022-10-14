@@ -4,12 +4,14 @@ import { Toaster } from "react-hot-toast";
 import { Oval } from "react-loader-spinner";
 import { Footer } from "../components";
 import { UserProvider, useUserContext } from "../global-context";
+import { Header } from "../page-components/home";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <UserProvider>
+        <Header />
         <Component {...pageProps} />
 
         <Footer />

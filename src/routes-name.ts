@@ -12,4 +12,5 @@ export const routesName = {
   UPDATE_BUS: "/update-bus",
   SEARCH_BUS: "/search-bus",
   PERMISSIONS_LIST: "/permissions-list",
+  LOGS: '/logs'
 };

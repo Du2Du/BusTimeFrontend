@@ -83,3 +83,19 @@ interface PermissionInterface {
   permissionName: string;
   permissionId: string;
 }
+
+export type MethodTypes = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+
+enum UrlStatus {
+  SUCCESS = "Sucesso",
+  FAILURE = "Falha",
+}
+
+export interface LogsProps {
+  id: number;
+  time: string;
+  urlStatus: UrlStatus;
+  method: MethodTypes;
+  url: string;
+  userForm: string;
+}

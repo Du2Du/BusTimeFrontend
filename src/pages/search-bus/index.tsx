@@ -9,7 +9,6 @@ const SearchBus: React.FC = WithAuth(() => {
   return (
     <div className={styles.searchBus}>
       <FixedHead title="Pesquisar" />
-      <Header />
       <List />
     </div>
   );

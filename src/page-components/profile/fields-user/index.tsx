@@ -112,7 +112,7 @@ export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
           <label>E-mail:</label>
           <SimpleInput
             className={styles.input}
-            disabled={isUpdate ? false : true}
+            disabled
             register={register("email")}
           />
         </div>

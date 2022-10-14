@@ -1,5 +1,6 @@
+import Link from "next/link";
 import React from "react";
-import { AiOutlineHeart, AiOutlineLock, AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineAlignLeft, AiOutlineHeart, AiOutlineLock, AiOutlineMenu } from "react-icons/ai";
 import { BiBusSchool, BiDoorOpen, BiHomeAlt } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { GiBusStop } from "react-icons/gi";
@@ -17,52 +18,76 @@ export const Dropdown: React.FC = () => {
       </a>
       <ul className={styles.items}>
         <li>
-          <a href={routesName.PROFILE}>
-            <CgProfile size={27} className={styles.faBrands} />
-            Perfil
-          </a>
+          <Link href={routesName.PROFILE}>
+            <a className={styles.link}>
+              <CgProfile size={27} className={styles.faBrands} />
+              Perfil
+            </a>
+          </Link>
         </li>
         {verifyPermissionsGroup(PermissionsGroupName.SUPER_ADMINISTRATOR) && (
           <li>
-            <a href={routesName.PERMISSIONS}>
-              <AiOutlineLock size={27} className={styles.faBrands} />
-              Permissões
-            </a>
+            <Link href={routesName.LOGS}>
+              <a className={styles.link}>
+                <AiOutlineAlignLeft size={27} className={styles.faBrands} />
+                Logs
+              </a>
+            </Link>
+          </li>
+        )}
+        {verifyPermissionsGroup(PermissionsGroupName.SUPER_ADMINISTRATOR) && (
+          <li>
+            <Link href={routesName.PERMISSIONS}>
+              <a className={styles.link}>
+                <AiOutlineLock size={27} className={styles.faBrands} />
+                Permissões
+              </a>
+            </Link>
           </li>
         )}
         <li>
-          <a href={routesName.FAVORITE}>
-            <AiOutlineHeart size={27} className={styles.faBrands} />
-            Favoritos
-          </a>
+          <Link href={routesName.FAVORITE}>
+            <a className={styles.link}>
+              <AiOutlineHeart size={27} className={styles.faBrands} />
+              Favoritos
+            </a>
+          </Link>
         </li>
         <li>
-          <a href={routesName.HOME}>
-            <BiHomeAlt size={27} className={styles.faBrands} />
-            Home
-          </a>
+          <Link href={routesName.HOME}>
+            <a className={styles.link}>
+              <BiHomeAlt size={27} className={styles.faBrands} />
+              Home
+            </a>
+          </Link>
         </li>
         {isAdmin && (
           <>
             <li>
-              <a href={routesName.CREATE_BUS}>
-                <GiBusStop size={27} className={styles.faBrands} />
-                Cadastrar
-              </a>
+              <Link href={routesName.CREATE_BUS}>
+                <a className={styles.link}>
+                  <GiBusStop size={27} className={styles.faBrands} />
+                  Cadastrar
+                </a>
+              </Link>
             </li>
             <li>
-              <a href={routesName.BUS}>
-                <BiBusSchool size={27} className={styles.faBrands} />
-                Ônibus
-              </a>
+              <Link href={routesName.BUS}>
+                <a className={styles.link}>
+                  <BiBusSchool size={27} className={styles.faBrands} />
+                  Ônibus
+                </a>
+              </Link>
             </li>
           </>
         )}
         <li>
-          <a href={routesName.LOGOUT}>
-            <BiDoorOpen size={27} className={styles.faBrands} />
-            Sair
-          </a>
+          <Link href={routesName.LOGOUT}>
+            <a className={styles.link}>
+              <BiDoorOpen size={27} className={styles.faBrands} />
+              Sair
+            </a>
+          </Link>
         </li>
       </ul>
     </div>

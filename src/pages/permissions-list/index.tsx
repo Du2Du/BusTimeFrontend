@@ -18,7 +18,6 @@ const PermissionsList: React.FC = WithAuth(() => {
   return (
     <>
       <FixedHead title="Permissões" />
-      <Header />
       <PermissionsListMain />
     </>
   );

@@ -7,7 +7,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
-  useState
+  useState,
 } from "react";
 import { ApiRoutes } from "../../api-routes";
 import { UserDataProps } from "../../interfaces";
@@ -18,6 +18,7 @@ interface UserInterface {
   userData?: UserDataProps;
   getUser: () => Promise<void | AxiosResponse<UserInterface, any>>;
   isAdmin: boolean;
+  isSuperAdmin: boolean;
   verifyPermissionsGroup: (
     permissionsGroup: string,
     user?: UserDataProps
@@ -42,15 +43,21 @@ export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
     },
     [userData]
   );
+
   const isAdmin = useMemo(
     () => !verifyPermissionsGroup(PermissionsGroupName.DEFAULT),
     [userData]
   );
 
+  const isSuperAdmin = useMemo(
+    () => verifyPermissionsGroup(PermissionsGroupName.SUPER_ADMINISTRATOR),
+    [userData]
+  );
+
   useEffect(() => {
-    if (!userData) {
-      getUser();
-    }
+      if (!userData) {
+        getUser();
+      }
   }, [userData]);
 
   useEffect(() => {
@@ -59,7 +66,13 @@ export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ userData, getUser, isAdmin, verifyPermissionsGroup }}
+      value={{
+        userData,
+        getUser,
+        isAdmin,
+        verifyPermissionsGroup,
+        isSuperAdmin,
+      }}
     >
       {children}
     </UserContext.Provider>

@@ -19,7 +19,6 @@ const Favorites: React.FC = WithAuth(() => {
   return (
     <>
       <FixedHead title="Favoritos" />
-      <Header />
       <h2 className={styles.title}>Ônibus Favoritos</h2>
       <div className={styles.listBusStyle}>
         {!favoriteBus || favoriteBus.length === 0 ? (
