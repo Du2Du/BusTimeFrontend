@@ -7,12 +7,12 @@ import { Button } from "../../page-components/credentials/components";
 import { routesName } from "../../routes-name";
 import styles from "./withAuth.module.scss";
 
-export function WithAuth<T>(
-  Component: React.ComponentType<T>,
+export function WithAuth(
+  Component: React.ComponentType,
   validateAdmin = false,
   validateSuperAdmin = false
 ) {
-  function WrapperFunction(props: T) {
+  function WrapperFunction(props: any) {
     const { userData, isAdmin, isSuperAdmin } = useUserContext();
     const { pathname } = useRouter();
 
@@ -64,7 +64,11 @@ export const NotAuthentic: React.FC<{ isCredential: boolean }> = ({
   return (
     <>
       <FixedHead title="Não Autorizado" />
-      <form onSubmit={onSubmit} className={`${styles.notAuth} rounded`}>
+      <form
+        onSubmit={onSubmit}
+        className={`${styles.notAuth} rounded`}
+        style={isCredential ? {} : { marginTop: "20%" }}
+      >
         <p>Você não pode acessar esse recurso </p>
         <Button label="Voltar" />
       </form>

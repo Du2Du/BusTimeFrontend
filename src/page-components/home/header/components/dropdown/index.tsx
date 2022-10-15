@@ -1,7 +1,13 @@
 import Link from "next/link";
 import React from "react";
-import { AiOutlineAlignLeft, AiOutlineHeart, AiOutlineLock, AiOutlineMenu } from "react-icons/ai";
+import {
+  AiOutlineAlignLeft,
+  AiOutlineHeart,
+  AiOutlineLock,
+  AiOutlineMenu,
+} from "react-icons/ai";
 import { BiBusSchool, BiDoorOpen, BiHomeAlt } from "react-icons/bi";
+import { VscGraph } from "react-icons/vsc";
 import { CgProfile } from "react-icons/cg";
 import { GiBusStop } from "react-icons/gi";
 import { useUserContext } from "../../../../../global-context";
@@ -25,6 +31,16 @@ export const Dropdown: React.FC = () => {
             </a>
           </Link>
         </li>
+        {verifyPermissionsGroup(PermissionsGroupName.SUPER_ADMINISTRATOR) && (
+          <li>
+            <Link href={routesName.STATISTICS}>
+              <a className={styles.link}>
+                <VscGraph size={27} className={styles.faBrands} />
+                Estatísticas
+              </a>
+            </Link>
+          </li>
+        )}
         {verifyPermissionsGroup(PermissionsGroupName.SUPER_ADMINISTRATOR) && (
           <li>
             <Link href={routesName.LOGS}>

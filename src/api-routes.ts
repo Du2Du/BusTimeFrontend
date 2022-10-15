@@ -15,4 +15,5 @@ export const ApiRoutes = {
   DISFAVOR_BUS: "/v1/users/desfavorite-bus",
   LIST_GROUP_PERMISSIONS: "/v1/permissions",
   LOGS: "/v1/logs",
+  GET_BUS_STATISTICS: '/v1/bus/statistics',
 };

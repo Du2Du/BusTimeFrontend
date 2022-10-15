@@ -1,9 +1,8 @@
 import type { AppProps } from "next/app";
-import Script from "next/script";
 import { Toaster } from "react-hot-toast";
 import { Oval } from "react-loader-spinner";
 import { Footer } from "../components";
-import { UserProvider, useUserContext } from "../global-context";
+import { UserProvider } from "../global-context";
 import { Header } from "../page-components/home";
 import "../styles/globals.css";
 
