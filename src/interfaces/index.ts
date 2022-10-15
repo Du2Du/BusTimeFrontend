@@ -84,7 +84,7 @@ interface PermissionInterface {
   permissionId: string;
 }
 
-export type MethodTypes = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+export type MethodTypes = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
 enum UrlStatus {
   SUCCESS = "Sucesso",
@@ -93,9 +93,21 @@ enum UrlStatus {
 
 export interface LogsProps {
   id: number;
-  time: string;
+  time: Date;
   urlStatus: UrlStatus;
   method: MethodTypes;
   url: string;
-  userForm: string;
+  userForm: string | null;
+}
+
+export interface ColumnsProps<T> {
+  name: string;
+  label: string;
+  renderColumn?: (values: T) => React.ReactNode;
+  size: number;
+}
+export interface TableParams<T> {
+  headerTitle: string;
+  columns: Array<ColumnsProps<T>>;
+  values: Array<T>;
 }
