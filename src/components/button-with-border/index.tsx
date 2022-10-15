@@ -15,6 +15,7 @@ export const ButtonWithBorder: React.FC<ButtonParams> = ({
   className,
   children,
   btnLabel,
+  style,
   ...rest
 }) => {
   return (
@@ -23,6 +24,7 @@ export const ButtonWithBorder: React.FC<ButtonParams> = ({
       disabled={disabled === undefined ? false : disabled}
       onClick={onClick}
       type={type}
+      style={style}
       className={`${styles.buttonBorder} ${className ? className : ""}`}
       {...rest}
     >

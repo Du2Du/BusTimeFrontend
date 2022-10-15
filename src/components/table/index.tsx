@@ -1,9 +1,18 @@
 import { get } from "lodash";
 import React from "react";
 import { TableParams } from "../../interfaces";
+import { Pagination } from "../pagination";
 import styles from "./Table.module.scss";
 
-export const Table = <T,>({ headerTitle, columns, values }: TableParams<T>) => {
+export const Table = <T,>({
+  headerTitle,
+  columns,
+  values,
+  showPagination = false,
+  paginationData,
+  reloadItens
+}: TableParams<T>) => {
+
   const setBorder = (
     idx: number,
     length: number,
@@ -47,7 +56,7 @@ export const Table = <T,>({ headerTitle, columns, values }: TableParams<T>) => {
                 const rowValue = renderColumn
                   ? renderColumn(value)
                   : get(value, name);
-                  
+
                 return (
                   <div
                     style={setBorder(idxColumn, columns.length, "borderRight")}
@@ -62,6 +71,11 @@ export const Table = <T,>({ headerTitle, columns, values }: TableParams<T>) => {
           ))}
         </div>
       </section>
+      <footer className={styles.tableFooter}>
+        {showPagination && paginationData && reloadItens && (
+          <Pagination pagination={paginationData} reloadItens={reloadItens} showTotal />
+        )}
+      </footer>
     </div>
   );
 };

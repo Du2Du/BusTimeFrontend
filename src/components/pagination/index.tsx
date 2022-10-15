@@ -8,8 +8,8 @@ interface PaginationParams<T> {
   showTotal?: boolean;
 }
 
-const LEFT_PAGE = "LEFT";
-const RIGHT_PAGE = "RIGHT";
+const LEFT_PAGE = "INICIO";
+const RIGHT_PAGE = "FIM";
 
 const range = (from: number, to: number, step = 1) => {
   let i = from;
@@ -93,8 +93,17 @@ export const Pagination: React.FC<PaginationParams<any>> = ({
 
     return range(1, totalPages);
   };
-  const goToPage = (page: number) => {
-    const currentPage = Math.max(0, Math.min(page, totalPages));
+  const goToPage = (page: number | string) => {
+    if (page === "INICIO" || page === "FIM") {
+      const pageString = {
+        INICIO: 1,
+        FIM: totalPages,
+      };
+
+      const currentPage = pageString[page];
+     return reloadItens(currentPage - 1);
+    }
+    const currentPage = Math.max(0, Math.min(Number(page), totalPages));
 
     reloadItens(currentPage - 1);
   };
@@ -107,7 +116,7 @@ export const Pagination: React.FC<PaginationParams<any>> = ({
         showTotal && "flex flex-col  justify-center items-center"
       }`}
     >
-      <div className="flex">
+      <div className="flex flex-wrap justify-center">
         {arrayPages.map((_pag) => {
           const pos: any = _pag;
           return (
@@ -115,13 +124,18 @@ export const Pagination: React.FC<PaginationParams<any>> = ({
               btnLabel={pos}
               onClick={() => goToPage(pos)}
               key={pos}
+              style={
+                pos === pagination.number + 1
+                  ? { backgroundColor: "#7e4ccb", color: "#fff" }
+                  : {}
+              }
               className="mx-1"
             />
           );
         })}
       </div>
       {showTotal && (
-        <span className="mb-3 mt-2">
+        <span className="mb-3 mt-2" style={{ color: "#7e4ccb" }}>
           Mostrando:
           {pagination.totalPages
             ? ` ${

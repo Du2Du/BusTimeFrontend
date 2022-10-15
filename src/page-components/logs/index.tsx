@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ApiRoutes } from "../../api-routes";
 import { Button, Table } from "../../components";
 import { useLoadingSpinner } from "../../hooks";
-import { ColumnsProps, LogsProps } from "../../interfaces";
+import { ColumnsProps, LogsProps, PaginationInterface } from "../../interfaces";
 import { Backend } from "../../services/backend";
 import { showError } from "../../utils";
 import { formatDateWithHour } from "../../utils/date";
@@ -54,21 +54,21 @@ const columns: Array<ColumnsProps<Omit<LogsProps, "time"> & { date: string }>> =
   ];
 
 export const SectionLogs: React.FC = ({}) => {
-  const [logs, setLogs] = useState<
-    Array<Omit<LogsProps, "time"> & { date: string }>
-  >([]);
+  const [logs, setLogs] =
+    useState<PaginationInterface<Omit<LogsProps, "time"> & { date: string }>>();
   const { setTrue, setFalse } = useLoadingSpinner();
 
-  const loadLogs = () => {
+  const loadLogs = (page = 0) => {
     setTrue();
-    Backend.get(ApiRoutes.LOGS)
-      .then((res: { data: Array<LogsProps> }) =>
-        setLogs(() =>
-          res.data.map((log) => ({
+    Backend.get(`${ApiRoutes.LOGS}?page=${page}&size=10`)
+      .then((res: { data: PaginationInterface<LogsProps> }) =>
+        setLogs(() => ({
+          ...res.data,
+          content: res.data.content.map((log) => ({
             ...log,
             date: formatDateWithHour(log.time),
-          }))
-        )
+          })),
+        }))
       )
       .catch(showError)
       .finally(setFalse);
@@ -77,17 +77,22 @@ export const SectionLogs: React.FC = ({}) => {
   useEffect(() => {
     loadLogs();
   }, []);
-
+  
   return (
     <div className={styles.logs}>
-      <Button btnLabel="Atualizar" onClick={loadLogs} className="mb-5 "/>
-      <div className={styles.tableLogs}>
-        <Table<Omit<LogsProps, "time"> & { date: string }>
-          headerTitle="Logs"
-          values={logs}
-          columns={columns}
-        />
-      </div>
+      <Button btnLabel="Atualizar" onClick={loadLogs} className="mb-5 " />
+      {logs && (
+        <div className={styles.tableLogs}>
+          <Table<Omit<LogsProps, "time"> & { date: string }>
+            headerTitle="Logs"
+            values={logs?.content}
+            showPagination={true}
+            paginationData={logs}
+            reloadItens={loadLogs}
+            columns={columns}
+          />
+        </div>
+      )}
     </div>
   );
 };

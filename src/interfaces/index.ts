@@ -109,5 +109,8 @@ export interface ColumnsProps<T> {
 export interface TableParams<T> {
   headerTitle: string;
   columns: Array<ColumnsProps<T>>;
+  showPagination?: boolean;
+  reloadItens?: (page: number) => void;
+  paginationData?: PaginationInterface<any>;
   values: Array<T>;
 }
