@@ -60,7 +60,6 @@ export const Credentials: React.FC<CredentialsParams> = ({
     <div className={styles.credentials}>
       <form
         onSubmit={handleSubmit(handleData)}
-        autoComplete="off"
         className={`${styles.formCredentials} rounded`}
       >
         <FormFields

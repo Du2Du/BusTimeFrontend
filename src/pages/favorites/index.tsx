@@ -1,16 +1,19 @@
+import { AxiosResponse } from "axios";
 import React, { useEffect, useState } from "react";
 import { FixedHead } from "../../components";
 import { useUserContext } from "../../global-context";
 import { WithAuth } from "../../global-hoc";
 import { useLoadingSpinner } from "../../hooks";
-import { Header } from "../../page-components/home";
+import { BusProps } from "../../interfaces";
 import { BusItem } from "../../page-components/home/main/components";
 import styles from "../../styles/Favorites.module.scss";
 
 const Favorites: React.FC = WithAuth(() => {
   const { userData } = useUserContext();
   const { setTrue, setFalse } = useLoadingSpinner();
-  const [favoriteBus, setFavoriteBus] = useState(userData?.favoriteBus);
+  const [favoriteBus, setFavoriteBus] = useState<Array<BusProps>>(
+    userData ? userData.favoriteBus : []
+  );
 
   useEffect(() => {
     setTrue();

@@ -1,17 +1,18 @@
-import React, { useLayoutEffect, useState, useEffect } from "react";
 import * as am5 from "@amcharts/amcharts5";
-import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import * as am5xy from "@amcharts/amcharts5/xy";
+import { AxiosResponse } from "axios";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { ApiRoutes } from "../../api-routes";
 import { FixedHead } from "../../components";
 import { WithAuth } from "../../global-hoc";
-import { Backend } from "../../services/backend";
-import { ApiRoutes } from "../../api-routes";
-import { showError } from "../../utils";
 import { useLoadingSpinner } from "../../hooks";
+import { Backend } from "../../services/backend";
+import { showError } from "../../utils";
 
 interface StatisticsProps {
-  label: string;
-  value: number;
+  lineName: string;
+  savedQuantity: number;
 }
 
 const Statistics: React.FC = WithAuth(
@@ -23,7 +24,9 @@ const Statistics: React.FC = WithAuth(
     useEffect(() => {
       setTrue();
       Backend.get(ApiRoutes.GET_BUS_STATISTICS)
-        .then((res: any) => setStatistic(res.data))
+        .then((res: AxiosResponse<Array<StatisticsProps>>) => {
+          setStatistic(res.data);
+        })
         .catch(showError)
         .finally(setFalse);
     }, []);
@@ -51,17 +54,28 @@ const Statistics: React.FC = WithAuth(
 
       // Create axes
       const xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+      const yRenderer = am5xy.AxisRendererY.new(root, {});
+
       xRenderer.labels.template.setAll({
-        rotation: -90,
+        rotation: 0,
         centerY: am5.p50,
-        centerX: am5.p100,
-        paddingRight: 15,
+        centerX: am5.p50,
+        fontSize: 20,
+        fontWeight: "500",
+        paddingTop: 10,
+        fill: am5.color("#fff"),
+      });
+
+      yRenderer.labels.template.setAll({
+        fontSize: 20,
+        fontWeight: "500",
+        fill: am5.color("#fff"),
       });
 
       const xAxis = chart.xAxes.push(
         am5xy.CategoryAxis.new(root, {
           maxDeviation: 0.3,
-          categoryField: "country",
+          categoryField: "lineName",
           renderer: xRenderer,
           tooltip: am5.Tooltip.new(root, {}),
         })
@@ -70,7 +84,7 @@ const Statistics: React.FC = WithAuth(
       const yAxis = chart.yAxes.push(
         am5xy.ValueAxis.new(root, {
           maxDeviation: 0.3,
-          renderer: am5xy.AxisRendererY.new(root, {}),
+          renderer: yRenderer,
         })
       );
 
@@ -80,9 +94,9 @@ const Statistics: React.FC = WithAuth(
           name: "Series 1",
           xAxis: xAxis,
           yAxis: yAxis,
-          valueYField: "value",
+          valueYField: "savedQuantity",
           sequencedInterpolation: true,
-          categoryXField: "country",
+          categoryXField: "lineName",
           tooltip: am5.Tooltip.new(root, {
             labelText: "{valueY}",
           }),
@@ -110,19 +124,30 @@ const Statistics: React.FC = WithAuth(
     }, [statistics]);
 
     return (
-      <div className="flex justify-center align-center w-100 h-100">
+      <>
         <FixedHead title="Estatísticas" />
         <div
-          id="chartdiv"
-          style={{
-            width: "90%",
-            height: "500px",
-            background: "#7e4ccb",
-            borderRadius: "5px",
-            padding: "5px",
-          }}
-        ></div>
-      </div>
+          className="flex flex-col justify-center w-100 h-100"
+          style={{ alignItems: "center", margin: "auto", minWidth: "90%" }}
+        >
+          <p
+            className="self-start mb-10"
+            style={{ fontSize: "30px", color: "#7e4ccb" }}
+          >
+            Índice das Linhas de Ônibus Salvos:
+          </p>
+          <div
+            id="chartdiv"
+            style={{
+              width: "100%",
+              height: "500px",
+              background: "#7e4ccb",
+              borderRadius: "5px",
+              padding: "5px",
+            }}
+          ></div>
+        </div>
+      </>
     );
   },
   true,

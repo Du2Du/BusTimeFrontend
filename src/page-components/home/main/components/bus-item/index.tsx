@@ -11,12 +11,12 @@ import { showError } from "../../../../../utils";
 import styles from "../../../Home.module.scss";
 interface BusItemProps {
   bus: BusProps;
-  setFavoriteBus?: React.Dispatch<React.SetStateAction<BusProps[] | undefined>>;
+  setFavoriteBus?: React.Dispatch<React.SetStateAction<BusProps[]>>;
 }
 
 export const BusItem: React.FC<BusItemProps> = ({ bus, setFavoriteBus }) => {
   const { setTrue, setFalse } = useLoadingSpinner();
-  const { userData } = useUserContext();
+  const { userData, getUser } = useUserContext();
   const [currentFavoriteBus, setCurrentFavoriteBus] = useState(
     userData?.favoriteBus.find((favoriteBus) => bus.id === favoriteBus.id)
   );
@@ -31,13 +31,14 @@ export const BusItem: React.FC<BusItemProps> = ({ bus, setFavoriteBus }) => {
         }?bus=${bus.id}`
       )
         .then((res: AxiosResponse<Array<BusProps>>) => {
-          if (setFavoriteBus) setFavoriteBus(res.data);
+         if (setFavoriteBus) setFavoriteBus(res.data);
           setCurrentFavoriteBus(
             res.data.find((favoriteBus) => bus.id === favoriteBus.id)
           );
           toast.success(
             `Ônibus ${isFavorite ? "favoritado" : "desfavoritado"} com sucesso!`
           );
+          getUser();
         })
         .catch(showError)
         .finally(setFalse);

@@ -46,6 +46,15 @@ input {
   outline: none;
 }
 
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #272530 inset;
+}
+
+/* Cor do texto do autocomplete */
+input:-webkit-autofill {
+    -webkit-text-fill-color: #fff !important;
+}
+
 #hidenLdsEllipsis {
   display: none !important;
 }

@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Router from "next/router";
-import BusSvg from "../../public/bus.svg";
 import { ButtonWithBorder, FixedHead } from "../components";
 import { WithAuth } from "../global-hoc";
 import { routesName } from "../routes-name";
@@ -53,7 +52,7 @@ const Home: NextPage = WithAuth(() => {
                 />
               </div>
             </div>
-            <BusSvg />
+            <img src="/bus.svg" />
           </main>
           <a
             target="_blank"
@@ -70,9 +69,3 @@ const Home: NextPage = WithAuth(() => {
 });
 
 export default Home;
-
-export const getStaticProps = async () => {
-  return {
-    props: {},
-  };
-};

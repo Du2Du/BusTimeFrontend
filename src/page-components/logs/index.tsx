@@ -18,12 +18,12 @@ const columns: Array<ColumnsProps<Omit<LogsProps, "time"> & { date: string }>> =
     {
       label: "Url",
       name: "url",
-      size: 2,
+      size: 3,
     },
     {
       label: "Hora",
       name: "date",
-      size: 3,
+      size: 2,
     },
     {
       label: "Status",

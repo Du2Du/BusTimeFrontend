@@ -1,8 +1,8 @@
 .table {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   width: 100%;
   max-height: 550px;
   border: 1px solid #7e4ccb;
@@ -12,9 +12,9 @@
     padding: 10px 20px;
     border-bottom: #7e4ccb 1px solid;
     display: flex;
+    justify-content: flex-start;
     width: 100%;
     border-bottom: 1;
-    justify-content: start;
     h1 {
       font-size: 30px;
     }
