@@ -27,11 +27,11 @@ export const BusItem: React.FC<BusItemProps> = ({ bus, setFavoriteBus }) => {
       setTrue();
       Backend.get(
         `${isFavorite ? ApiRoutes.FAVORITE_BUS : ApiRoutes.DISFAVOR_BUS}/${
-          userData?.id
-        }?bus=${bus.id}`
+          bus.id
+        }`
       )
         .then((res: AxiosResponse<Array<BusProps>>) => {
-         if (setFavoriteBus) setFavoriteBus(res.data);
+          if (setFavoriteBus) setFavoriteBus(res.data);
           setCurrentFavoriteBus(
             res.data.find((favoriteBus) => bus.id === favoriteBus.id)
           );
@@ -40,15 +40,15 @@ export const BusItem: React.FC<BusItemProps> = ({ bus, setFavoriteBus }) => {
           );
           getUser();
         })
-        .catch(showError)
-        .finally(setFalse);
+        .catch(showError);
+      setFalse();
     };
 
   return (
     <div className={styles.listItem}>
       <div className={styles.fieldItem}>
         <b>Linha: </b>
-        {bus.line}
+        {bus.lineBus.lineName}
       </div>
       <div className={styles.fieldItem}>
         <b>Horário: </b>

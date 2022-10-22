@@ -14,7 +14,6 @@ import { Backend } from "../../../services/backend";
 import { showError } from "../../../utils";
 
 const UpdateBus: React.FC = WithAuth(() => {
-  const { userData } = useUserContext();
   const [fieldValues, setFieldValues] = useState<BusProps>();
   const { setTrue, setFalse } = useLoadingSpinner();
   const router = useRouter();

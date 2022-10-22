@@ -23,7 +23,7 @@ interface SectionParams {
 }
 
 type BusType =
-  | "line"
+  | "lineBus"
   | "hour"
   | "ticketPrice"
   | "inicialRoute"
@@ -41,14 +41,14 @@ export const Section: React.FC<SectionParams> = ({
   isCreate = false,
   fieldValues,
 }) => {
-  const { register, handleSubmit, setValue, getValues } = useForm<BusProps>();
+  const { register, handleSubmit, setValue } = useForm<BusProps>();
 
   const { userData } = useUserContext();
 
   useEffect(() => {
     if (fieldValues) {
       const busFields: Array<BusType> = [
-        "line",
+        "lineBus",
         "hour",
         "ticketPrice",
         "inicialRoute",
@@ -80,7 +80,7 @@ export const Section: React.FC<SectionParams> = ({
       </h1>
       <form onSubmit={handleSubmit(addIdUserAdmin)} className="fields">
         <Input
-          register={register("line", { required: isCreate ? true : false })}
+          register={register("lineBus.lineName", { required: isCreate ? true : false })}
           className="my-2"
           label="Linha"
           placeHolder="Linha"

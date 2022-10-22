@@ -34,7 +34,7 @@ export const ListAllBus: React.FC = () => {
             <div className={styles.fields}>
               <div className={styles.fieldItem}>
                 <b>Linha: </b>
-                {element.line}
+                {element.lineBus.lineName}
               </div>
               <div className={styles.fieldItem}>
                 <b>Hora: </b>

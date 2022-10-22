@@ -10,9 +10,13 @@ export type BootstrapColors =
   | "light"
   | "dark";
 
+export interface LineBusProps{
+  id: number;
+  lineName: string;
+}
 export interface BusProps {
   id: number;
-  line: string;
+  lineBus: LineBusProps;
   hour: string;
   ticketPrice: number;
   inicialRoute: string;

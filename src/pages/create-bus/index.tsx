@@ -1,3 +1,4 @@
+import Router from "next/router";
 import React from "react";
 import toast from "react-hot-toast";
 import { ApiRoutes } from "../../api-routes";
@@ -7,6 +8,7 @@ import { useLoadingSpinner } from "../../hooks";
 import { BusProps } from "../../interfaces";
 import { Section } from "../../page-components/bus-page";
 import { Header } from "../../page-components/home";
+import { routesName } from "../../routes-name";
 import { Backend } from "../../services/backend";
 import { showError } from "../../utils";
 
@@ -18,9 +20,9 @@ const CreateBus: React.FC = WithAuth(() => {
     Backend.post(ApiRoutes.CREATE_BUS, data)
       .then(() => {
         toast.success(`Ônibus criado com sucesso!`);
+        Router.push(routesName.BUS);
       })
       .catch(showError)
-      .finally(setFalse);
   };
 
   return (

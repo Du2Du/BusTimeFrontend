@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
  * @author Du2Du
  */
 export const showError = (error: any) => {
-  if (error?.isCanceled || !error) return;
+  if (error?.isCanceled || !error) toast.error("Não foi possível fazer isso no momento");
   const {
     response: {
       data: { message, errors },
