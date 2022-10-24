@@ -17,7 +17,7 @@ export const PermissionsMain: React.FC = () => {
 
   const reloadItens = (page = 0) => {
     setTrue();
-    Backend.get(`${ApiRoutes.USER.LIST_USERS}?&size=5&page=${page}`)
+    Backend.get(`${ApiRoutes.LIST_USERS}?&size=5&page=${page}`)
       .then((res) => {
         setUsersList(res.data);
       })

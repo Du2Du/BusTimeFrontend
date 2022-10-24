@@ -31,7 +31,7 @@ export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [userData, setUserData] = useState<UserDataProps>();
 
   const getUser = useCallback(async () => {
-    Backend.get(ApiRoutes.USER.USER_ME).then((res) => {
+    Backend.get(ApiRoutes.USER_ME).then((res) => {
       setUserData(res.data);
     });
   }, []);

@@ -18,7 +18,7 @@ export const List: React.FC = () => {
   }, [line]);
 
   const reloadItens = (page = 0) => {
-    Backend.get(`${ApiRoutes.BUS.FILTER_BUS}?line=${line}&size=10&page=${page}`)
+    Backend.get(`${ApiRoutes.FILTER_BUS}?line=${line}&size=10&page=${page}`)
       .then((res) => setBus(res.data))
       .catch(showError);
   };

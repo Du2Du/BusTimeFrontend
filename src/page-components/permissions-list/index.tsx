@@ -15,7 +15,7 @@ export const PermissionsListMain: React.FC = () => {
 
   useEffect(() => {
     setTrue();
-    Backend.get(ApiRoutes.PERMISSIONS.LIST_GROUP_PERMISSIONS)
+    Backend.get(ApiRoutes.LIST_GROUP_PERMISSIONS)
       .then((res) => setPermissionsGroup(res.data))
       .catch(showError)
       .finally(setFalse);

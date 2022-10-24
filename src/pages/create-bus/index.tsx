@@ -17,7 +17,7 @@ const CreateBus: React.FC = WithAuth(() => {
 
   const createBus = (data: BusProps) => {
     setTrue();
-    Backend.post(ApiRoutes.BUS.CREATE_BUS, data)
+    Backend.post(ApiRoutes.CREATE_BUS, data)
       .then(() => {
         toast.success(`Ônibus criado com sucesso!`);
         Router.push(routesName.BUS);

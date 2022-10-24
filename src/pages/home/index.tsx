@@ -23,7 +23,7 @@ const Home: React.FC = WithAuth(
 
     useEffect(() => {
       if (!userData) Router.reload();
-      Backend.get(`${ApiRoutes.BUS.LIST_BUS}?size=4&page=0`).then(
+      Backend.get(`${ApiRoutes.LIST_BUS}?size=4&page=0`).then(
         (res) => setBusPagination(res.data)
       );
     }, [userData]);

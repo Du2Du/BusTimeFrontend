@@ -28,7 +28,7 @@ export const Main: React.FC<{
   };
 
   const reloadBus = (page: number, perPage = 4) => {
-    Backend.get(`${ApiRoutes.BUS.LIST_BUS}?size=${perPage}&page=${page}`).then(
+    Backend.get(`${ApiRoutes.LIST_BUS}?size=${perPage}&page=${page}`).then(
       (res) => setBusPagination(res.data)
     );
   };

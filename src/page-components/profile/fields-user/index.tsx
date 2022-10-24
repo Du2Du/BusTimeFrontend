@@ -30,7 +30,7 @@ export const FieldsUser: React.FC<{ isUpdate?: boolean }> = ({
   const updateUser = (data: UserDataProps) => {
     if (isUpdate && userData?.id) {
       setTrue();
-      Backend.put(`${ApiRoutes.USER.UPDATE_USER}/${userData.id}`, {
+      Backend.put(`${ApiRoutes.UPDATE_USER}/${userData.id}`, {
         ...data,
         id: userData.id,
       })

@@ -20,7 +20,7 @@ const Favorites: React.FC = WithAuth(() => {
 
   useEffect(() => {
     setTrue();
-    Backend.get(ApiRoutes.USER.LIST_FAVORITE_BUS)
+    Backend.get(ApiRoutes.LIST_FAVORITE_BUS)
       .then((res) => setFavoriteBus(res.data))
       .catch(showError)
       .finally(setFalse);
