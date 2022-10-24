@@ -38,7 +38,7 @@ export const UserItem: React.FC<{ user: UserDataProps }> = ({ user }) => {
 
   const changeAdmin = (ev: any) => {
     setTrue();
-    Backend.put(`${ApiRoutes.CHANGE_ADMIN}/${user.id}`, {
+    Backend.put(`${ApiRoutes.USER.CHANGE_ADMIN}/${user.id}`, {
       permissionGroup: ev.currentTarget.value,
     })
       .then((res: AxiosResponse<UserDataProps>) => {

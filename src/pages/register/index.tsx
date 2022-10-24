@@ -25,12 +25,12 @@ const Register: React.FC = WithAuth(() => {
     setTrue();
     const { email, password } = data;
     const dataLogin = { email, password };
-    Backend.post(ApiRoutes.CREATE_USER, data)
+    Backend.post(ApiRoutes.USER.CREATE_USER, data)
       .then(() => {
         setTrue();
 
         /*Essa função realiza o login apos o cadastro */
-        Backend.post(ApiRoutes.LOGIN_USER, dataLogin)
+        Backend.post(ApiRoutes.USER.LOGIN_USER, dataLogin)
           .then(() => {
             getUser();
             Router.push(routesName.HOME);

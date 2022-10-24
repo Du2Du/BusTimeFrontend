@@ -23,7 +23,7 @@ const Login: React.FC = WithAuth(() => {
   /*Essa função realiza o login do usuário */
   const login = (data: { email: string; password: string }) => {
     setTrue();
-    Backend.post(ApiRoutes.LOGIN_USER, data)
+    Backend.post(ApiRoutes.USER.LOGIN_USER, data)
       .then(() => {
         setTrue();
         getUser()

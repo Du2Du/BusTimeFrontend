@@ -21,7 +21,7 @@ const UpdateBus: React.FC = WithAuth(() => {
 
   const updateBus = (data: BusProps) => {
     setTrue();
-    Backend.put(`${ApiRoutes.CREATE_BUS}/${busId}`, {
+    Backend.put(`${ApiRoutes.BUS.CREATE_BUS}/${busId}`, {
       ...data,
       id: busId,
     })
@@ -35,7 +35,7 @@ const UpdateBus: React.FC = WithAuth(() => {
   useEffect(() => {
     if (!busId) return;
     setTrue();
-    Backend.get(`${ApiRoutes.LIST_BUS}/${busId}`)
+    Backend.get(`${ApiRoutes.BUS.LIST_BUS}/${busId}`)
       .then((res: AxiosResponse<BusProps>) => {
         const bus = res.data;
         setFieldValues(bus);

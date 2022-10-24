@@ -26,7 +26,7 @@ export const BusItem: React.FC<BusItemProps> = ({ bus, setFavoriteBus }) => {
     () => {
       setTrue();
       Backend.get(
-        `${isFavorite ? ApiRoutes.FAVORITE_BUS : ApiRoutes.DISFAVOR_BUS}/${
+        `${isFavorite ? ApiRoutes.BUS.FAVORITE_BUS : ApiRoutes.BUS.DISFAVOR_BUS}/${
           bus.id
         }`
       )

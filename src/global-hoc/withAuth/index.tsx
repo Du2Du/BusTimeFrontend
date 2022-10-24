@@ -67,7 +67,6 @@ export const NotAuthentic: React.FC<{ isCredential: boolean }> = ({
       <form
         onSubmit={onSubmit}
         className={`${styles.notAuth} rounded`}
-        style={isCredential ? {} : { marginTop: "20%" }}
       >
         <p>Você não pode acessar esse recurso </p>
         <Button label="Voltar" />
