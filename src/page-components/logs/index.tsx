@@ -80,7 +80,7 @@ export const SectionLogs: React.FC = ({}) => {
   
   return (
     <div className={styles.logs}>
-      <Button btnLabel="Atualizar" onClick={loadLogs} className="mb-5 " />
+      <Button btnLabel="Atualizar" onClick={() => loadLogs()} className="mb-5 " />
       {logs && (
         <div className={styles.tableLogs}>
           <Table<Omit<LogsProps, "time"> & { date: string }>

@@ -1,5 +1,4 @@
 import { get } from "lodash";
-import React from "react";
 import { TableParams } from "../../interfaces";
 import { Pagination } from "../pagination";
 import styles from "./Table.module.scss";
@@ -34,10 +33,11 @@ export const Table = <T,>({
         <div className={styles.tableSectionHeader}>
           {columns.map((column, idx) => (
             <div
+            key={idx}
               style={setBorder(idx, columns.length, "borderRight", "#fff")}
               className={`col-lg-${column.size} ` + styles.columnHeader}
             >
-              <div key={idx} className={styles.column}>
+              <div className={styles.column}>
                 <b>{column.label}</b>
               </div>
             </div>
@@ -46,7 +46,7 @@ export const Table = <T,>({
         <div className={styles.tableSectionBody}>
           {values.map((value, rowIdx) => (
             <div
-              style={setBorder(rowIdx, values.length, "borderBottom")}
+              style={{...setBorder(rowIdx, values.length, "borderBottom")}}
               key={rowIdx}
               className={styles.columnRow}
             >

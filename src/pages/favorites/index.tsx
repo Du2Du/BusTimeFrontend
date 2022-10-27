@@ -12,7 +12,7 @@ import styles from "../../styles/Favorites.module.scss";
 import { showError } from "../../utils";
 
 const Favorites: React.FC = WithAuth(() => {
-  const { userData, getUser } = useUserContext();
+  const { userData } = useUserContext();
   const { setTrue, setFalse } = useLoadingSpinner();
   const [favoriteBus, setFavoriteBus] = useState<Array<BusProps>>(
     userData ? userData.favoriteBus : []
@@ -24,7 +24,7 @@ const Favorites: React.FC = WithAuth(() => {
       .then((res) => setFavoriteBus(res.data))
       .catch(showError)
       .finally(setFalse);
-  }, [])
+  }, []);
 
   return (
     <>

@@ -118,3 +118,10 @@ export interface TableParams<T> {
   paginationData?: PaginationInterface<any>;
   values: Array<T>;
 }
+
+export interface MenusProps{
+  id: number;
+  url: string;
+  iconName: string;
+  menuName: string;
+}

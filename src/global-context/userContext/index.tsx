@@ -10,13 +10,15 @@ import React, {
   useState,
 } from "react";
 import { ApiRoutes } from "../../api-routes";
-import { UserDataProps } from "../../interfaces";
+import { MenusProps, UserDataProps } from "../../interfaces";
 import { Backend } from "../../services/backend";
 import { PermissionsGroupName } from "../../utils";
 
 interface UserInterface {
   userData?: UserDataProps;
   getUser: () => Promise<void | AxiosResponse<UserInterface, any>>;
+  getMenus: () => void;
+  menus: Array<MenusProps>;
   isAdmin: boolean;
   isSuperAdmin: boolean;
   verifyPermissionsGroup: (
@@ -29,6 +31,11 @@ const UserContext = createContext<UserInterface>({} as UserInterface);
 
 export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [userData, setUserData] = useState<UserDataProps>();
+  const [menus, setMenus] = useState<Array<MenusProps>>([]);
+
+  const getMenus = useCallback(() => {
+    Backend.get(ApiRoutes.GET_MENUS).then((res) => setMenus(res.data));
+  }, []);
 
   const getUser = useCallback(async () => {
     Backend.get(ApiRoutes.USER_ME).then((res) => {
@@ -55,9 +62,8 @@ export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   );
 
   useEffect(() => {
-      if (!userData) {
-        getUser();
-      }
+    if (!userData) getUser();
+    else getMenus();
   }, [userData]);
 
   useEffect(() => {
@@ -69,6 +75,8 @@ export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
       value={{
         userData,
         getUser,
+        getMenus,
+        menus,
         isAdmin,
         verifyPermissionsGroup,
         isSuperAdmin,
