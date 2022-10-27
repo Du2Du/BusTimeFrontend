@@ -8,7 +8,6 @@ import { AllIcons } from "../../../../../utils/allIcons";
 
 export const Dropdown: React.FC = () => {
   const { menus } = useUserContext();
-  console.log(menus);
   
   return (
     <div className={styles.dropdown}>
