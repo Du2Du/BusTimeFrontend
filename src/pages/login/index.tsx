@@ -27,7 +27,7 @@ const Login: React.FC = WithAuth(() => {
       .then(() => {
         setTrue();
         getUser()
-          .then(() => Router.push(routesName.HOME))
+          .then(() => Router.push(routesName.HOME).then(() => Router.reload()))
           .finally(setFalse);
       })
       .catch(showError)

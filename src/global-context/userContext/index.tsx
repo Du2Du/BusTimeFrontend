@@ -10,6 +10,7 @@ import React, {
   useState,
 } from "react";
 import { ApiRoutes } from "../../api-routes";
+import { useLoadingSpinner } from "../../hooks";
 import { MenusProps, UserDataProps } from "../../interfaces";
 import { Backend } from "../../services/backend";
 import { PermissionsGroupName } from "../../utils";
@@ -32,15 +33,16 @@ const UserContext = createContext<UserInterface>({} as UserInterface);
 export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [userData, setUserData] = useState<UserDataProps>();
   const [menus, setMenus] = useState<Array<MenusProps>>([]);
-
+  const {setFalse, setTrue} = useLoadingSpinner();
   const getMenus = useCallback(() => {
     Backend.get(ApiRoutes.GET_MENUS).then((res) => setMenus(res.data));
   }, []);
 
   const getUser = useCallback(async () => {
+   setTrue();
     Backend.get(ApiRoutes.USER_ME).then((res) => {
       setUserData(res.data);
-    });
+    }).finally(setFalse);
   }, []);
 
   const verifyPermissionsGroup = useCallback(

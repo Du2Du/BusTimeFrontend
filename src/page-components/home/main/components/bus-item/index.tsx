@@ -40,8 +40,8 @@ export const BusItem: React.FC<BusItemProps> = ({ bus, setFavoriteBus }) => {
           );
           getUser();
         })
-        .catch(showError);
-      setFalse();
+        .catch(showError)
+        .finally(setFalse);
     };
 
   return (

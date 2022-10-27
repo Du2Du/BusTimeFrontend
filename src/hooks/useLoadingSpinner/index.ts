@@ -18,17 +18,11 @@ export const useLoadingSpinner = () => {
     else spinnerElement.id = "lds-ellipsis";
   }, [loadingSpinner]);
 
-  const setFalse = () => {
-    setTimeout(() => {
-      setFalseSpinner();
-    }, 1000);
-  };
-
   return {
     loadingSpinner,
     setLoadingSpinner,
     setTrue,
-    setFalse,
+    setFalse: setFalseSpinner,
     toggle,
   };
 };

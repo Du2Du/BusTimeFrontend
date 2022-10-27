@@ -13,10 +13,8 @@ import { showError } from "../../utils";
 
 const Favorites: React.FC = WithAuth(() => {
   const { userData } = useUserContext();
-  const { setTrue, setFalse } = useLoadingSpinner();
-  const [favoriteBus, setFavoriteBus] = useState<Array<BusProps>>(
-    userData ? userData.favoriteBus : []
-  );
+  const { setTrue, setFalse, loadingSpinner } = useLoadingSpinner();
+  const [favoriteBus, setFavoriteBus] = useState<Array<BusProps>>([]);
 
   useEffect(() => {
     setTrue();
