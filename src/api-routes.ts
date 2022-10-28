@@ -5,6 +5,7 @@ export const ApiRoutes = {
   LIST_FAVORITE_BUS: "/v1/users/favorite-buses",
   CHANGE_ADMIN: "/v1/users/change-admin",
   LOGIN_USER: "/v1/auth/login",
+  REFRESH: "/v1/auth/refresh",
   USER_ME: "/v1/users/me",
   LOGOUT: "/v1/auth/logout",
   LIST_BUS: "/v1/bus",

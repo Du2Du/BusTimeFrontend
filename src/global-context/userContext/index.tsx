@@ -33,16 +33,18 @@ const UserContext = createContext<UserInterface>({} as UserInterface);
 export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [userData, setUserData] = useState<UserDataProps>();
   const [menus, setMenus] = useState<Array<MenusProps>>([]);
-  const {setFalse, setTrue} = useLoadingSpinner();
+  const { setFalse, setTrue } = useLoadingSpinner();
   const getMenus = useCallback(() => {
     Backend.get(ApiRoutes.GET_MENUS).then((res) => setMenus(res.data));
   }, []);
 
   const getUser = useCallback(async () => {
-   setTrue();
-    Backend.get(ApiRoutes.USER_ME).then((res) => {
-      setUserData(res.data);
-    }).finally(setFalse);
+    setTrue();
+    Backend.get(ApiRoutes.USER_ME)
+      .then((res) => {
+        setUserData(res.data);
+      })
+      .finally(setFalse);
   }, []);
 
   const verifyPermissionsGroup = useCallback(
@@ -70,6 +72,44 @@ export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
 
   useEffect(() => {
     if (userData) Router.reload();
+  }, []);
+
+  useEffect(() => {
+    Backend.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+        const originalRequest = error?.config;
+        console.log(error);
+        if (
+          error?.response?.status === 401 &&
+          originalRequest?.url === ApiRoutes.REFRESH
+        ) {
+          setUserData(undefined);
+          return Promise.reject(error);
+        }
+        if (error?.response?.status === 401) {
+          const tokens = await localStorage.getItem("refreshToken");
+          console.log(tokens);
+
+          if (tokens) {
+            return Backend.put<UserDataProps>(ApiRoutes.REFRESH)
+              .then((res) => {
+                setUserData(res.data);
+                return Backend(originalRequest);
+              })
+              .catch((err) => {
+                console.log(err.response, "REFRESHerror");
+              });
+          } else {
+            console.log("Refresh token is expired");
+            setUserData(undefined);
+          }
+        } else {
+          console.log("Refresh token not available.");
+        }
+        return Promise.reject(error);
+      }
+    );
   }, []);
 
   return (
