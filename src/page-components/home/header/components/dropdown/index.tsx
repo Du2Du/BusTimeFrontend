@@ -8,7 +8,7 @@ import { AllIcons } from "../../../../../utils/allIcons";
 
 export const Dropdown: React.FC = () => {
   const { menus } = useUserContext();
-  
+
   return (
     <div className={styles.dropdown}>
       <a className={styles.label}>
@@ -19,12 +19,10 @@ export const Dropdown: React.FC = () => {
           const { iconName, id, url, menuName } = menu;
           const IconName = get(AllIcons, iconName);
           return (
-            <li id={String(id)}>
+            <li className={styles.link} key={id} id={String(id)}>
               <Link href={url}>
-                <a className={styles.link}>
                   <IconName size={27} className={styles.faBrands} />
                   {menuName}
-                </a>
               </Link>
             </li>
           );
