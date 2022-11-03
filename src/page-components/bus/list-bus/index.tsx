@@ -13,7 +13,7 @@ export const ListAllBus: React.FC = () => {
   const { userData } = useUserContext();
 
   useEffect(() => {
-    Backend.get(`${ApiRoutes.LIST_BUS_USER}/${userData?.id}`)
+    Backend.get(`${ApiRoutes.LIST_BUS_USER}`)
       .then((res) => setBus(res.data))
       .catch(showError);
   }, []);
