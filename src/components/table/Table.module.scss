@@ -2,18 +2,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
-  max-height: 550px;
   border: 1px solid #7e4ccb;
   border-radius: 5px;
+  height: 100%;
 
   .tableHeader {
     padding: 10px 20px;
     border-bottom: #7e4ccb 1px solid;
     display: flex;
-    justify-content: flex-start;
+    background-color: #2a292c;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
+    max-height: 100px;
     border-bottom: 1;
     h1 {
       font-size: 30px;
@@ -25,8 +28,8 @@
     overflow: auto;
     margin: 0 20px;
     height: 100%;
+    background-color: #2a292c;
     width: 100%;
-    max-height: 500px;
     flex-direction: column;
 
     .tableSectionHeader {
@@ -61,10 +64,12 @@
       }
     }
   }
-  .tableFooter{
+  .tableFooter {
+    background-color: #2a292c;
     border-top: #7e4ccb 4px solid;
     width: 100%;
     display: flex;
+    padding-bottom: 5px;
     justify-content: center;
     align-items: center;
   }

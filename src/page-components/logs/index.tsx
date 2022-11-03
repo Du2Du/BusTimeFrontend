@@ -77,16 +77,22 @@ export const SectionLogs: React.FC = ({}) => {
   useEffect(() => {
     loadLogs();
   }, []);
-  
+
   return (
     <div className={styles.logs}>
-      <Button btnLabel="Atualizar" onClick={() => loadLogs()} className="mb-5 " />
       {logs && (
         <div className={styles.tableLogs}>
           <Table<Omit<LogsProps, "time"> & { date: string }>
             headerTitle="Logs"
             values={logs?.content}
+            showTotal={false}
             showPagination={true}
+            renderExtraHeaderComponent={
+              <Button
+                btnLabel="Atualizar"
+                onClick={() => loadLogs()}
+              />
+            }
             paginationData={logs}
             reloadItens={loadLogs}
             columns={columns}

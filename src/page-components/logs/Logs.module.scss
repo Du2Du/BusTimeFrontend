@@ -1,11 +1,15 @@
-.logs{
+.logs {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   flex-direction: column;
 
-  .tableLogs{
-    width: 75%;
+  .tableLogs {
+    position: absolute;
+    top: 3%;
+    left: 5%;
+    width: 93%;
+    height: 86%;
   }
 }

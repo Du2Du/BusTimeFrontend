@@ -5,6 +5,7 @@ import { ButtonWithBorder } from "../button-with-border";
 interface PaginationParams<T> {
   pagination: PaginationInterface<T>;
   reloadItens: (page: number) => void;
+  marginTop?: number;
   showTotal?: boolean;
 }
 
@@ -27,6 +28,7 @@ export const Pagination: React.FC<PaginationParams<any>> = ({
   pagination,
   reloadItens,
   showTotal,
+  marginTop,
 }) => {
   let totalRecords = pagination.totalPages,
     pageLimit = pagination.numberOfElements,
@@ -101,7 +103,7 @@ export const Pagination: React.FC<PaginationParams<any>> = ({
       };
 
       const currentPage = pageString[page];
-     return reloadItens(currentPage - 1);
+      return reloadItens(currentPage - 1);
     }
     const currentPage = Math.max(0, Math.min(Number(page), totalPages));
 
@@ -112,7 +114,7 @@ export const Pagination: React.FC<PaginationParams<any>> = ({
 
   return (
     <nav
-      className={`mt-5 ${
+      className={`mt-${marginTop ? marginTop : "2"} ${
         showTotal && "flex flex-col  justify-center items-center"
       }`}
     >

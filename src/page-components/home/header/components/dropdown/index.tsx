@@ -19,10 +19,10 @@ export const Dropdown: React.FC = () => {
           const { iconName, id, url, menuName } = menu;
           const IconName = get(AllIcons, iconName);
           return (
-            <li className={styles.link} key={id} id={String(id)}>
-              <Link href={url}>
-                  <IconName size={27} className={styles.faBrands} />
-                  {menuName}
+            <li key={id} id={String(id)}>
+              <Link className={styles.link} href={url}>
+                <IconName size={27} className={styles.faBrands} />
+                {menuName}
               </Link>
             </li>
           );

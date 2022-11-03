@@ -9,9 +9,10 @@ export const Table = <T,>({
   values,
   showPagination = false,
   paginationData,
-  reloadItens
+  reloadItens,
+  renderExtraHeaderComponent,
+  showTotal = true,
 }: TableParams<T>) => {
-
   const setBorder = (
     idx: number,
     length: number,
@@ -27,13 +28,14 @@ export const Table = <T,>({
     <div className={styles.table}>
       <header className={styles.tableHeader}>
         <h1>{headerTitle}</h1>
+        {renderExtraHeaderComponent}
       </header>
 
       <section className={styles.tableSection}>
         <div className={styles.tableSectionHeader}>
           {columns.map((column, idx) => (
             <div
-            key={idx}
+              key={idx}
               style={setBorder(idx, columns.length, "borderRight", "#fff")}
               className={`col-lg-${column.size} ` + styles.columnHeader}
             >
@@ -46,7 +48,7 @@ export const Table = <T,>({
         <div className={styles.tableSectionBody}>
           {values.map((value, rowIdx) => (
             <div
-              style={{...setBorder(rowIdx, values.length, "borderBottom")}}
+              style={{ ...setBorder(rowIdx, values.length, "borderBottom") }}
               key={rowIdx}
               className={styles.columnRow}
             >
@@ -73,7 +75,12 @@ export const Table = <T,>({
       </section>
       <footer className={styles.tableFooter}>
         {showPagination && paginationData && reloadItens && (
-          <Pagination pagination={paginationData} reloadItens={reloadItens} showTotal />
+          <Pagination
+            marginTop={2}
+            pagination={paginationData}
+            reloadItens={reloadItens}
+            showTotal={showTotal}
+          />
         )}
       </footer>
     </div>

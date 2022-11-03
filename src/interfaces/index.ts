@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { number } from "yup";
 
 export type BootstrapColors =
@@ -113,10 +114,12 @@ export interface ColumnsProps<T> {
 export interface TableParams<T> {
   headerTitle: string;
   columns: Array<ColumnsProps<T>>;
+  renderExtraHeaderComponent?: ReactNode;
   showPagination?: boolean;
   reloadItens?: (page: number) => void;
   paginationData?: PaginationInterface<any>;
   values: Array<T>;
+  showTotal?: boolean;
 }
 
 export interface MenusProps{
