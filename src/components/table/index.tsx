@@ -48,7 +48,7 @@ export const Table = <T,>({
         <div className={styles.tableSectionBody}>
           {values.map((value, rowIdx) => (
             <div
-              style={{ ...setBorder(rowIdx, values.length, "borderBottom") }}
+              style={{ borderBottom: "1px solid #7e4ccb" }}
               key={rowIdx}
               className={styles.columnRow}
             >
@@ -65,7 +65,7 @@ export const Table = <T,>({
                     key={idxColumn}
                     className={`col-lg-${size} flex justify-center flex-wrap`}
                   >
-                    <p>{rowValue}</p>
+                    <p>{rowValue ? rowValue : "Nada para Exibir"}</p>
                   </div>
                 );
               })}
