@@ -4,7 +4,7 @@ import { BiSearch } from "react-icons/bi";
 import { useUserContext } from "../../global-context";
 import { useLoadingSpinner } from "../../hooks";
 import { routesName } from "../../routes-name";
-import styles from "../Home.module.scss";
+import styles from "../../page-components/home/Home.module.scss";
 import { Dropdown } from "./components";
 
 /**
