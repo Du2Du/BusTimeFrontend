@@ -14,7 +14,6 @@ import styles from "../../Permissions.module.scss";
 
 export const UserItem: React.FC<{ user: UserDataProps }> = ({ user }) => {
   const { userData } = useUserContext();
-  if (!userData) return <></>;
 
   const [userPermissionGroup, setUserPermissionGroup] = useState<
     PermissionsType | undefined
@@ -49,7 +48,7 @@ export const UserItem: React.FC<{ user: UserDataProps }> = ({ user }) => {
       .finally(setFalse);
   };
 
-  return (
+  return userData ? (
     <div className={styles.userItem}>
       <div className={`flex`}>
         <b className="mx-2">Nome:</b>
@@ -68,5 +67,5 @@ export const UserItem: React.FC<{ user: UserDataProps }> = ({ user }) => {
         />
       </div>
     </div>
-  );
+  ) : null;
 };

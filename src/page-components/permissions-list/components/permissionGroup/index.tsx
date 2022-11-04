@@ -34,7 +34,7 @@ export const PermissionGroup: React.FC<{
               </div>
             ) : (
               permissionGroup.permissionList.map((permission) => (
-                <div className={styles.accorContent}>
+                <div key={permission.id} className={styles.accorContent}>
                   <p>{permission.permissionName}</p>
                   <hr />
                 </div>
