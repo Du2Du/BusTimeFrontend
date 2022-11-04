@@ -1560,32 +1560,6 @@
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
   integrity sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==
 
-"@types/@amcharts/amcharts5":
-  version "5.2.30"
-  resolved "https://codeload.github.com/amcharts/amcharts5/tar.gz/95b4c84bcba08356733811d67270adcade3103ee"
-  dependencies:
-    "@types/d3" "^7.0.0"
-    "@types/d3-chord" "^3.0.0"
-    "@types/d3-sankey" "^0.11.1"
-    "@types/d3-shape" "^3.0.0"
-    "@types/geojson" "^7946.0.8"
-    "@types/polylabel" "^1.0.5"
-    "@types/svg-arc-to-cubic-bezier" "^3.2.0"
-    d3 "^7.0.0"
-    d3-chord "^3.0.0"
-    d3-geo "^3.0.0"
-    d3-sankey "^0.12.3"
-    d3-selection "^3.0.0"
-    d3-transition "^3.0.0"
-    flatpickr "^4.6.9"
-    markerjs2 "^2.17.2"
-    pdfmake "^0.2.2"
-    polylabel "^1.1.0"
-    regression "^2.0.1"
-    svg-arc-to-cubic-bezier "^3.2.0"
-    tslib "^2.2.0"
-    xlsx "^0.18.0"
-
 "@types/axios@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@types/axios/-/axios-0.14.0.tgz#ec2300fbe7d7dddd7eb9d3abf87999964cafce46"

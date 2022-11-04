@@ -32,7 +32,6 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@types/": "amcharts/amcharts5",
     "@types/axios": "^0.14.0",
     "@types/dotenv": "^8.2.0",
     "@types/jsonwebtoken": "^8.5.9",
