@@ -1,10 +1,15 @@
 import Router from "next/router";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { ApiRoutes } from "../../../api-routes";
 import { Button, ButtonWithBorder, Input } from "../../../components";
 import { useUserContext } from "../../../global-context";
+import { useLoadingSpinner } from "../../../hooks";
 import { BusProps } from "../../../interfaces";
 import { routesName } from "../../../routes-name";
+import { Backend } from "../../../services/backend";
+import { showError } from "../../../utils";
 import styles from "../BusPage.module.scss";
 
 interface SectionParams {
@@ -42,7 +47,17 @@ export const Section: React.FC<SectionParams> = ({
   fieldValues,
 }) => {
   const { register, handleSubmit, setValue } = useForm<BusProps>();
+  const { setTrue, setFalse } = useLoadingSpinner();
 
+  const createBus = (data: BusProps) => {
+    setTrue();
+    Backend.post(ApiRoutes.CREATE_BUS, data)
+      .then(() => {
+        toast.success(`Ônibus criado com sucesso!`);
+        Router.push(routesName.BUS);
+      })
+      .catch(showError);
+  };
   const { userData } = useUserContext();
 
   useEffect(() => {

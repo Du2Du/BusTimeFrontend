@@ -4,7 +4,6 @@ import { FixedHead } from "../../components";
 import { useUserContext } from "../../global-context";
 import { WithAuth } from "../../global-hoc";
 import { PermissionsListMain } from "../../page-components";
-import { Header } from "../../page-components/home";
 import { routesName } from "../../routes-name";
 import { PermissionsGroupName } from "../../utils";
 

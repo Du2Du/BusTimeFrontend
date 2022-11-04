@@ -7,12 +7,17 @@ import styles from "../styles/Dashboard.module.scss";
 
 /**
  * Esse componente renderiza a pagina Inicial da aplicação.
- *
+ * Componentes da Página:
+ * 
+ * - Botão de Cadastro
+ * - Botão de Login
+ * - Ilustração de uma pessoa em um ponto de ônibus.
+ * 
  * @author Du2Du
  */
 const Home: NextPage = WithAuth(() => {
   /**
-   * Função que redireciona o usuário para a url de registro
+   * Essa função redireciona o usuário para a tela de registrar o usuário.
    */
   const redirect = (url: string) => () => {
     Router.push(url);

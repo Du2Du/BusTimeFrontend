@@ -1,7 +1,6 @@
 import React from "react";
 import { FixedHead } from "../../../components";
 import { WithAuth } from "../../../global-hoc";
-import { Header } from "../../../page-components/home";
 import { FieldsUser } from "../../../page-components/profile";
 import styles from "../../../page-components/profile/Profile.module.scss";
 

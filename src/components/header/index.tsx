@@ -1,9 +1,9 @@
-import Router from "next/router";
-import React, { ChangeEventHandler, useState } from "react";
+import Router, { useRouter } from "next/router";
+import React, { useState } from "react";
 import { BiSearch } from "react-icons/bi";
-import { useUserContext } from "../../../global-context";
-import { useLoadingSpinner } from "../../../hooks";
-import { routesName } from "../../../routes-name";
+import { useUserContext } from "../../global-context";
+import { useLoadingSpinner } from "../../hooks";
+import { routesName } from "../../routes-name";
 import styles from "../Home.module.scss";
 import { Dropdown } from "./components";
 
@@ -20,10 +20,11 @@ export const Header: React.FC = () => {
     setSearchBus(ev.target.value);
   };
 
-  const isLogPage = Router.pathname === routesName.LOGS;
+  const {pathname}  = useRouter();
 
-  if (!userData) return null;
-  return (
+  const isLogPage = pathname === routesName.LOGS;
+
+  return userData?(
     <header className={`${styles.header}`}>
       <Dropdown />
       <div className={`${styles.searchBox} ${isLogPage ? 'hidden' : ''}`}>
@@ -48,5 +49,5 @@ export const Header: React.FC = () => {
       </div>
       <h1 style={isLogPage ? {display: 'none'} : {}}>BusTime</h1>
     </header>
-  );
+  ) : null;
 };

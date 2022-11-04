@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import { useUserContext } from "../../../../../global-context";
 import styles from "./Dropdown.module.scss";
 import { get } from "lodash";
-import { AllIcons } from "../../../../../utils/allIcons";
+import { useUserContext } from "../../../../global-context";
+import { AllIcons } from "../../../../utils/allIcons";
 
 export const Dropdown: React.FC = () => {
   const { menus } = useUserContext();

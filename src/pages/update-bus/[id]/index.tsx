@@ -4,12 +4,10 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { ApiRoutes } from "../../../api-routes";
 import { FixedHead } from "../../../components";
-import { useUserContext } from "../../../global-context";
 import { WithAuth } from "../../../global-hoc";
 import { useLoadingSpinner } from "../../../hooks";
 import { BusProps } from "../../../interfaces";
 import { Section } from "../../../page-components/bus-page";
-import { Header } from "../../../page-components/home";
 import { Backend } from "../../../services/backend";
 import { showError } from "../../../utils";
 

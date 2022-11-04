@@ -1,24 +1,32 @@
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
 import { ApiRoutes } from "../../../api-routes";
-import { useUserContext } from "../../../global-context";
 import { BusProps } from "../../../interfaces";
 import { routesName } from "../../../routes-name";
 import { Backend } from "../../../services/backend";
 import { showError } from "../../../utils";
 import styles from "../Bus.module.scss";
 
+/**
+ * Esse main renderiza a tela de todos os ônibus cadastrados pelo usuário.
+ * Componentes da Página:
+ * 
+ * - Campos dos ônibus
+ * - Botão de atualizar cada ônibus
+ * 
+ * @author Du2Du
+ */
 export const ListAllBus: React.FC = () => {
-  const [bus, setBus] = useState<Array<BusProps>>([]);
-  const { userData } = useUserContext();
+  const [buses, setBuses] = useState<Array<BusProps>>([]);
 
+  //Esse useEffect faz a chamada na API e pega o response e seta como valor do array de ônibus.
   useEffect(() => {
     Backend.get(`${ApiRoutes.LIST_BUS_USER}`)
-      .then((res) => setBus(res.data))
+      .then((res) => setBuses(res.data))
       .catch(showError);
   }, []);
 
-  //Método que redireciona o user para a tela de alterar onibus
+  //Método que redireciona o user para a tela de alterar o ônibus
   const redirectBus = (busId: number) => () => {
     Router.push(`${routesName.UPDATE_BUS}/${busId}`);
   };
@@ -26,10 +34,10 @@ export const ListAllBus: React.FC = () => {
   return (
     <main className={styles.mainBus}>
       <h2 className={styles.title}>Rotas Criadas por Você</h2>
-      {bus.length === 0 ? (
+      {buses.length === 0 ? (
         <h2 className={styles.notBus}>Nenhuma Rota Criada</h2>
       ) : (
-        bus.map((element) => (
+        buses.map((element) => (
           <div className={styles.busItem} key={element.id}>
             <div className={styles.fields}>
               <div className={styles.fieldItem}>

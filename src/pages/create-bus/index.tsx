@@ -7,7 +7,6 @@ import { WithAuth } from "../../global-hoc";
 import { useLoadingSpinner } from "../../hooks";
 import { BusProps } from "../../interfaces";
 import { Section } from "../../page-components/bus-page";
-import { Header } from "../../page-components/home";
 import { routesName } from "../../routes-name";
 import { Backend } from "../../services/backend";
 import { showError } from "../../utils";

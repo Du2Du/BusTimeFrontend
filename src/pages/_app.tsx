@@ -2,8 +2,8 @@ import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 import { Oval } from "react-loader-spinner";
 import { Footer } from "../components";
+import { Header } from "../components/header";
 import { UserProvider } from "../global-context";
-import { Header } from "../page-components/home";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
