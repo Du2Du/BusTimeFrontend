@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "type": "module",
   "dependencies": {
     "@amcharts/amcharts5": "^5.2.30",
     "@emotion/react": "^11.9.0",
@@ -32,7 +33,6 @@
     "styled-components": "^5.3.5",
     "yup": "^0.32.11"
   },
-  "type": "module",
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/dotenv": "^8.2.0",
