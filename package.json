@@ -9,7 +9,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "type": "module",
   "dependencies": {
     "@amcharts/amcharts5": "^5.2.30",
     "@emotion/react": "^11.9.0",
