@@ -145,10 +145,11 @@ export const FormFields: React.FC<FormFieldsParams> = ({
         onClick={() => {
           fieldsErros.forEach((field) => {
             if (errors[field]?.type === "required")
-              showToast(fieldLabel[field].required);
+              return showToast(fieldLabel[field].required);
             if (errors[field]?.type === "pattern")
-              showToast(fieldLabel[field].pattern);
-            if (errors[field]?.type === "min") showToast(fieldLabel[field].min);
+              return showToast(fieldLabel[field].pattern);
+            if (errors[field]?.type === "min")
+              return showToast(fieldLabel[field].min);
           });
         }}
         label={buttonLabel}
