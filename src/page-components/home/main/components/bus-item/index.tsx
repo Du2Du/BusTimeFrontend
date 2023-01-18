@@ -8,6 +8,7 @@ import { useLoadingSpinner } from "../../../../../hooks";
 import { BusProps } from "../../../../../interfaces";
 import { Backend } from "../../../../../services/backend";
 import { showError } from "../../../../../utils";
+import { formatToLocalCurrency } from "../../../../../utils/string";
 import styles from "../../../Home.module.scss";
 interface BusItemProps {
   bus: BusProps;
@@ -55,7 +56,8 @@ export const BusItem: React.FC<BusItemProps> = ({ bus, setFavoriteBus }) => {
         {bus.hour}
       </div>
       <div className={styles.fieldItem}>
-        <b>Passagem: </b>R${bus.ticketPrice}
+        <b>Passagem: </b>
+        {formatToLocalCurrency(String(bus.ticketPrice))}
       </div>
       <div className={styles.fieldItem}>
         <b>Rota Incial: </b>

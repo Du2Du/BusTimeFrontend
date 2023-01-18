@@ -95,7 +95,9 @@ export const Section: React.FC<SectionParams> = ({
       </h1>
       <form onSubmit={handleSubmit(addIdUserAdmin)} className="fields">
         <Input
-          register={register("lineBus.lineName", { required: isCreate ? true : false })}
+          register={register("lineBus.lineName", {
+            required: isCreate ? true : false,
+          })}
           className="my-2"
           label="Linha"
           placeHolder="Linha"
@@ -109,13 +111,11 @@ export const Section: React.FC<SectionParams> = ({
         <Input
           register={register("ticketPrice", {
             required: isCreate ? true : false,
-            valueAsNumber: true,
           })}
           className="my-2"
           label="Preço da Passagem"
           placeHolder="Preço da Passagem"
         />
-
         <Input
           register={register("inicialRoute", {
             required: isCreate ? true : false,

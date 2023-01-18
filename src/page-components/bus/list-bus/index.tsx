@@ -5,15 +5,16 @@ import { BusProps } from "../../../interfaces";
 import { routesName } from "../../../routes-name";
 import { Backend } from "../../../services/backend";
 import { showError } from "../../../utils";
+import { formatToLocalCurrency } from "../../../utils/string";
 import styles from "../Bus.module.scss";
 
 /**
  * Esse main renderiza a tela de todos os ônibus cadastrados pelo usuário.
  * Componentes da Página:
- * 
+ *
  * - Campos dos ônibus
  * - Botão de atualizar cada ônibus
- * 
+ *
  * @author Du2Du
  */
 export const ListAllBus: React.FC = () => {
@@ -37,37 +38,38 @@ export const ListAllBus: React.FC = () => {
       {buses.length === 0 ? (
         <h2 className={styles.notBus}>Nenhuma Rota Criada</h2>
       ) : (
-        buses.map((element) => (
-          <div className={styles.busItem} key={element.id}>
+        buses.map((bus) => (
+          <div className={styles.busItem} key={bus.id}>
             <div className={styles.fields}>
               <div className={styles.fieldItem}>
                 <b>Linha: </b>
-                {element.lineBus.lineName}
+                {bus.lineBus.lineName}
               </div>
               <div className={styles.fieldItem}>
                 <b>Hora: </b>
-                {element.hour}
+                {bus.hour}
               </div>
               <div className={styles.fieldItem}>
-                <b>Passagem: </b>R${element.ticketPrice}
+                <b>Passagem: </b>
+                {formatToLocalCurrency(String(bus.ticketPrice))}
               </div>
               <div className={styles.fieldItem}>
                 <b>Rota Incial: </b>
-                {element.inicialRoute}
+                {bus.inicialRoute}
               </div>
               <div className={styles.fieldItem}>
                 <b>Rota Final: </b>
-                {element.finalRoute}
+                {bus.finalRoute}
               </div>
               <div className={styles.fieldItem}>
                 <b>Número: </b>
-                {element.busNumber}
+                {bus.busNumber}
               </div>
             </div>
             <hr className={styles.hr} />
             <button
               type="button"
-              onClick={redirectBus(element.id)}
+              onClick={redirectBus(bus.id)}
               className={`${styles.update} mb-4 ml-2  mt-3`}
             >
               Alterar

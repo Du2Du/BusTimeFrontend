@@ -3,6 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { routesName } from "../../routes-name";
+import { formatCPF, validateCPF, verifyCpfFormat } from "../../utils/string";
 import { FormFields } from "./components";
 import styles from "./Credentials.module.scss";
 
@@ -23,6 +24,7 @@ export interface Fields {
   email: string;
   password: string;
   birthDate: string;
+  cpf: string;
 }
 
 /**
@@ -48,7 +50,13 @@ export const Credentials: React.FC<CredentialsParams> = ({
 
   //Função que irá validar quais informações devem ir para o backend
   const handleData = (data: Fields) => {
-    if (!isLogin) return onSubmit(data);
+    if (!isLogin) {
+      const cpfWithoutPoint = data.cpf.replace(/\./g, "").replace("-", "");
+      if (!validateCPF(cpfWithoutPoint))
+        return toast.error("Digite um CPF válido!");
+      const formattedCPF = formatCPF(cpfWithoutPoint);
+      return onSubmit({ ...data, cpf: formattedCPF });
+    }
 
     const { email, password } = data;
     const dataLogin = { email, password };

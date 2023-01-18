@@ -64,7 +64,7 @@ export const FormFields: React.FC<FormFieldsParams> = ({
     name: { required: "O nome é obrigatório", pattern: "", min: "" },
     cpf: {
       required: "O cpf é obrigatório",
-      pattern: "O cpf deve ficar no formato XXX.XXX.XXX-XX",
+      pattern: "",
       min: "",
     },
     birthDate: {
@@ -98,18 +98,15 @@ export const FormFields: React.FC<FormFieldsParams> = ({
             id="name"
             className={styles.credentialsInput}
           />
-
           <Input
             label="CPF"
             placeHolder="CPF"
             register={register("cpf", {
               required: true,
-              pattern: /\d{3}\.\d{3}\.\d{3}\-\d{2}/g,
             })}
             id="cpf"
             className={styles.credentialsInput}
           />
-
           <Input
             label="Data de Nascimento"
             placeHolder="Data de Nascimento"

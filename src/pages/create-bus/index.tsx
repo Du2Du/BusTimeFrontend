@@ -10,13 +10,15 @@ import { Section } from "../../page-components/bus-page";
 import { routesName } from "../../routes-name";
 import { Backend } from "../../services/backend";
 import { showError } from "../../utils";
+import { formatToLocalCurrency } from "../../utils/string";
 
 const CreateBus: React.FC = WithAuth(() => {
   const { setTrue, setFalse } = useLoadingSpinner();
 
   const createBus = (data: BusProps) => {
     setTrue();
-    Backend.post(ApiRoutes.CREATE_BUS, data)
+    const newTicketPrice = String(data.ticketPrice).replace(",", ".");
+    Backend.post(ApiRoutes.CREATE_BUS, { ...data, ticketPrice: newTicketPrice })
       .then(() => {
         toast.success(`Ônibus criado com sucesso!`);
         Router.push(routesName.BUS);
