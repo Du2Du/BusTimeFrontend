@@ -71,10 +71,6 @@ export const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   }, [userData]);
 
   useEffect(() => {
-    if (userData) Router.reload();
-  }, []);
-
-  useEffect(() => {
     Backend.interceptors.response.use(
       (response) => response,
       async (error) => {

@@ -1,6 +1,9 @@
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { FaTrash } from "react-icons/fa";
 import { ApiRoutes } from "../../../api-routes";
+import { useLoadingSpinner } from "../../../hooks";
 import { BusProps } from "../../../interfaces";
 import { routesName } from "../../../routes-name";
 import { Backend } from "../../../services/backend";
@@ -19,17 +22,35 @@ import styles from "../Bus.module.scss";
  */
 export const ListAllBus: React.FC = () => {
   const [buses, setBuses] = useState<Array<BusProps>>([]);
+  const { setTrue, setFalse } = useLoadingSpinner();
 
   //Esse useEffect faz a chamada na API e pega o response e seta como valor do array de ônibus.
   useEffect(() => {
+    loadBus();
+  }, []);
+
+  //Método que carrega os onibus
+  const loadBus = () => {
     Backend.get(`${ApiRoutes.LIST_BUS_USER}`)
       .then((res) => setBuses(res.data))
       .catch(showError);
-  }, []);
+  };
 
   //Método que redireciona o user para a tela de alterar o ônibus
   const redirectBus = (busId: number) => () => {
     Router.push(`${routesName.UPDATE_BUS}/${busId}`);
+  };
+
+  //Método que exclui um onibus
+  const excludeBus = (id: number) => () => {
+    setTrue();
+    Backend.delete(`${ApiRoutes.DELETE_BUS}/${id}`)
+      .then((res) => {
+        toast.success("Ônibus excluido com sucesso!");
+        loadBus();
+      })
+      .catch(showError)
+      .finally(setFalse);
   };
 
   return (
@@ -67,13 +88,21 @@ export const ListAllBus: React.FC = () => {
               </div>
             </div>
             <hr className={styles.hr} />
-            <button
-              type="button"
-              onClick={redirectBus(bus.id)}
-              className={`${styles.update} mb-4 ml-2  mt-3`}
-            >
-              Alterar
-            </button>
+            <div className="flex justify-between items-center w-[100%]">
+              <button
+                type="button"
+                onClick={redirectBus(bus.id)}
+                className={`${styles.update} mb-4 ml-2  mt-3`}
+              >
+                Alterar
+              </button>
+              <FaTrash
+                size={20}
+                className="cursor-pointer"
+                color="#7E4CCB"
+                onClick={excludeBus(bus.id)}
+              />
+            </div>
           </div>
         ))
       )}

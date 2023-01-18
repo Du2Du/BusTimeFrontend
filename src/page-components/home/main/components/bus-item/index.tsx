@@ -29,7 +29,7 @@ export const BusItem: React.FC<BusItemProps> = ({ bus, setFavoriteBus }) => {
       Backend.get(
         `${isFavorite ? ApiRoutes.FAVORITE_BUS : ApiRoutes.DISFAVOR_BUS}/${
           bus.id
-        }`
+        }/${!isFavorite ? userData?.id : ""}`
       )
         .then((res: AxiosResponse<Array<BusProps>>) => {
           if (setFavoriteBus) setFavoriteBus(res.data);

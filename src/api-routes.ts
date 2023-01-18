@@ -11,6 +11,7 @@ export const ApiRoutes = {
   LIST_BUS: "/v1/bus",
   FILTER_BUS: "/v1/bus/line",
   CREATE_BUS: "/v1/bus",
+  DELETE_BUS: "/v1/bus",
   SEARCH_BUS: "/v1/bus",
   LIST_BUS_USER: "/v1/bus/user",
   FAVORITE_BUS: "/v1/bus/favorite",
@@ -18,5 +19,5 @@ export const ApiRoutes = {
   LIST_GROUP_PERMISSIONS: "/v1/permissions",
   LOGS: "/v1/logs",
   GET_BUS_STATISTICS: "/v1/bus/statistics",
-  GET_MENUS: '/v1/menus'
+  GET_MENUS: "/v1/menus",
 };

@@ -52,7 +52,11 @@ export const Credentials: React.FC<CredentialsParams> = ({
   const handleData = (data: Fields) => {
     if (!isLogin) {
       const cpfWithoutPoint = data.cpf.replace(/\./g, "").replace("-", "");
-      if (!validateCPF(cpfWithoutPoint))
+      if (
+        (verifyCpfFormat(data.cpf) && !data.cpf.match("[0-9]+")) ||
+        verifyCpfFormat(data.cpf) ||
+        !validateCPF(cpfWithoutPoint)
+      )
         return toast.error("Digite um CPF válido!");
       const formattedCPF = formatCPF(cpfWithoutPoint);
       return onSubmit({ ...data, cpf: formattedCPF });
