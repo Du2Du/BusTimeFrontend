@@ -1,5 +1,5 @@
 import Router, { useRouter } from "next/router";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect } from "react";
 import { FixedHead } from "../../components";
 import { useUserContext } from "../../global-context";
 import { useLoadingSpinner } from "../../hooks";
@@ -60,14 +60,13 @@ export const NotAuthentic: React.FC<{ isCredential: boolean }> = ({
       setFalse
     );
   };
-
+  useEffect(() => {
+    Router.push(isCredential ? routesName.HOME : routesName.LOGIN);
+  }, []);
   return (
     <>
       <FixedHead title="Não Autorizado" />
-      <form
-        onSubmit={onSubmit}
-        className={`${styles.notAuth} rounded`}
-      >
+      <form onSubmit={onSubmit} className={`${styles.notAuth} rounded`}>
         <p>Você não pode acessar esse recurso </p>
         <Button label="Voltar" />
       </form>

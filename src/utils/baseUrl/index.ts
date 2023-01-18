@@ -1,5 +1,5 @@
 const returnAppUrl = () => {
-  return "https://bus-time-web.herokuapp.com/api";
+  return "http://localhost:8090/api";
 };
 
 export const appUrl = returnAppUrl();

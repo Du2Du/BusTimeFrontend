@@ -1,16 +1,24 @@
 import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
 import { Toaster } from "react-hot-toast";
 import { Oval } from "react-loader-spinner";
 import { Footer } from "../components";
 import { Header } from "../components/header";
 import { UserProvider } from "../global-context";
+import { routesName } from "../routes-name";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { pathname } = useRouter();
+
+  const isCredential =
+    pathname === routesName.LOGIN ||
+    pathname === routesName.REGISTER ||
+    pathname === "/";
   return (
     <>
       <UserProvider>
-        <Header />
+        {!isCredential ? <Header /> : null}
         <Component {...pageProps} />
 
         <Footer />

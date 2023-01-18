@@ -22,6 +22,7 @@ const CreateBus: React.FC = WithAuth(() => {
         Router.push(routesName.BUS);
       })
       .catch(showError)
+      .finally(setFalse);
   };
 
   return (
