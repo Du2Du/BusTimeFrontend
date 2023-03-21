@@ -13,7 +13,7 @@ import { showError } from "../../utils";
 const Favorites: React.FC = WithAuth(() => {
   const { setTrue, setFalse } = useLoadingSpinner();
   const { data: favoriteBus, refetch } = useQuery<BusProps[]>(
-    ["favoritesBus"],
+    "favoritesBus",
     () => {
       setTrue();
       return Backend.get(ApiRoutes.LIST_FAVORITE_BUS)
