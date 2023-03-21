@@ -8,6 +8,7 @@ import { useLoadingSpinner } from "../../../hooks";
 import { BusProps, PaginationInterface } from "../../../interfaces";
 import { routesName } from "../../../routes-name";
 import { Backend } from "../../../services/backend";
+import { showError } from "../../../utils";
 import styles from "../Home.module.scss";
 import { BusItem } from "./components";
 
@@ -28,9 +29,10 @@ export const Main: React.FC = () => {
       setTrue();
       return Backend.get(`${ApiRoutes.LIST_BUS}?size=${perPage}&page=${page}`)
         .then((res) => res.data)
+        .catch(showError)
         .finally(setFalse);
     },
-    { keepPreviousData: true }
+    { keepPreviousData: true, refetchOnWindowFocus: false }
   );
 
   /**

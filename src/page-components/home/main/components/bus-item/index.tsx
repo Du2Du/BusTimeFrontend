@@ -12,10 +12,10 @@ import { formatToLocalCurrency } from "../../../../../utils/string";
 import styles from "../../../Home.module.scss";
 interface BusItemProps {
   bus: BusProps;
-  setFavoriteBus?: React.Dispatch<React.SetStateAction<BusProps[]>>;
+  refetch?: () => void;
 }
 
-export const BusItem: React.FC<BusItemProps> = ({ bus, setFavoriteBus }) => {
+export const BusItem: React.FC<BusItemProps> = ({ bus, refetch }) => {
   const { setTrue, setFalse } = useLoadingSpinner();
   const { userData, getUser } = useUserContext();
   const [currentFavoriteBus, setCurrentFavoriteBus] = useState(
@@ -32,7 +32,6 @@ export const BusItem: React.FC<BusItemProps> = ({ bus, setFavoriteBus }) => {
         }/${!isFavorite ? userData?.id : ""}`
       )
         .then((res: AxiosResponse<Array<BusProps>>) => {
-          if (setFavoriteBus) setFavoriteBus(res.data);
           setCurrentFavoriteBus(
             res.data.find((favoriteBus) => bus.id === favoriteBus.id)
           );
@@ -40,6 +39,7 @@ export const BusItem: React.FC<BusItemProps> = ({ bus, setFavoriteBus }) => {
             `Ônibus ${isFavorite ? "favoritado" : "desfavoritado"} com sucesso!`
           );
           getUser();
+          if (refetch) refetch();
         })
         .catch(showError)
         .finally(setFalse);
