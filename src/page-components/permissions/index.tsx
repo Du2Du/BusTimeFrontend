@@ -1,5 +1,6 @@
 import Router from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
 import { ApiRoutes } from "../../api-routes";
 import { Button, Pagination } from "../../components";
 import { useLoadingSpinner } from "../../hooks";
@@ -11,23 +12,19 @@ import { UserItem } from "./components";
 import styles from "./Permissions.module.scss";
 
 export const PermissionsMain: React.FC = () => {
-  const [usersList, setUsersList] =
-    useState<PaginationInterface<UserDataProps>>();
+  const [page, setPage] = useState<number>(0);
   const { setTrue, setFalse } = useLoadingSpinner();
-
-  const reloadItens = (page = 0) => {
+  const { data: usersList } = useQuery<PaginationInterface<UserDataProps>>(
+    ["userPermissions", page],
+    () => reloadItens()
+  );
+  const reloadItens = () => {
     setTrue();
-    Backend.get(`${ApiRoutes.LIST_USERS}?&size=5&page=${page}`)
-      .then((res) => {
-        setUsersList(res.data);
-      })
+    return Backend.get(`${ApiRoutes.LIST_USERS}?&size=5&page=${page}`)
+      .then((res) => res.data)
       .catch(showError)
       .finally(setFalse);
   };
-
-  useEffect(() => {
-    reloadItens();
-  }, []);
 
   return (
     <div className={styles.permissions}>
@@ -42,7 +39,12 @@ export const PermissionsMain: React.FC = () => {
         ))}
       </div>
       {usersList && (
-        <Pagination pagination={usersList} reloadItens={reloadItens} />
+        <Pagination
+          pagination={usersList}
+          reloadItens={(newPage) => {
+            setPage(newPage);
+          }}
+        />
       )}
     </div>
   );
