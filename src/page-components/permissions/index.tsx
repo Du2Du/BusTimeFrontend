@@ -16,7 +16,8 @@ export const PermissionsMain: React.FC = () => {
   const { setTrue, setFalse } = useLoadingSpinner();
   const { data: usersList } = useQuery<PaginationInterface<UserDataProps>>(
     ["userPermissions", page],
-    () => reloadItens()
+    () => reloadItens(),
+    { keepPreviousData: true }
   );
   const reloadItens = () => {
     setTrue();
