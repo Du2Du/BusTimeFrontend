@@ -1,8 +1,10 @@
 import Router from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
 import { ApiRoutes } from "../../../api-routes";
 import { Button, Pagination } from "../../../components";
 import { useUserContext } from "../../../global-context";
+import { useLoadingSpinner } from "../../../hooks";
 import { BusProps, PaginationInterface } from "../../../interfaces";
 import { routesName } from "../../../routes-name";
 import { Backend } from "../../../services/backend";
@@ -15,9 +17,21 @@ import { BusItem } from "./components";
  * @author Du2Du
  */
 export const Main: React.FC = () => {
-  const [busPagination, setBusPagination] =
-    useState<PaginationInterface<BusProps>>();
+  const [page, setPage] = useState(0);
+  const [perPage, setPerPage] = useState(4);
   const { isAdmin } = useUserContext();
+  const { setTrue, setFalse } = useLoadingSpinner();
+
+  const { data: busPagination } = useQuery<PaginationInterface<BusProps>>(
+    ["bus", page, perPage],
+    () => {
+      setTrue();
+      return Backend.get(`${ApiRoutes.LIST_BUS}?size=${perPage}&page=${page}`)
+        .then((res) => res.data)
+        .finally(setFalse);
+    },
+    { keepPreviousData: true }
+  );
 
   /**
    * Método que redireciona o usuário para a tela de registrar ônibus ao clicar no botão
@@ -28,24 +42,13 @@ export const Main: React.FC = () => {
   };
 
   /**
-   * Método para refazer a busca na API de ônibus com uma nova página da paginação. 
+   * Método para refazer a busca na API de ônibus com uma nova página da paginação.
    */
-  const reloadBus = (page: number, perPage = 4) => {
-    Backend.get(`${ApiRoutes.LIST_BUS}?size=${perPage}&page=${page}`).then(
-      (res) => setBusPagination(res.data)
-    );
+  const reloadBus = (page: number, perPageProp?: number) => {
+    setPage(page);
+    if (perPageProp) setPerPage(perPageProp);
   };
-
-  /**
-   * Esse useEffect é realizado para que sempre que a tela é carregada é feita a chamada 
-   * na API de ônibus e setar o retorno da promise no estado de paginação dos ônibus.
-   */
-  useEffect(() => {
-    Backend.get(`${ApiRoutes.LIST_BUS}?size=4&page=0`).then((res) =>
-      setBusPagination(res.data)
-    );
-  }, []);
-
+  console.log(busPagination);
   return (
     <main className={styles.homeMain}>
       {isAdmin ? (
@@ -61,7 +64,7 @@ export const Main: React.FC = () => {
       <div className={styles.busList}>
         <p>Veja agora os horários de ônibus:</p>
         {busPagination?.content.length === 0 || !busPagination?.content ? (
-          <p style={{ color: "#fff" }}></p>
+          <p style={{ color: "#fff" }}>Nenhum ônibus para ser listado</p>
         ) : (
           <>
             <div className={styles.list}>
