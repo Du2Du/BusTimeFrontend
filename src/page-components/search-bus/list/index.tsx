@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
 import { ApiRoutes } from "../../../api-routes";
 import { Pagination } from "../../../components";
 import { BusProps, PaginationInterface } from "../../../interfaces";
@@ -9,17 +10,20 @@ import { BusItem } from "../../home/main/components";
 import styles from "../SearchBus.module.scss";
 
 export const List: React.FC = () => {
-  const [bus, setBus] = useState<PaginationInterface<BusProps>>();
   const { query } = useRouter();
+  const [page, setPage] = useState<number>(0);
   const line = query.line;
+  const { data: bus } = useQuery<PaginationInterface<BusProps>>(
+    ["busSearch", page, line],
+    () => reloadItens(),
+    { keepPreviousData: true }
+  );
 
-  useEffect(() => {
-    reloadItens();
-  }, [line]);
-
-  const reloadItens = (page = 0) => {
-    Backend.get(`${ApiRoutes.FILTER_BUS}?line=${line}&size=10&page=${page}`)
-      .then((res) => setBus(res.data))
+  const reloadItens = () => {
+    return Backend.get(
+      `${ApiRoutes.FILTER_BUS}?line=${line}&size=10&page=${page}`
+    )
+      .then((res) => res.data)
       .catch(showError);
   };
 
@@ -38,7 +42,11 @@ export const List: React.FC = () => {
                 <BusItem bus={ele} key={ele.id} />
               ))}
             </div>
-            <Pagination reloadItens={reloadItens} pagination={bus} showTotal />
+            <Pagination
+              reloadItens={(newPage) => setPage(newPage)}
+              pagination={bus}
+              showTotal
+            />
           </>
         )
       )}
