@@ -1,7 +1,8 @@
 import Router from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 import { FaTrash } from "react-icons/fa";
+import { useQuery } from "react-query";
 import { ApiRoutes } from "../../../api-routes";
 import { useLoadingSpinner } from "../../../hooks";
 import { BusProps } from "../../../interfaces";
@@ -21,18 +22,16 @@ import styles from "../Bus.module.scss";
  * @author Du2Du
  */
 export const ListAllBus: React.FC = () => {
-  const [buses, setBuses] = useState<Array<BusProps>>([]);
   const { setTrue, setFalse } = useLoadingSpinner();
 
-  //Esse useEffect faz a chamada na API e pega o response e seta como valor do array de ônibus.
-  useEffect(() => {
-    loadBus();
-  }, []);
+  const { data: buses, refetch } = useQuery<BusProps[]>("buses", () =>
+    loadBus()
+  );
 
   //Método que carrega os onibus
   const loadBus = () => {
-    Backend.get(`${ApiRoutes.LIST_BUS_USER}`)
-      .then((res) => setBuses(res.data))
+    return Backend.get(`${ApiRoutes.LIST_BUS_USER}`)
+      .then((res) => res.data)
       .catch(showError);
   };
 
@@ -47,7 +46,7 @@ export const ListAllBus: React.FC = () => {
     Backend.delete(`${ApiRoutes.DELETE_BUS}/${id}`)
       .then((res) => {
         toast.success("Ônibus excluido com sucesso!");
-        loadBus();
+        refetch();
       })
       .catch(showError)
       .finally(setFalse);
@@ -56,7 +55,7 @@ export const ListAllBus: React.FC = () => {
   return (
     <main className={styles.mainBus}>
       <h2 className={styles.title}>Rotas Criadas por Você</h2>
-      {buses.length === 0 ? (
+      {!buses || buses.length === 0 ? (
         <h2 className={styles.notBus}>Nenhuma Rota Criada</h2>
       ) : (
         buses.map((bus) => (

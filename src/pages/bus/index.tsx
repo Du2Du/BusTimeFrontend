@@ -7,10 +7,10 @@ import styles from "../../page-components/bus/Bus.module.scss";
 /**
  * Essa página renderiza a tela de todos os ônibus cadastrados pelo usuário.
  * Componentes da Página:
- * 
+ *
  * - Campos dos ônibus
  * - Botão de atualizar cada ônibus
- * 
+ *
  * @author Du2Du
  */
 const ListBus: React.FC = WithAuth(() => {

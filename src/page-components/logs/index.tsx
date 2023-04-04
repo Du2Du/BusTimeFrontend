@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
 import { ApiRoutes } from "../../api-routes";
 import { Button, Table } from "../../components";
 import { useLoadingSpinner } from "../../hooks";
@@ -54,29 +55,27 @@ const columns: Array<ColumnsProps<Omit<LogsProps, "time"> & { date: string }>> =
   ];
 
 export const SectionLogs: React.FC = ({}) => {
-  const [logs, setLogs] =
-    useState<PaginationInterface<Omit<LogsProps, "time"> & { date: string }>>();
   const { setTrue, setFalse } = useLoadingSpinner();
+  const [page, setPage] = useState<number>(0);
+  const { data: logs } = useQuery<
+    PaginationInterface<Omit<LogsProps, "time"> & { date: string }>
+  >(["logs", page], () => loadLogs(), { keepPreviousData: true });
 
-  const loadLogs = (page = 0) => {
+  const loadLogs = () => {
     setTrue();
-    Backend.get(`${ApiRoutes.LOGS}?page=${page}&size=10`)
-      .then((res: { data: PaginationInterface<LogsProps> }) =>
-        setLogs(() => ({
-          ...res.data,
-          content: res.data.content.map((log) => ({
-            ...log,
-            date: formatDateWithHour(log.time),
-          })),
-        }))
-      )
+    return Backend.get(`${ApiRoutes.LOGS}?page=${page}&size=10`)
+      .then((res: { data: PaginationInterface<LogsProps> }) => ({
+        ...res.data,
+        content: res.data.content.map((log) => ({
+          ...log,
+          date: formatDateWithHour(log.time),
+        })),
+      }))
       .catch(showError)
-      .finally(setFalse);
+      .finally(setFalse) as Promise<
+      PaginationInterface<Omit<LogsProps, "time"> & { date: string }>
+    >;
   };
-
-  useEffect(() => {
-    loadLogs();
-  }, []);
 
   return (
     <div className={styles.logs}>
@@ -88,13 +87,12 @@ export const SectionLogs: React.FC = ({}) => {
             showTotal={false}
             showPagination={true}
             renderExtraHeaderComponent={
-              <Button
-                btnLabel="Atualizar"
-                onClick={() => loadLogs()}
-              />
+              <Button btnLabel="Atualizar" onClick={() => loadLogs()} />
             }
             paginationData={logs}
-            reloadItens={loadLogs}
+            reloadItens={(newPage) => {
+              setPage(newPage);
+            }}
             columns={columns}
           />
         </div>

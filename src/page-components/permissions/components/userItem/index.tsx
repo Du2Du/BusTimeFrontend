@@ -1,5 +1,4 @@
 import { AxiosResponse } from "axios";
-import { get } from "lodash";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { ApiRoutes } from "../../../../api-routes";

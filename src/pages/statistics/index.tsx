@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import dynamic from "next/dynamic";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useQuery } from "react-query";
 import { ApiRoutes } from "../../api-routes";
 import { FixedHead } from "../../components";
 import { WithAuth } from "../../global-hoc";
@@ -21,21 +22,19 @@ export interface StatisticsProps {
 
 const Statistics: React.FC = WithAuth(
   () => {
-    const [statistics, setStatistic] = useState<Array<StatisticsProps>>([]);
-
     const { setFalse, setTrue } = useLoadingSpinner();
+    const { data: statistics } = useQuery<StatisticsProps[]>(
+      "statistics",
+      () => {
+        setTrue();
+        return Backend.get(ApiRoutes.GET_BUS_STATISTICS)
+          .then((res) => res.data)
+          .catch(showError)
+          .finally(setFalse);
+      }
+    );
 
-    useEffect(() => {
-      setTrue();
-      Backend.get(ApiRoutes.GET_BUS_STATISTICS)
-        .then((res: AxiosResponse<Array<StatisticsProps>>) => {
-          setStatistic(res.data);
-        })
-        .catch(showError)
-        .finally(setFalse);
-    }, []);
-
-    return (
+    return !statistics ? null : (
       <>
         <FixedHead title="Estatísticas" />
         <div
