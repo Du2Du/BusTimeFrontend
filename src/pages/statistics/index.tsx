@@ -28,7 +28,7 @@ const Statistics: React.FC = WithAuth(
       () => {
         setTrue();
         return Backend.get(ApiRoutes.GET_BUS_STATISTICS)
-          .then((res: AxiosResponse<StatisticsProps[]>) => res.data)
+          .then((res) => res.data)
           .catch(showError)
           .finally(setFalse);
       }
